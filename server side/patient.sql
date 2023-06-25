@@ -18,9 +18,11 @@ CREATE TABLE `user` (
   `birthday` varchar(100) DEFAULT NULL COMMENT '用户生日',
   `job` varchar(100) DEFAULT NULL COMMENT '用户职业',
   `post_qty` int NOT NULL COMMENT '主题贴数',
+  `reply_qty` int NOT NULL COMMENT '回复数',
   `record_date` date DEFAULT NULL COMMENT '注册日期',
   `location` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '所在区域',
-  `voluteer_tag` tinyint(1) DEFAULT NULL COMMENT '志愿者标志位',
+  `vol_tag` tinyint(1) DEFAULT NULL COMMENT '志愿者标志位',
+  `age` int NOT NULL COMMENT '用户年龄',
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
