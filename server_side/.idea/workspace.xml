@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9b1b3a9a-3825-4ded-a92e-daf4e6f06803" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/controller/UseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/controller/UseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/service/impl/UserServiceimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/service/impl/UserServiceimpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +60,7 @@
       <updated>1687752286085</updated>
       <workItem from="1687752287337" duration="765000" />
       <workItem from="1687753078918" duration="95000" />
+      <workItem from="1687754472307" duration="95000" />
     </task>
     <servers />
   </component>
