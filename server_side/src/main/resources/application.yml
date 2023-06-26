@@ -1,10 +1,10 @@
 server:
-  port: 8129
+  port: 8888
 spring:
   datasource:
     username: root
-    password: "root"
-    url: jdbc:mysql://127.0.0.1:3306/patient?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/patient?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
   mapper-locations: classpath*:/mapper/*.xml

@@ -1,4 +1,4 @@
-package com.cupk.service.impl;
+package com.cupk.service.Impl;
 
 import com.cupk.mapper.UserMapper;
 import com.cupk.pojo.User;
@@ -9,26 +9,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * 名称UserServiceimpl
- * 描述
- *
- * @version 1.0
- * @author:Liu JiaQi
- * @datatime:2023-06-25 19:01
- */
 @Service
 @Primary
-public class UserServiceimpl implements UserService {
+public class UserServiceImpl implements UserService {
     @Autowired(required = false)
     private UserMapper userMapper;
     @Override
-    public User findByID(Integer id) {
-        return userMapper.findByID(id);
-    }
-
-    @Override
-    public List<User> findAllUsers() {
-        return userMapper.findAllUsers();
+    public List<User> findall() {
+        return userMapper.findall();
     }
 }
