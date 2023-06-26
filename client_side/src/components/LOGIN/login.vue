@@ -24,6 +24,7 @@
       <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
     </el-form-item>
   </el-form>
+
 </template>
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
@@ -82,3 +83,7 @@ const resetForm = (formEl: FormInstance | undefined) => {
 }
 
 </script>
+
+<style scoped>
+
+</style>
