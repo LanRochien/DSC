@@ -5,5 +5,6 @@ import com.cupk.pojo.User;
 import java.util.List;
 
 public interface UserService {
-    List<User> findall();
+    User findByID(Integer id);//通过id找用户
+    List <User> findAllUsers(); //找到全部用户
 }
