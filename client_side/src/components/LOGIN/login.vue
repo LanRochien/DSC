@@ -1,6 +1,7 @@
 <template>
   <div class="main">
     <div class="logo">
+      <h2>登录</h2>
     </div>
     <hr id="underline"/>
     <div class="login">
@@ -95,6 +96,8 @@ const resetForm = (formEl: FormInstance | undefined) => {
 .logo{
   width:30vw;
   height: 5vw;
+  text-align: center;
+  line-height: 5vw;
 
 }
 .main{
@@ -113,14 +116,15 @@ const resetForm = (formEl: FormInstance | undefined) => {
   color: white;
 }
 .login{
-  margin-left: -6vw;
+  margin-left: -5vw;
+  max-width: 500px;
 }
 #app{
   display: flex;
   justify-content: center;
 }
 .btn{
-  margin-left: 6vw;
+  margin-left: 4.5vw;
 }
 
 
