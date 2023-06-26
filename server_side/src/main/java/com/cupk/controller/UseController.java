@@ -27,4 +27,15 @@ public class UseController {
     public List<User> findAll(){
         return userService.findAllUsers();
     }
+
+
+    public String getUserByName(String name, Model model){
+        User user=userService.getUserByName(name);
+        if(user!=null){
+            model.addAttribute("user",user);
+            return "";
+        }else{
+            return "";
+        }
+    }
 }
