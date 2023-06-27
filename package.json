@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "element-plus": "^2.3.7",
+    "mybatis": "^0.0.1",
+    "vue-grid-layout": "^3.0.0-beta1"
+  }
+}
