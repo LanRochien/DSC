@@ -126,10 +126,7 @@ const resetForm = (formEl: FormInstance | undefined) => {
   margin-left: -5vw;
   max-width: 500px;
 }
-#app{
-  display: flex;
-  justify-content: center;
-}
+
 .btn{
   margin-left: 4.5vw;
 }

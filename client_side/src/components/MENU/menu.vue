@@ -8,10 +8,11 @@
     @select="handleSelect"
 >
   <el-menu-item index="0">LOGO</el-menu-item>
-  <div class="flex-grow" />
   <el-menu-item index="1">首页</el-menu-item>
   <el-menu-item index="2">活动</el-menu-item>
   <el-menu-item index="3">论坛</el-menu-item>
+  <div class="flex-grow" />
+
 </el-menu>
 </div>
 </template>
@@ -34,6 +35,6 @@ const handleSelect = (key: string, keyPath: string[]) => {
   height: 60px;
 }
 .flex-grow {
-  flex-grow: 1;
+  //flex-grow: 1;
 }
 </style>

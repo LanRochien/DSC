@@ -72,13 +72,9 @@ const activityList=ref([{
 </script>
 
 <style scoped>
-/*.menu{
-  position: fixed;
-  width: 100%;
-  //min-width: 900px;
-  height: 50px;
-  z-index: 99;
-}*/
+body{
+  background-color: #f6f6f6;
+}
 .el-carousel__item h3 {
 
   display: flex;
