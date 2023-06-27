@@ -51,7 +51,7 @@
     <el-form-item>
       <div class="btn">
       <el-button type="primary" @click="onSubmit">Create</el-button>
-      <el-button>Cancel</el-button>
+      <el-button @click="onCancel">Cancel</el-button>
       </div>
     </el-form-item>
   </el-form>
@@ -61,7 +61,9 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
+import {useRouter} from "vue-router";
 
+const router=useRouter()
 // do not use same name with ref
 const form = reactive({
   name: '',
@@ -76,6 +78,9 @@ const form = reactive({
 
 const onSubmit = () => {
   console.log('submit!')
+}
+const onCancel = () => {
+  router.push('/')
 }
 </script>
 

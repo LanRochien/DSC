@@ -4,6 +4,8 @@ import { createRouter,createWebHashHistory } from "vue-router";
 
 import LOGIN from "/src/components/LOGIN/login.vue"
 import INDEX from "/src/components/INDEX/index.vue"
+import REGISTER from "/src/components/REGISTER/register.vue"
+
 
 const routes=[
     {
@@ -13,6 +15,10 @@ const routes=[
     {
         path:'/index',
         component:INDEX
+    },
+    {
+        path:'/register',
+        component:REGISTER
     },
 ]
 export default createRouter({
