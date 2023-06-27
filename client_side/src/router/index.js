@@ -4,6 +4,9 @@ import { createRouter,createWebHashHistory } from "vue-router";
 
 import LOGIN from "/src/components/LOGIN/login.vue"
 import INDEX from "/src/components/INDEX/index.vue"
+import REGISTER from "/src/components/REGISTER/register.vue"
+import ACTIVITY from "/src/components/ACTIVITY/activities.vue"
+
 
 const routes=[
     {
@@ -13,6 +16,14 @@ const routes=[
     {
         path:'/index',
         component:INDEX
+    },
+    {
+        path:'/register',
+        component:REGISTER
+    },
+    {
+        path:'/activities',
+        component:ACTIVITY
     },
 ]
 export default createRouter({

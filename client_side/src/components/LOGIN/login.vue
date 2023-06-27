@@ -28,7 +28,8 @@
             <el-button type="primary" @click="submitForm(ruleFormRef)"
             >Submit</el-button
             >
-            <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
+<!--            <el-button @click="resetForm(ruleFormRef)">Reset</el-button>-->
+              <el-button @click="naviToreg()">注册</el-button>
           </el-form-item>
         </div>
       </el-form>
@@ -38,7 +39,13 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
+import {useRouter} from "vue-router"
+const router=useRouter()
 const ruleFormRef = ref<FormInstance>()
+
+const naviToreg=()=>{
+  router.push('/register')
+}
 const validatePass = (rule: any, value: any, callback: any) => {
   if (value === '') {
     callback(new Error('请输入用户名'))
@@ -119,10 +126,7 @@ const resetForm = (formEl: FormInstance | undefined) => {
   margin-left: -5vw;
   max-width: 500px;
 }
-#app{
-  display: flex;
-  justify-content: center;
-}
+
 .btn{
   margin-left: 4.5vw;
 }
