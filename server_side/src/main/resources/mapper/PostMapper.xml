@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cupk.mapper.PostMapper">
+    <select id="getMainPostsByPlateID" resultMap="PostWithUser">
+        select * from t_post where plate_id=#{plate_id}
+    </select>
+    <resultMap id="PostWithUser" type="com.cupk.pojo.Post">
+        <id column="id" property="id"></id>
+        <result column="reply_qty" property="reply_qty"></result>
+        <result column="click_qty" property="click_qty"></result>
+        <result column="up_qty" property="up_qty"></result>
+        <result column="head" property="head"></result>
+        <result column="content" property="content"></result>
+        <result column="datetime" property="datetime"></result>
+        <association property="plate_id" column="plate_id" javaType="com.cupk.pojo.PlateMessage"
+                     select="com.cupk.mapper.PlateMapper.findPlateById"></association>
+        <association property="user" column="user_id" javaType="com.cupk.pojo.User"
+                     select="com.cupk.mapper.UserMapper.findUserByID"></association>
+    </resultMap>
+    <insert id="insertMainPost" parameterType="com.cupk.pojo.Post">
+        insert into t_post(reply_qty,click_qty,up_qty,head,content,datetime,plate_id,user_id)
+        value (#{reply_qty},#{click_qty},#{up_qty},#{head},#{content},#{datetime},#{plate.id},#{user.id})
+    </insert>
+</mapper>

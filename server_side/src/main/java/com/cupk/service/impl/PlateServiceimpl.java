@@ -27,4 +27,9 @@ public class PlateServiceimpl implements PlateService {
     public List<PlateMessage> findAllPlate() {
         return plateMapper.findAllPlate();
     }
+
+    @Override
+    public PlateMessage findPlateById(Integer id) {
+        return plateMapper.findPlateById(id);
+    }
 }

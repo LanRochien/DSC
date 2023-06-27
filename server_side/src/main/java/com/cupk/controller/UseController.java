@@ -29,14 +29,16 @@ public class UseController {
         return userService.findAllUsers();
     }
 
-
-    public String getUserByName(String name, Model model){
-        User user=userService.getUserByName(name);
+    @RequestMapping("/findbid")
+    public String findUserByName(Integer id, Model model){
+        User user=userService.findByID(id);
         if(user!=null){
+            System.out.println(user);
             model.addAttribute("user",user);
-            return "";
+            model.addAttribute("msg","成功");
         }else{
-            return "";
+            model.addAttribute("msg","失败");
         }
+        return "test/test";
     }
 }

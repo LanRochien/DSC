@@ -6,6 +6,9 @@ import java.util.Date;
 
 @Data
 public class User {
+    private Integer id;
+    private String password;
+    private Boolean role;
     private String name;//用户名
     private String sex;//用户性别
     private Date birthday;//用户生日
