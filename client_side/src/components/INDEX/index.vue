@@ -24,10 +24,13 @@
     </div>
   </el-card>
   </div>
+  <bottom></bottom>
 </template>
 <script lang="ts" setup>
-import MENU from '../MENU/menu.vue'
+import MENU from '../COMPONENT/menu.vue'
+import Bottom from "../COMPONENT/bottom.vue";
 import { ref } from 'vue'
+
 const infoTitle=ref(["titlea","titleb","titlec","titled"])
 const infoDetail=ref(["phara","pharb","pharc","phard"])
 const infoList=ref([{
@@ -105,17 +108,22 @@ body{
 }
 .info_item:nth-child(odd) .info_img{
   position: absolute;
-  right: 20px;
+  right: 0px;
+  top: 0;
   background-repeat: no-repeat;
   height: 100%;
   width: 50%;
+  background-size:100% 100%;
 }
 .info_item:nth-child(even) .info_img{
   position: absolute;
-  left: 20px;
+  left: 0px;
+  top:0;
   background-repeat: no-repeat;
   height: 100%;
   width: 50%;
+  background-size:100% 100%;
+
 }
 .info_item:nth-child(odd) .info_text{
   position: absolute;

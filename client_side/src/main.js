@@ -4,7 +4,7 @@ import 'element-plus/dist/index.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import axios from '@/components/test/axiosInstance';
-import './mock/index'
+import '/src/mock/index.js'
 import router from '/src/router/index.js'
 
 const app=createApp(App)
