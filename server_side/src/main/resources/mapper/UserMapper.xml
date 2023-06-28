@@ -16,8 +16,8 @@
         values(#{name},#{sex},#{birthday},#{job},#{location},#{record_date},#{age})
     </insert>
     <insert id="register" parameterType="com.cupk.pojo.User" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        insert into t_user(name,password,sex,birthday,job,post_num,reply_num,record_date,location,vol_tag)
-        values(#{name},#{password},#{sex},#{birthday},#{job},0,0,#{record_date},#{location},0)
+        insert into t_user(name,password,sex,birthday,job,record_date,location)
+        values(#{name},#{password},#{sex},#{birthday},#{job},#{record_date},#{location})
     </insert>
     <delete id="deleteUserById">
         delete from t_user where id=#{id}

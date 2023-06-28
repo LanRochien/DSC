@@ -52,7 +52,8 @@ public class UserController {
         if (name.equals("") || password.equals("")) {
             return "用户名或密码不能为空";
         } else {
-            if (userService.login(name,password)>0) return "登录成功";
+            if (userService.login(name,password)>0)
+                return "登录成功";
             else {
                 return "用户名或密码错误";
             }
