@@ -23,4 +23,14 @@
         insert into t_post(reply_qty,click_qty,up_qty,head,content,datetime,plate_id,user_id)
         value (#{reply_qty},#{click_qty},#{up_qty},#{head},#{content},#{datetime},#{plate.id},#{user.id})
     </insert>
+    <select id="findMainPostsByStr" resultMap="PostWithUser">
+        select * from t_post
+        where 1=1
+        <if test="Str!=null and Str!=''">
+            and head like CONCAT('%',#{Str},'%')
+            or content like CONCAT('%',#{Str},'%')
+            or palte_id = (select id from t_plate where name like CONCAT('%',#{Str},'%'))
+            or user_id =(select id from t_plate where name like CONCAT('%',#{Str},'%'))
+        </if>
+    </select>
 </mapper>
