@@ -10,5 +10,18 @@
     <select id="findAllUsers" resultType="com.cupk.pojo.User">
         select * from t_user
     </select>
-    
+    <insert id="addUser" parameterType="com.cupk.pojo.User">
+        insert into t_user(name,sex,birthday,job,location,record_date,age)
+        values(#{name},#{sex},#{birthday},#{job},#{location},#{record_date},#{age})
+    </insert>
+    <insert id="register" parameterType="com.cupk.pojo.User" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into t_user(name,password,sex,birthday,job,record_date,location)
+        values(#{name},#{password},#{sex},#{birthday},#{job},#{record_date},#{location})
+    </insert>
+    <delete id="deleteUserById">
+        delete from t_user where id=#{id}
+    </delete>
+    <select id="login">
+        select id from t_user where (name = #{name} and password = #{password})
+    </select>
 </mapper>

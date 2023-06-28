@@ -12,5 +12,5 @@ public class Comment {
     private Integer click_qty;//点击数
     private Integer up_qty;//点赞数
     private User user;//外键用户编号
-    private Post Post;//外键主题帖编号
+    private Post mainPost;//外键主题帖编号
 }

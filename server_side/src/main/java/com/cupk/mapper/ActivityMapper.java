@@ -1,12 +1,12 @@
-package com.cupk.service;
+package com.cupk.mapper;
 import com.cupk.pojo.Activity;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Service;
+
 
 import java.util.List;
-public interface ActivityService {
+
+public interface ActivityMapper {
     List<Activity> findAllActivities();
     int insertActivity(Activity activity);
     List<Activity> findActivitiesByStr(String Str);//活动的模糊搜索
+
 }

@@ -1,94 +1,86 @@
--- patient.plate_message definition
+-- patient.t_plate definition
 
 CREATE TABLE `t_plate` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '板块编号',
-  `name` VARCHAR(100) DEFAULT NULL COMMENT '板块名',
-  `explain` VARCHAR(300) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '板块简介',
-  `click_qty` INT DEFAULT NULL COMMENT '板块点击数',
-  `post_qty` INT DEFAULT NULL COMMENT '主题帖数',
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `explain` varchar(300) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `click_qty` int DEFAULT NULL,
+  `post_qty` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 
 
--- patient.`user` definition
+-- patient.t_user definition
 
 CREATE TABLE `t_user` (
-  `name` VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '用户名',
-  `sex` VARCHAR(100) DEFAULT NULL COMMENT '用户性别',
-  `birthday` VARCHAR(100) DEFAULT NULL COMMENT '用户生日',
-  `job` VARCHAR(100) DEFAULT NULL COMMENT '用户职业',
-  `post_qty` INT NOT NULL COMMENT '主题贴数',
-  `reply_qty` INT NOT NULL COMMENT '回复数',
-  `record_date` DATE DEFAULT NULL COMMENT '注册日期',
-  `location` VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '所在区域',
-  `vol_tag` TINYINT(1) DEFAULT NULL COMMENT '志愿者标志位',
-  `age` INT NOT NULL COMMENT '用户年龄',
-  PRIMARY KEY (`name`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb3;
-
-
--- patient.login_message definition
-
-CREATE TABLE `t_login` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '用户编号',
-  `password` VARCHAR(100) NOT NULL COMMENT '用户密码',
-  `role` TINYINT(1) NOT NULL COMMENT '用户角色标志位',
-  `user_name` VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '用户名',
+  `name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `sex` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `birthday` date NOT NULL,
+  `job` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `post_qty` int DEFAULT NULL,
+  `record_date` date NOT NULL,
+  `location` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `vol_tag` tinyint(1) DEFAULT NULL,
+  `age` int DEFAULT NULL,
+  `reply_qty` int DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `password` varchar(100) NOT NULL,
+  `role` tinyint(1) DEFAULT NULL,
+  `head_url` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `login_message_FK` (`user_name`),
-  CONSTRAINT `login_message_FK` FOREIGN KEY (`user_name`) REFERENCES `t_user` (`name`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb3;
+  UNIQUE KEY `t_user_un` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 
 
--- patient.main_post definition
+-- patient.t_activity definition
+
+CREATE TABLE `t_activity` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `content` varchar(600) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `datetime` datetime DEFAULT NULL,
+  `num_required` int DEFAULT NULL,
+  `num_participants` int DEFAULT NULL,
+  `state` varchar(100) DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `t_activity_FK` (`user_id`),
+  CONSTRAINT `t_activity_FK` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+
+
+-- patient.t_post definition
 
 CREATE TABLE `t_post` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '主题帖编号',
-  `reply_qty` INT DEFAULT NULL COMMENT '回复数',
-  `click_qty` INT DEFAULT NULL COMMENT '点击数',
-  `up_qty` INT DEFAULT NULL COMMENT '点赞数',
-  `head` VARCHAR(100) DEFAULT NULL COMMENT '主题帖标题',
-  `content` VARCHAR(600) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '主题帖内容',
-  `datetime` DATETIME DEFAULT NULL COMMENT '发帖时间',
-  `plate_id` INT DEFAULT NULL COMMENT '板块编号',
-  `user_id` INT DEFAULT NULL COMMENT '发帖人编号',
+  `id` int NOT NULL AUTO_INCREMENT,
+  `reply_qty` int DEFAULT NULL,
+  `click_qty` int DEFAULT NULL,
+  `up_qty` int DEFAULT NULL,
+  `head` varchar(100) DEFAULT NULL,
+  `content` varchar(600) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `datetime` datetime DEFAULT NULL,
+  `plate_id` int DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `main_post_FK` (`plate_id`),
-  KEY `main_post_FK_1` (`user_id`),
+  KEY `t_post_FK` (`user_id`),
   CONSTRAINT `main_post_FK` FOREIGN KEY (`plate_id`) REFERENCES `t_plate` (`id`),
-  CONSTRAINT `main_post_FK_1` FOREIGN KEY (`user_id`) REFERENCES `t_login` (`id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `t_post_FK` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 
 
--- patient.acticity definition
-
-CREATE TABLE `t_acticity` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '活动编号',
-  `content` VARCHAR(600) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '内容',
-  `datetime` DATETIME DEFAULT NULL COMMENT '发布时间',
-  `num_requied` INT DEFAULT NULL COMMENT '需要人数',
-  `num_participants` INT DEFAULT NULL COMMENT '已报名人数',
-  `state` TINYINT(1) DEFAULT NULL COMMENT '活动状态',
-  `user_id` INT DEFAULT NULL COMMENT '发布者编号',
-  PRIMARY KEY (`id`),
-  KEY `acticity_FK` (`user_id`),
-  CONSTRAINT `acticity_FK` FOREIGN KEY (`user_id`) REFERENCES `t_login` (`id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb3;
-
-
--- patient.comment definition
+-- patient.t_comment definition
 
 CREATE TABLE `t_comment` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '评论编号',
-  `content` VARCHAR(400) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '评论内容',
-  `datetime` DATETIME DEFAULT NULL COMMENT '评论时间',
-  `click_qty` INT DEFAULT NULL COMMENT '点击数',
-  `up_qty` INT DEFAULT NULL COMMENT '点赞数',
-  `mainpost_id` INT DEFAULT NULL COMMENT '主题帖编号',
-  `user_id` INT DEFAULT NULL COMMENT '发表者编号',
+  `id` int NOT NULL AUTO_INCREMENT,
+  `content` varchar(400) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `datetime` datetime DEFAULT NULL,
+  `click_qty` int DEFAULT NULL,
+  `up_qty` int DEFAULT NULL,
+  `mainpost_id` int DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `comment_FK` (`user_id`),
   KEY `comment_FK_1` (`mainpost_id`),
-  CONSTRAINT `comment_FK` FOREIGN KEY (`user_id`) REFERENCES `t_login` (`id`),
-  CONSTRAINT `comment_FK_1` FOREIGN KEY (`mainpost_id`) REFERENCES `t_post` (`id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb3;
+  KEY `t_comment_FK` (`user_id`),
+  CONSTRAINT `comment_FK_1` FOREIGN KEY (`mainpost_id`) REFERENCES `t_post` (`id`),
+  CONSTRAINT `t_comment_FK` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;

@@ -3,46 +3,71 @@ package com.cupk.controller;
 import com.cupk.pojo.Post;
 import com.cupk.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 /**
- * 名称MainPostController
+ * 名称PostController
  * 描述
  *
  * @version 1.0
- * @author:LANKEREN
- * @datatime:2023-06-26 17:38
+ * @author:Liu JiaQi
+ * @datatime:2023-06-27 19:04
  */
-@Controller
-@RequestMapping("/mainpost")
+@RestController
+@RequestMapping("/post")
 public class PostController {
     @Autowired(required = false)
     private PostService postService;
 
-    @RequestMapping("/getpostbyid")
-    public String getMainPostsByPlateID(Integer plate_id, Model model){
-         List<Post> posts = postService.getMainPostsByPlateID(plate_id);
-         posts.sort((Post a, Post b)->{
-                Integer a1=a.getClick_qty()*2+a.getUp_qty()*3+a.getReply_qty()*5;
-                Integer b1=b.getClick_qty()*2+a.getReply_qty()*5+a.getUp_qty()*3;
-                return b1.compareTo(a1);
-         });
-         if(posts !=null){
-             for (Post i: posts) {
-                 System.out.println(i);
-             }
-             System.out.println("0101\n");
-             model.addAttribute("mainpostlist", posts);
-             model.addAttribute("msg","成功");
-         }else{
-             model.addAttribute("msg","失败");
-         }
-         return "test/test";
+    @RequestMapping("/click")
+    public int clickPost(Post post) {
+        postService.clickPost(post);
+        return post.getClick_qty();
+    }//点击post
+
+    @RequestMapping("/up")
+    public int upPost(Post post) {
+        postService.upPost(post);
+        return post.getUp_qty();
+    }//为post点赞
+
+    @RequestMapping("/reply")
+    public int countReply(Post post) {
+        postService.countReply(post);
+        return post.getReply_qty();
+    }//记录回复数
+    @GetMapping("/getpostbyid")
+    public String getMainPostsByPlateID(Integer plate_id, Model model,Integer line){
+        List<Post> postList = postService.getMainPostsByPlateID(plate_id);
+        if(postList !=null){
+            if(line==null||line==1){
+                postList.sort((a,b)->{
+                    Integer a1=a.getClick_qty()*2+a.getUp_qty()*3+a.getReply_qty()*5;
+                    Integer b1=b.getClick_qty()*2+a.getReply_qty()*5+a.getUp_qty()*3;
+                    return b1.compareTo(a1);
+                });
+            }else{
+                postList.sort((a,b)->{
+                    Integer a1=a.getClick_qty()*2+a.getUp_qty()*3+a.getReply_qty()*5;
+                    Integer b1=b.getClick_qty()*2+a.getReply_qty()*5+a.getUp_qty()*3;
+                    return a1.compareTo(b1);
+                });
+            }
+            for (Post i: postList) {
+                System.out.println(i);
+            }
+            System.out.println("0101\n");
+            model.addAttribute("mainpostlist", postList);
+            model.addAttribute("msg","成功");
+        }else{
+            model.addAttribute("msg","失败");
+        }
+        return "test/test";
     }
 
     @RequestMapping("/insertpost")
@@ -56,5 +81,33 @@ public class PostController {
         return "test/test";
     }
 
+    //论坛的模糊搜索
+    @RequestMapping("/findpostbystr")
+    public String  findMainPostsByStr(String Str,Model model,Integer line){
+        List<Post> postList=postService.findMainPostsByStr(Str);
+        if(postList !=null){
+            if(line==null||line==1){
+                postList.sort((a,b)->{
+                    Integer a1=a.getClick_qty()*2+a.getUp_qty()*3+a.getReply_qty()*5;
+                    Integer b1=b.getClick_qty()*2+a.getReply_qty()*5+a.getUp_qty()*3;
+                    return b1.compareTo(a1);
+                });
+            }else{
+                postList.sort((a,b)->{
+                    Integer a1=a.getClick_qty()*2+a.getUp_qty()*3+a.getReply_qty()*5;
+                    Integer b1=b.getClick_qty()*2+a.getReply_qty()*5+a.getUp_qty()*3;
+                    return a1.compareTo(b1);
+                });
+            }
+            for (Post i: postList) {
+                System.out.println(i);
+            }
+            model.addAttribute("mainpostlist", postList);
+            model.addAttribute("msg","成功");
+        }else{
+            model.addAttribute("msg","失败");
+        }
+        return "test/test";
+    }
 
 }

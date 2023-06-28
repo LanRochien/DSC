@@ -10,3 +10,4 @@ public class PlateMessage {
     private Integer click_qty;//点击数
     private Integer post_qty;//主题数
 }
+

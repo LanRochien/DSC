@@ -9,6 +9,13 @@ import java.util.List;
 
 public interface UserMapper {
     User findByID(Integer id);
-    List<User> findAllUsers();
 
+    List<User> findAllUsers();
+    int addUser(User user);
+
+    int register (User user);
+
+    int deleteUserById(int id);
+
+    int login(String name,String password);
 }
