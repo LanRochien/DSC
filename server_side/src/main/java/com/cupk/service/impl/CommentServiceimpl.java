@@ -28,3 +28,4 @@ public class CommentServiceimpl implements CommentService {
         return commentMapper.findCommentsByPostID(post_id);
     }
 }
+

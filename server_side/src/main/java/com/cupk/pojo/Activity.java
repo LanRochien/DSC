@@ -1,8 +1,8 @@
 package com.cupk.pojo;
 
+import com.cupk.pojo.User;
 import lombok.Data;
 
-import java.util.List;
 @Data
 public class Activity {
     private Integer id;

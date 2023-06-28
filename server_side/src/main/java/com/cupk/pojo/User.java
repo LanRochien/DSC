@@ -10,6 +10,7 @@ public class User {
     private String password;
     private Boolean role;
     private String name;//用户名
+    private String head_url;//头像存储
     private String sex;//用户性别
     private Date birthday;//用户生日
     private String job;//用户职业

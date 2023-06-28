@@ -6,7 +6,4 @@
   <select id="findAllPlate" resultType="com.cupk.pojo.PlateMessage">
     select * from t_plate
   </select>
-  <select id="findPlateById" resultType="com.cupk.pojo.PlateMessage">
-    select * from t_plate where id=#{id}
-  </select>
 </mapper>

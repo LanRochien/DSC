@@ -3,6 +3,21 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cupk.mapper.PostMapper">
+    <update id="clickPost">
+        update t_post
+        set click_qty=click_qty+1
+        where id = #{id}
+    </update>
+    <update id="upPost">
+        update t_post
+        set up_qty=up_qty+1
+        where id = #{id}
+    </update>
+   <update id="countReply" >
+     update t_post
+     set reply_qty=reply_qty+1
+     where id = #{id}
+   </update>
     <select id="getMainPostsByPlateID" resultMap="PostWithUser">
         select * from t_post where plate_id=#{plate_id}
     </select>
@@ -21,6 +36,6 @@
     </resultMap>
     <insert id="insertMainPost" parameterType="com.cupk.pojo.Post">
         insert into t_post(reply_qty,click_qty,up_qty,head,content,datetime,plate_id,user_id)
-        value (#{reply_qty},#{click_qty},#{up_qty},#{head},#{content},#{datetime},#{plate.id},#{user.id})
+            value (#{reply_qty},#{click_qty},#{up_qty},#{head},#{content},#{datetime},#{plate.id},#{user.id})
     </insert>
 </mapper>

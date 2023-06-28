@@ -3,12 +3,26 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cupk.mapper.UserMapper">
-    <select id="findByID" resultType="com.cupk.pojo.User">
+    <select id="findUserByID" resultType="com.cupk.pojo.User">
         select * from t_user
-        where id=#{id}
+        where name=(select name from t_login
+               where id = #{id})
     </select>
     <select id="findAllUsers" resultType="com.cupk.pojo.User">
         select * from t_user
     </select>
-    
+    <insert id="addUser" parameterType="com.cupk.pojo.User">
+        insert into t_user(name,sex,birthday,job,location,record_date,age)
+        values(#{name},#{sex},#{birthday},#{job},#{location},#{record_date},#{age})
+    </insert>
+    <insert id="register" parameterType="com.cupk.pojo.User" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into t_user(name,password,sex,birthday,job,post_num,reply_num,record_date,location,vol_tag)
+        values(#{name},#{password},#{sex},#{birthday},#{job},0,0,#{record_date},#{location},0)
+    </insert>
+    <delete id="deleteUserById">
+        delete from t_user where id=#{id}
+    </delete>
+    <select id="login">
+        select id from t_user where (name = #{name} and password = #{password})
+    </select>
 </mapper>

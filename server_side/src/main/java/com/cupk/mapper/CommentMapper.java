@@ -1,7 +1,5 @@
 package com.cupk.mapper;
-
 import com.cupk.pojo.Comment;
-import com.cupk.pojo.Post;
 
 import java.util.List;
 
