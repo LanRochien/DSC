@@ -2,7 +2,6 @@ package com.cupk.pojo;
 
 import lombok.Data;
 
-import java.util.List;
 @Data
 public class Comment {
     private Integer id;  //回复编号
@@ -10,6 +9,6 @@ public class Comment {
     private String datetime;//回复时间
     private Integer click_qty;//点击数
     private Integer up_qty;//点赞数
-    List<LoginMessage> LoginMessageList;//外键用户编号
-    List<MainPost> MainPostList;//外键主题帖编号
+    private User user;//外键用户编号
+    private Post mainPost;//外键主题帖编号
 }

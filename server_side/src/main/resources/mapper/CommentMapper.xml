@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cupk.mapper.CommentMapper">
+  <select id="findCommentsByPostID" resultMap="CommentWithOthers">
+    select * from t_comment where mainpost_id={post_id}
+  </select>
+  <resultMap id="CommentWithOthers" type="com.cupk.pojo.Comment">
+    <id column="id" property="id"></id>
+    <result column="content" property="content"></result>
+    <result column="datetime" property="datetime"></result>
+    <result column="click_qty" property="click_qty"></result>
+    <result column="uo_qty" property="up_qty"></result>
+    <association property="user" column="user_id" javaType="com.cupk.pojo.User"
+                 select="com.cupk.mapper.UserMapper.findByID"></association>
+    <association property="Post" column="mainpost_id" javaType="com.cupk.pojo.Post"
+                 select="com.cupk.mapper.PostMapper.getMainPostsByPlateID"></association>
+  </resultMap>
+</mapper>

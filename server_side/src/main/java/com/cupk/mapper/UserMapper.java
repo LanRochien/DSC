@@ -1,6 +1,9 @@
 package com.cupk.mapper;
 
 import com.cupk.pojo.User;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -8,7 +11,7 @@ public interface UserMapper {
     User findByID(Integer id);
 
     List<User> findAllUsers();
-
+    int addUser(User user);
     @Select("select * from t_user where name=#{name}")
     @Results({@Result(column = "name",property = "name"),
             @Result(column = "sex",property = "sex"),
@@ -22,4 +25,10 @@ public interface UserMapper {
             @Result(column = "age" ,property = "age")
     })
     User getUserByName(String name);//通过用户名查询主页信息
+
+    int register (User user);
+
+    int deleteUserById(int id);
+
+    int login(String name,String password);
 }

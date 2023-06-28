@@ -10,7 +10,11 @@ import ACTIVITY from "/src/components/ACTIVITY/activities.vue"
 
 const routes=[
     {
-        path:'/',
+        path: '/',
+        redirect:'/index'
+    },
+    {
+        path:'/login',
         component:LOGIN
     },
     {
