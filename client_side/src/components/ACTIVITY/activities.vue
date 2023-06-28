@@ -1,11 +1,39 @@
-<script lang="ts" setup>
+<script lang="ts">
 import { ref } from 'vue'
+import API from "../../axiosinstance/axiosInstance.js"//API路径
+var images=ref([{content:''}])
+export default{
+  name:'activities',
+  setup(){
+    //数据
+    const testData = ref({});
+    //测试请求方法
+    const getData = function(){
+      API({
+        url:'/activity/findall',//目的数据详细路基
+        method:'GET'
+      }).then((res)=>{
+        // alert('请求成功!');
+        let arr=res.data.map((item)=>{
+          return Object.assign({},{content:item.content})
+        })//将获取的数组整理为只含图片地址的数组
+        console.log(arr)
+        this.images=arr;
+        console.log(this.images[0].content)
+      });
+    }
+    return{
+      testData,
+      getData,
+      images,
+    }
+  }
+}
 
-const currentDate = ref(new Date())
 </script>
 
-<template>
-  <div class="common-layout">
+<template >
+  <div class="common-layout" @mouseover="getData">
     <el-container>
       <el-header class="header">Header</el-header>
       <el-main class="main">
@@ -38,28 +66,38 @@ const currentDate = ref(new Date())
           </div>
       </div>
       <div class="huodongview">
-        <el-row>
+        <div class="testfirst">
+        <el-row >
           <el-col
-              v-for="(o, index) in 5"
-              :key="o"
+              v-for="image in images"
               :span="4"
-              :offset="index > 0 ? 1 : 0"
+              :offset="1"
           >
+            <a href="#" class="cardin">
             <el-card :body-style="{ padding: '0px' }">
+
               <img
-                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  :src=image.content
+                  @loadstart="getData"
                   class="image"
               />
-              <div style="padding: 14px">
+
+              <div style="padding: 14px;">
+
                 <span>Yummy hamburger</span>
                 <div class="bottom">
                   <p>activities txt</p>
                   <el-button text class="button">Operating</el-button>
                 </div>
+
               </div>
+
             </el-card>
+            </a>
           </el-col>
         </el-row>
+        </div>
+
       </div>
       </el-main>
     </el-container>
@@ -125,4 +163,10 @@ const currentDate = ref(new Date())
   width: 100%;
   display: block;
 }
+.testfirst{
+  margin-left: 10vw;
+}
+
+
+
 </style>
