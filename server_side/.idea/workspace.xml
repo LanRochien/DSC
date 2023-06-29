@@ -6,7 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="9b1b3a9a-3825-4ded-a92e-daf4e6f06803" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/controller/PlateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/controller/PlateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/controller/CommentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/mapper/CommentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/mapper/CommentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/service/CommentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/service/impl/CommentServiceimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/service/impl/CommentServiceimpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/CommentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/CommentMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,6 +117,8 @@
       <workItem from="1687922987610" duration="9391000" />
       <workItem from="1687943912621" duration="1820000" />
       <workItem from="1688005120284" duration="211000" />
+      <workItem from="1688005386414" duration="12000" />
+      <workItem from="1688005463118" duration="2031000" />
     </task>
     <servers />
   </component>
