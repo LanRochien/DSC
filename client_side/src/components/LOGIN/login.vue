@@ -40,6 +40,8 @@
 import { reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import {useRouter} from "vue-router"
+import API from "../../axiosinstance/axiosInstance.js"//API路径
+
 const router=useRouter()
 const ruleFormRef = ref<FormInstance>()
 
@@ -78,13 +80,23 @@ const rules = reactive<FormRules<typeof ruleForm>>({
 
 })
 
-const submitForm = (formEl: FormInstance | undefined) => {
+const submitForm = (formEl: FormInstance |undefined) => {
   if (!formEl) return
   formEl.validate((valid) => {
     if (valid) {
       console.log('submit!')
       console.log(ruleForm.name);
       console.log(ruleForm.pwd);
+      API({
+        url:'http://localhost:8080/test',
+        method:"post",
+        params:{
+          username:ruleForm.name,
+          password:ruleForm.pwd
+        }
+      }).then((res)=>{
+        console.log(res)
+      })
 
     } else {
       console.log('error submit!')

@@ -1,4 +1,8 @@
 import Mock from 'mockjs'
+const login =Mock.mock('http://localhost:8080/test/?username=qwe&password=qwe ','post',function (req){
+
+    return body
+})
 const testData=Mock.mock('http://localhost:8080/test','get',{
     name:"Lanxxx",
     id:1
@@ -13,24 +17,24 @@ const plate=Mock.mock('http://localhost:8080/plate','get',{
     post_qty: 655,
     plate_img: '/src/assets/test2.png',
 },{
-        id: 1234,
-        name: 'a24bc',
+        id: 123434,
+        name: 'a24bsdfsc',
         explain: '242435',
         click_qty: 6685885,
         post_qty: 6755,
         plate_img: '/src/assets/test2.png',
     },
         {
-            id: 1234,
-            name: 'a24bc',
+            id: 1263334,
+            name: 'a2zsdf 4bc',
             explain: '242435',
             click_qty: 6685885,
             post_qty: 6755,
             plate_img: '/src/assets/test2.png',
         },
         {
-            id: 1234,
-            name: 'a24bc',
+            id: 14,
+            name: 'a24zxcfwebc',
             explain: '242435',
             click_qty: 6685885,
             post_qty: 6755,

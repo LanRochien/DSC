@@ -8,14 +8,26 @@ import API from "../../axiosinstance/axiosInstance.js"//API路径
 const current='/forum'
 const router=useRouter()
 const plate_data=ref({})
-
+const plateid=ref()
+const toPost=(plateid,postid)=>{
+  router.push({
+    name:'post',
+    params:{
+      plateid:plateid,
+      postid:postid,
+    }
+  })
+}
 onMounted(()=>{
-  const  plateId=router.currentRoute.value.params
+  const  plateId=router.currentRoute.value.params.plateid
+  plateid.value=plateId
   API({
     url:"http://localhost:8080/posts",
+    // 传参，使用指定板块号
     method:'GET'
   }).then((res)=>{
     plate_data.value=res.data
+    console.log(plate_data.value)
   })
 })
 </script>
@@ -38,9 +50,9 @@ onMounted(()=>{
     <el-card>
     <div class="plate_content">
       <div class="plate_block" v-for="item in plate_data.posts">
-       <div class="plate_tilte"><h5>{{ item.title }}</h5></div>
+       <div class="plate_title" @click="toPost(plateid,item.post_id)"><h5>{{ item.title }}</h5></div>
         <div class="flex_grow"/>
-        <div class="user_name"><el-icon class="icon"><User /></el-icon>{{item.user.name}}</div>
+        <div class="user_name" @click="toUser(item.user.id)" ><el-icon class="icon"><User /></el-icon>{{item.user.name}}</div>
         <div class="post_time"><div>{{item.datetime}}</div></div>
       </div>
     </div>
@@ -78,6 +90,7 @@ onMounted(()=>{
   width: 80%;
   height: 100%;
   margin: 0 auto;
+
 }
 .flex_grow{
   flex-grow: 1;
@@ -87,9 +100,12 @@ onMounted(()=>{
   padding-bottom: 15px;
   padding-top: 15px;
   display: flex;
+  align-items: center;
 }
-.plate_tilte{
+.plate_title h5{
   display: block;
+  line-height: inherit;
+  cursor: pointer;
 
 }
 .user_name{
