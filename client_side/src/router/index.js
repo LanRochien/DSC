@@ -8,6 +8,7 @@ import REGISTER from "/src/components/REGISTER/register.vue"
 import ACTIVITY from "/src/components/ACTIVITY/activities.vue"
 import FORUMINDEX from "/src/components/FORUM/forum_index.vue"
 import PLATE from "/src/components/FORUM/plate.vue"
+import POST from "/src/components/FORUM/post.vue"
 
 
 const routes=[
@@ -40,6 +41,11 @@ const routes=[
         name:'plate',
         component:PLATE
     },
+    {
+        path:'/FORUM/:plateid/post/:postid',
+        name:'post',
+        component: POST
+    }
 ]
 export default createRouter({
     // 设置路由模式，设置每次加载新路由地址，页面位置顶部开始

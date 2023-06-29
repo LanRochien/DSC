@@ -27,5 +27,10 @@ public class CommentServiceimpl implements CommentService {
     public List<Comment> findCommentsByPostID(Integer post_id) {
         return commentMapper.findCommentsByPostID(post_id);
     }
+
+    @Override
+    public int insertComment(Comment comment) {
+        return commentMapper.insertComment(comment);
+    }
 }
 

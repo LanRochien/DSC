@@ -31,8 +31,6 @@ import MENU from '../COMPONENT/menu.vue'
 import Bottom from "../COMPONENT/bottom.vue";
 import { ref } from 'vue'
 const current='/index'
-const infoTitle=ref(["titlea","titleb","titlec","titled"])
-const infoDetail=ref(["phara","pharb","pharc","phard"])
 const infoList=ref([{
   infoTitle:"titlea",
   infoDetail:"phara",

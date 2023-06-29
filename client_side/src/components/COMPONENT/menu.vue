@@ -25,7 +25,6 @@
     <template #title>  <el-avatar  :icon="UserFilled" /></template>
     <div class="user_info">
       <div class="username">{{user.name}}</div>
-
     </div>
     <el-menu-item> 个人中心</el-menu-item>
   </el-sub-menu>
@@ -44,7 +43,7 @@ import API from "../../axiosinstance/axiosInstance.js"//API路径
 
 
 const input=ref("")
-const login=ref(true)
+const login=ref(false)
 const user=ref({})
 const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
@@ -54,6 +53,7 @@ API({
   url:'/test',
   method:'GET'
 }).then((res)=>{
+
   user.value=res.data
 
 })

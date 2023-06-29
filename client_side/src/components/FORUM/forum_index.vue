@@ -27,19 +27,19 @@ API({
 <Menu :current=current></Menu>
   <div class="dock">
   <div class="wrapper">
-  <div class="plate_block" v-for="item in plate">
+  <div class="forum_block" v-for="item in plate">
     <el-card class="box-card">
     <template #header>
-      <div class="plate_header">
+      <div class="forum_header">
         <span>{{ item.name }}</span>
         <el-button class="button" @click="toPlate(item.id)" text>进入板块</el-button>
       </div>
-      <div class="plate_info">
+      <div class="forum_info">
         <span>点击数: {{item.click_qty}}</span>
         <span>帖子数:{{item.post_qty}}</span>
       </div>
     </template>
-    <div class="plate_img"><img :src="item.plate_img"></div>
+    <div class="forum_img"><img :src="item.plate_img"></div>
   </el-card>
   </div>
   </div></div>
@@ -57,26 +57,26 @@ API({
 
   overflow: hidden;
 }
-.plate_block{
+.forum_block{
   float: left;
   margin: 20px 20px;
   width: 620px;
   height:fit-content;
 
 }
-.plate_block img{
+.forum_block img{
   width: 100%;
 }
-.plate_header {
+.forum_header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.plate_info{
+.forum_info{
   color: #cccccc;
   font-size: 12px;
 }
-.plate_info span{
+.forum_info span{
   margin-right: 10px;
 }
 </style>

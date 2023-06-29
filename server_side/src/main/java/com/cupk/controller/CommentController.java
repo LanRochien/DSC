@@ -3,6 +3,7 @@ package com.cupk.controller;
 import com.cupk.service.CommentService;
 import com.cupk.pojo.Comment;
 import com.cupk.pojo.Post;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +43,17 @@ import java.util.List;
                 model.addAttribute("msg","失败");
             }
             return "test/test";
+        }
+
+        @RequestMapping("/insertcomment")
+        public String insertComment(Comment comment){
+            int i=commentService.insertComment(comment);
+            if(i>0){
+                Gson gson=new Gson();
+                return gson.toJson(comment);
+            }else{
+                return "false";
+            }
         }
     }
 
