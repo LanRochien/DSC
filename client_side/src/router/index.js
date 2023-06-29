@@ -6,6 +6,8 @@ import LOGIN from "/src/components/LOGIN/login.vue"
 import INDEX from "/src/components/INDEX/index.vue"
 import REGISTER from "/src/components/REGISTER/register.vue"
 import ACTIVITY from "/src/components/ACTIVITY/activities.vue"
+import FORUMINDEX from "/src/components/FORUM/forum_index.vue"
+import PLATE from "/src/components/FORUM/plate.vue"
 
 
 const routes=[
@@ -28,6 +30,15 @@ const routes=[
     {
         path:'/activities',
         component:ACTIVITY
+    },
+    {
+        path:'/FORUM',
+        component:FORUMINDEX
+    },
+    {
+        path:'/FORUM/:plateid',
+        name:'plate',
+        component:PLATE
     },
 ]
 export default createRouter({

@@ -8,7 +8,7 @@
 </template>
 <script>
 import { reactive } from 'vue'
-import API from "../test/axiosInstance"
+// import API from "../test/axiosInstance"
 
 export default{
   name:'About',

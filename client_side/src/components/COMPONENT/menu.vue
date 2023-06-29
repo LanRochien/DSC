@@ -1,7 +1,7 @@
 <template>
 <div class="menu">
 <el-menu
-    :default-active="activeIndex"
+    :default-active="current"
     class="el-menu"
     mode="horizontal"
     :ellipsis="false"
@@ -24,7 +24,7 @@
   <el-sub-menu v-if="login">
     <template #title>  <el-avatar  :icon="UserFilled" /></template>
     <div class="user_info">
-      <div class="username">{{username}}</div>
+      <div class="username">{{user.name}}</div>
 
     </div>
     <el-menu-item> 个人中心</el-menu-item>
@@ -40,15 +40,27 @@
 import {ref} from "vue";
 import { Search } from '@element-plus/icons-vue'
 import { UserFilled } from '@element-plus/icons-vue'
+import API from "../../axiosinstance/axiosInstance.js"//API路径
+
+
 const input=ref("")
-const activeIndex = ref('/index')
 const login=ref(true)
-const username=ref('name')
 const user=ref({})
 const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
 
+API({
+  url:'/test',
+  method:'GET'
+}).then((res)=>{
+  user.value=res.data
+
+})
+
+defineProps({
+  current:String,
+})
 </script>
 <style scoped>
 .el-menu{
@@ -62,5 +74,11 @@ const handleSelect = (key: string, keyPath: string[]) => {
 }
 .flex-grow {
   flex-grow: 1;
+}
+.user_info{
+  width: 100%;
+  height: 150px;
+  text-align: center;
+  border: 1px solid black;
 }
 </style>
