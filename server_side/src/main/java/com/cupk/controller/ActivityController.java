@@ -42,5 +42,32 @@ public class ActivityController {
         return "activity/findall";
     }
 
+    @RequestMapping("/findactivitiesbystr")
+    public String findActivitiesByStr(String Str,Model model,Integer line){
+        List<Activity> activityList=activityService.findActivitiesByStr(Str);
+        if(activityList!=null){
+            if(line==null||line==1) {
+                activityList.sort((a, b) -> {
+                    Integer a1 = Math.toIntExact(a.getDatetime().getTime());
+                    Integer b1 = Math.toIntExact(b.getDatetime().getTime());
+                    return b1.compareTo(a1);
+                });
+            }else{
+                activityList.sort((a, b) -> {
+                    Integer a1 = Math.toIntExact(a.getDatetime().getTime());
+                    Integer b1 = Math.toIntExact(b.getDatetime().getTime());
+                    return a1.compareTo(b1);
+                });
+            }
+            for (Activity activity:activityList ) {
+                System.out.println(activity);
+            }
+            model.addAttribute("activities",activityList);
+            model.addAttribute("msg","成功");
+        }else{
+            model.addAttribute("msg","失败");
+        }
+        return "test/test";
+    }
 
 }

@@ -15,12 +15,12 @@ public class User {
     private String sex;//用户性别
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;//用户生日
-    private String job;//用户职业
     private Integer post_num;//主题帖数
     private Integer reply_num;//回复数
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date record_date;//注册日期
     private String location;//所在区域
-    private Boolean vol_tag;//志愿者标志位：
+    private Integer vol_tag;//志愿者标志位：
+    private Integer ban_tag;//禁用标志位
     private Integer age;//用户年龄
 }

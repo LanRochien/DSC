@@ -32,10 +32,21 @@
         <association property="plate_id" column="plate_id" javaType="com.cupk.pojo.PlateMessage"
                      select="com.cupk.mapper.PlateMapper.findPlateById"></association>
         <association property="user" column="user_id" javaType="com.cupk.pojo.User"
-                     select="com.cupk.mapper.UserMapper.findUserByID"></association>
+                     select="com.cupk.mapper.UserMapper.findByID"></association>
     </resultMap>
     <insert id="insertMainPost" parameterType="com.cupk.pojo.Post">
         insert into t_post(reply_qty,click_qty,up_qty,head,content,datetime,plate_id,user_id)
             value (#{reply_qty},#{click_qty},#{up_qty},#{head},#{content},#{datetime},#{plate.id},#{user.id})
     </insert>
+    <select id="findMainPostsByStr" parameterType="java.lang.String" resultMap="PostWithUser">
+        select * from t_post
+        where 1=1
+        <if test="Str!=null and Str!=''">
+            and head like CONCAT('%',#{Str},'%')
+            or content like CONCAT('%',#{Str},'%')
+            or plate_id = (select id from t_plate where name like CONCAT('%',#{Str},'%'))
+            or user_id =(select id from t_plate where name like CONCAT('%',#{Str},'%'))
+        </if>
+    </select>
 </mapper>
+

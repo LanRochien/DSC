@@ -33,4 +33,9 @@ public class ActivityServiceimpl implements ActivityService {
     public int insertActivity(Activity activity) {
         return activityMapper.insertActivity(activity);
     }
+
+    @Override
+    public List<Activity> findActivitiesByStr(String Str) {
+        return activityMapper.findActivitiesByStr(Str);
+    }
 }

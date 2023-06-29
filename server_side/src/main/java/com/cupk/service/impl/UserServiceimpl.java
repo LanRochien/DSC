@@ -35,10 +35,6 @@ public class UserServiceimpl implements UserService {
         return userMapper.addUser(user);
     }
 
-    @Override
-    public User getUserByName(String name) {
-        return userMapper.getUserByName(name);
-    }
 
     @Override
     public int register(User user) {

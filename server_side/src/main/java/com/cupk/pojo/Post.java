@@ -12,7 +12,7 @@ public class Post {
     private Integer up_qty;
     private String head;
     private String content;
-    private Date datatime;
+    private Date datetime;
     private PlateMessage plate_id;
     private User user;
 }

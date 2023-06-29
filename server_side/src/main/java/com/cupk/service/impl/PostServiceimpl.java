@@ -45,4 +45,9 @@ public class PostServiceimpl implements PostService {
     public int insertMainPost(Post post) {
         return postMapper.insertMainPost(post);
     }
+
+    @Override
+    public List<Post> findMainPostsByStr(String Str) {
+        return postMapper.findMainPostsByStr(Str);
+    }
 }
