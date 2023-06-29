@@ -17,4 +17,8 @@
         <association property="mainPost" column="mainpost_id" javaType="com.cupk.pojo.Post"
                      select="com.cupk.mapper.PostMapper.getMainPostsByPlateID"></association>
     </resultMap>
+    <insert id="insertComment" parameterType="com.cupk.pojo.Comment">
+        insert into t_comment(id,content,datetime,click_qty,up_qty,main_post_id,user_id)
+        values(#{id},#{content},#{datetime},#{click_qty},#{up_qty},#{user.id},#{mainPost.id})
+    </insert>
 </mapper>
