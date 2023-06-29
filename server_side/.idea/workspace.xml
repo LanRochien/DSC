@@ -5,45 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b1b3a9a-3825-4ded-a92e-daf4e6f06803" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/web-comprehensive-practice.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cupk/controller/ActivityController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cupk/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cupk/mapper/ActivityMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cupk/service/impl/ActivityServiceimpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/ActivityMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/PatientApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/PatienthomeApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/controller/CommentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/controller/PlateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/controller/PlateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/controller/UseController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/mapper/CommentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/mapper/CommentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/mapper/PlateMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/mapper/PlateMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/mapper/PostMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/mapper/PostMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/pojo/Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/pojo/Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/pojo/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/pojo/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/pojo/PlateMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/pojo/PlateMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/pojo/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/pojo/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/pojo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/pojo/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/service/ActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/service/ActivityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/service/CommentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/service/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/service/impl/CommentServiceimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/service/impl/CommentServiceimpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/service/impl/PostServiceimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/service/impl/PostServiceimpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/service/impl/UserServiceimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/service/impl/UserServiceimpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/CommentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/CommentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/PostMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/PostMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cupk/PatientApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cupk/PatienthomeApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/建表sql/patient.sql" beforeDir="false" afterPath="$PROJECT_DIR$/建表sql/patient.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,6 +111,8 @@
       <workItem from="1687875970783" duration="845000" />
       <workItem from="1687882386323" duration="596000" />
       <workItem from="1687922987610" duration="9391000" />
+      <workItem from="1687943912621" duration="1820000" />
+      <workItem from="1688005120284" duration="211000" />
     </task>
     <servers />
   </component>

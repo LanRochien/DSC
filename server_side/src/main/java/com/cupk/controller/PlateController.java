@@ -2,6 +2,7 @@ package com.cupk.controller;
 
 import com.cupk.pojo.PlateMessage;
 import com.cupk.service.PlateService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,14 +24,15 @@ public class PlateController {
         }
         return "plate/findall";
     }
-    @RequestMapping("/findmyall")
-    public String findPlate(Model model){
-        List<PlateMessage> plateMessageList=plateService.findAllPlate();
-        if(plateMessageList!=null){
-            model.addAttribute("msg","成功");
-        }else{
-            model.addAttribute("msg","失败");
+
+    @RequestMapping("/findmyall/{id}")
+    public String findPlate(Integer id){
+        PlateMessage plateMessage=plateService.findPlateById(id);
+        if(plateMessage!=null) {
+            Gson gson = new Gson();
+            return gson.toJson(plateMessage);
+        }else {
+            return "false";
         }
-        return "test/test";
     }
 }
