@@ -8,6 +8,125 @@ const testData=Mock.mock('http://localhost:8080/test','get',{
     id:1
 
 })
+const post =Mock.mock('http://localhost:8080/post','get',{
+    "post_id": 55,
+    "title": "这区想不质",
+    "post_image": "http://dummyimage.com/400x400",
+    "content": "irure exercitation proident",
+    "datetime": "1989-09-22 03:50:32",
+    "click_qty": 77,
+    "reply_qty": 39,
+    "commentlist": [
+        {
+            "id": 93,
+            "content": "magna anim Excepteur",
+            "datetime": "1978-10-09 16:44:41",
+            "up_qty": 79,
+            "user": {
+                "role": 11,
+                "name": "设称管",
+                "id": 76,
+                "password": "pariatur enim dolore cillum",
+                "sex": "女",
+                "record_date": "1974-09-28",
+                "birthday": "2012-10-25",
+                "location": "culpa dolor est magna tempor",
+                "post_num": 38,
+                "reply_num": 65,
+                "head_image": "http://dummyimage.com/400x400"
+            }
+        },
+        {
+            "id": 84,
+            "content": "enim commodo ullamco",
+            "datetime": "1987-05-28 07:49:35",
+            "up_qty": 14,
+            "user": {
+                "role": 92,
+                "name": "话论好切书",
+                "id": 88,
+                "password": "Ut",
+                "sex": "男",
+                "record_date": "1991-04-29",
+                "birthday": "2020-05-15",
+                "location": "quis",
+                "post_num": 17,
+                "reply_num": 11,
+                "head_image": "http://dummyimage.com/400x400"
+            }
+        },
+        {
+            "id": 45,
+            "content": "in ut",
+            "datetime": "1977-01-09 13:44:50",
+            "up_qty": 13,
+            "user": {
+                "role": 40,
+                "name": "安资过越很声达",
+                "id": 47,
+                "password": "eu",
+                "sex": "男",
+                "record_date": "2006-06-12",
+                "birthday": "1993-03-22",
+                "location": "ipsum",
+                "post_num": 49,
+                "reply_num": 35,
+                "head_image": "http://dummyimage.com/400x400"
+            }
+        },
+        {
+            "id": 75,
+            "content": "veniam magna",
+            "datetime": "1991-07-16 16:57:20",
+            "up_qty": 94,
+            "user": {
+                "role": 6,
+                "name": "状系内经律",
+                "id": 15,
+                "password": "ipsum irure quis Excepteur",
+                "sex": "男",
+                "record_date": "1985-05-28",
+                "birthday": "2005-08-28",
+                "location": "sit veniam in ipsum",
+                "post_num": 97,
+                "reply_num": 2,
+                "head_image": "http://dummyimage.com/400x400"
+            }
+        },
+        {
+            "id": 11,
+            "content": "sit occaecat",
+            "datetime": "2011-02-14 23:27:10",
+            "up_qty": 27,
+            "user": {
+                "role": 47,
+                "name": "干各同则",
+                "id": 25,
+                "password": "in",
+                "sex": "男",
+                "record_date": "2008-01-09",
+                "birthday": "2018-08-22",
+                "location": "est aute irure sit",
+                "post_num": 39,
+                "reply_num": 11,
+                "head_image": "http://dummyimage.com/400x400"
+            }
+        }
+    ],
+    "user": {
+        "role": 36,
+        "name": "断把身化",
+        "id": 5,
+        "password": "ut et proident magna amet",
+        "sex": "女",
+        "record_date": "1986-04-20",
+        "birthday": "1995-09-28",
+        "location": "dolor enim dolor proident",
+        "post_num": 20,
+        "reply_num": 30,
+        "head_image": "http://dummyimage.com/400x400"
+    }
+})
 const plate=Mock.mock('http://localhost:8080/plate','get',{
     forum:[{
     id: 123,
