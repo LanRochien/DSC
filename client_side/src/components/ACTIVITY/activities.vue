@@ -1,41 +1,33 @@
-<script lang="ts">
+<script lang="ts" setup>
 import { ref } from 'vue'
+import MENU from '../COMPONENT/menu.vue'
 import API from "../../axiosinstance/axiosInstance.js"//API路径
 var images=ref([{content:''}])
-export default{
-  name:'activities',
-  setup(){
-    //数据
+    const   current='/activities';
     const testData = ref({});
     //测试请求方法
     const getData = function(){
       API({
-        url:'/activity/findall',//目的数据详细路基
+        // url:'/activity/findall',//目的数据详细路基
         method:'GET'
       }).then((res)=>{
         // alert('请求成功!');
         let arr=res.data.map((item)=>{
           return Object.assign({},{content:item.content})
         })//将获取的数组整理为只含图片地址的数组
-        console.log(arr)
-        this.images=arr;
-        console.log(this.images[0].content)
+       images.value=arr;
       });
     }
-    return{
-      testData,
-      getData,
-      images,
-    }
-  }
-}
+
+
 
 </script>
 
 <template >
+  <MENU :current=current></MENU>
   <div class="common-layout" @mouseover="getData">
+
     <el-container>
-      <el-header class="header">Header</el-header>
       <el-main class="main">
         <div class="jieshao">
           <div class="huodongxuechuan">

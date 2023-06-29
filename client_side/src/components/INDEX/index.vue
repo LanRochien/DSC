@@ -1,5 +1,5 @@
 <template>
-  <MENU></MENU>
+  <MENU :current=current></MENU>
   <div class="carousel">
   <el-carousel indicator-position="outside" height="800px">
     <el-carousel-item v-for="item in 4" :key="item">
@@ -30,7 +30,7 @@
 import MENU from '../COMPONENT/menu.vue'
 import Bottom from "../COMPONENT/bottom.vue";
 import { ref } from 'vue'
-
+const current='/index'
 const infoTitle=ref(["titlea","titleb","titlec","titled"])
 const infoDetail=ref(["phara","pharb","pharc","phard"])
 const infoList=ref([{
