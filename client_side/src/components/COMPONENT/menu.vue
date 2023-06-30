@@ -24,7 +24,7 @@
   <el-sub-menu v-if="login">
     <template #title>  <el-avatar  :icon="UserFilled" /></template>
     <div class="user_info">
-<!--      <div class="username">{{user.name}}</div>-->
+      <div class="username">{{store.user.name}}</div>
     </div>
     <el-menu-item> 个人中心</el-menu-item>
   </el-sub-menu>
@@ -44,10 +44,9 @@ import {useStore} from '../../pinia/index.js'
 const user=inject('userInfo')
 const input=ref("")
 const login=ref()
-// const user=ref({})
 const store=useStore()
 const checkLogin=()=>{
-  if(typeof (store.user)!="undefined"){
+  if(typeof (store.user.name)!="undefined"){
     login.value=true
   }
   else login.value=false
@@ -70,10 +69,6 @@ onMounted(()=>{
 
 defineProps({
   current:String,
-})
-defineExpose({
-  user,
-  login
 })
 
 </script>

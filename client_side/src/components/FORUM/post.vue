@@ -4,7 +4,9 @@ import {ref,shallowRef,onBeforeUnmount,onMounted} from "vue";
 import {useRouter} from "vue-router";
 import {Editor,Toolbar} from '@wangeditor/editor-for-vue'
 import Menu from "@/components/COMPONENT/menu.vue";
-import API from "../../axiosinstance/axiosInstance.js"//API路径
+import API from "../../axiosinstance/axiosInstance.js"
+import {useStore} from "@/pinia";
+//API路径
 
 const editorRef = shallowRef()
 const toolbarConfig = {}
@@ -20,6 +22,7 @@ const postId=ref()
 const post_data=ref({})
 const isShow=ref(false)
 const user=ref(null)
+const store=useStore()
 const handleCreated = (editor) => {
   editorRef.value = editor // 记录 editor 实例，重要！
 }
@@ -47,7 +50,7 @@ const toSubmit=()=>{
               datetime:currentDate,
               up_qty:0,
             },
-            user:user.value.user,
+            user:store.user,
             post:post_data.value.post
     }
   }).then((res)=>{
@@ -56,13 +59,16 @@ const toSubmit=()=>{
     // }
   })
   console.log(post_data.value.post)
-  console.log(user.value.user)
+  console.log(store.user)
 }
 onMounted(()=>{
   postId.value=router.currentRoute.value.params.postid
   API({
     url:'http://localhost:8080/posttest',
     //传参使用指定postid
+    // params:{
+    //   id:postId.value
+    // },
     method:'GET'
   }).then((res)=>{
     post_data.value=res.data
@@ -77,7 +83,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-<Menu :current=current ref="user"></Menu>
+<Menu :current=current></Menu>
   <el-card class="post_section" v-if="isShow">
     <div class="post_title" ><h2>{{post_data.post.title}}</h2></div>
     <div class="post_list">
