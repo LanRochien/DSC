@@ -9,6 +9,7 @@ import API from "../../axiosinstance/axiosInstance.js"//API路径
 const current='/forum'
 const router=useRouter()
 const plate_data=ref({})
+const posts_data=ref({})
 const plateid=ref()
 const toPost=(plateid,postid)=>{
   //跳转帖子页面
@@ -31,9 +32,10 @@ onMounted(()=>{
   // }
     method:'GET'
   }).then((res)=>{
-    plate_data.value=res.data
+    plate_data.value=res.data.plate
+    posts_data.value=res.data.posts
     console.log(plate_data.value)
-    console.log(plate_data.value.posts[0].user)
+    console.log(posts_data.value)
   })
 })
 </script>
@@ -45,18 +47,18 @@ onMounted(()=>{
     <el-card class="header-card">
       <el-avatar shape="square" :size="100" :fit="fill" :src="plate_data.plate_image" />
       <div class="plate_info">
-        <h3 class="plate_name">{{plate_data.plate_name}}</h3>
+        <h3 class="plate_name">{{plate_data.name}}</h3>
         <div >点击数：{{plate_data.click_qty}}</div>
         <div >贴子数：{{plate_data.post_qty}}</div>
       </div>
-        <div class="plate_exp">{{plate_data.explain}}</div>
+        <div class="exp_block"><div class="plate_exp">{{plate_data.detail}}</div></div>
     </el-card>
   </div>
   <div class="plate_body">
     <el-card>
     <div class="plate_content">
-      <div class="plate_block" v-for="item in plate_data.posts">
-       <div class="plate_title" @click="toPost(plateid,item.post_id)"><h5>{{ item.title }}</h5></div>
+      <div class="plate_block" v-for="item in posts_data">
+       <div class="plate_title" @click="toPost(plateid,item.id)"><h5>{{ item.title }}</h5></div>
          <div class="flex_grow"/>
         <div class="user_name" @click="toUser(item.user.id)" ><el-icon class="icon"><User /></el-icon>{{item.user.name}}</div>
         <div class="post_time"><div>{{item.datetime}}</div></div>
@@ -83,8 +85,16 @@ onMounted(()=>{
 .header-card h3{
   margin:10px auto ;
 }
+
 .header-card div{
   font-size: 14px;
+}
+.plate_info{
+  height: fit-content;
+}
+.exp_block{
+  width: 100%;
+  min-height: 200px;
 }
 .plate_exp{
   width: 100%;

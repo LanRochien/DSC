@@ -92,7 +92,7 @@ const post =Mock.mock('http://localhost:8080/posttest','get',{
         },
         {
             "id": 22,
-            "content": "dolor amet",
+            "content": "<p>hello</p>",
             "datetime": "2021-12-31 13:42:53",
             "up_qty": 38,
             "user": {
@@ -174,86 +174,62 @@ const plate=Mock.mock('http://localhost:8080/plate','get',{
     }
 )
 const plates=Mock.mock("http://localhost:8080/posts",'get',{
-
-    plate_id: 23,
-    plate_name: "决美导备办引",
-    explain: "reprehenderit velit aute in sint",
-    post_qty: 67,
-    click_qty: 53,
-    plate_image: "http://dummyimage.com/400x400",
-    posts: [
-    {
-        post_id: 73,
-        title: "海统形装格争得",
-        post_image: "http://dummyimage.com/400x400",
-        content: "ex",
-        datetime: "1990-04-22 07:45:49",
-        click_qty: 78,
-        reply_qty: 44,
-        role: 26,
-        user:{
-            id: 17,
-            name: "劳时真",
-        },
-        password: "aliquip dolore",
-        sex: "男",
-        record_date: "1994-08-16",
-        birthday: "1986-08-22",
-        location: "officia aliqua",
-        ban_tag: 20,
-        post_num: "71",
-        reply_num: "96",
-        vol_tag: 88,
-        head_image: "http://dummyimage.com/400x400"
+    "plate": {
+        "id": 56,
+        "name": "第分格车铁",
+        "detail": "in ullamco sint",
+        "post_qty": 71,
+        "click_qty": 61,
+        "plate_image": "http://dummyimage.com/400x400"
     },
-    {
-        post_id: 94,
-        title: "验入作只意和式",
-        post_image: "http://dummyimage.com/400x400",
-        content: "elit reprehenderit dolore",
-        datetime: "1970-11-07 17:35:34",
-        click_qty: 96,
-        reply_qty: 90,
-        role: 70,
-        user:{
-            id: 9,
-            name: "研你建量办利",
+    "posts": [
+        {
+            "id": 63,
+            "title": "须转决反现",
+            "post_image": "http://dummyimage.com/400x400",
+            "content": "enim culpa cupidatat",
+            "datetime": "1990-04-07 00:50:27",
+            "click_qty": 84,
+            "reply_qty": 3,
+            "user": {
+                "role": 2,
+                "name": "真反命多中历",
+                "id": 14,
+                "password": "sit aliqua tempor",
+                "sex": "女",
+                "record_date": "2017-06-21",
+                "birthday": "1976-03-18",
+                "location": "cupidatat anim labore",
+                "post_num": 43,
+                "reply_num": 14,
+                "head_image": "http://dummyimage.com/400x400"
+            }
         },
-        password: "mollit",
-        sex: "女",
-        record_date: "1979-07-19",
-        birthday: "2011-08-30",
-        location: "pariatur mollit ipsum laborum id",
-        ban_tag: 82,
-        post_num: "60",
-        reply_num: "15",
-        vol_tag: 2,
-        head_image: "http://dummyimage.com/400x400"
-    },
-    {
-        post_id: 88,
-        title: "天值数",
-        post_image: "http://dummyimage.com/400x400",
-        content: "officia consequat Excepteur anim",
-        datetime: "1976-07-24 07:48:19",
-        click_qty: 52,
-        reply_qty: 72,
-        role: 83,
-        user:{
-            id: 39,
-            name: "同民团写心品矿",
-        },
-        password: "occaecat dolor nisi deserunt",
-        sex: "女",
-        record_date: "1985-09-24",
-        birthday: "1991-10-07",
-        location: "sint magna nisi culpa",
-        ban_tag: 34,
-        post_num: "99",
-        reply_num: "19",
-        vol_tag: 88,
-        head_image: "http://dummyimage.com/400x400"
+        {
+            "id": 62,
+            "title": "办快林并家",
+            "post_image": "http://dummyimage.com/400x400",
+            "content": "adipisicing qui labore officia",
+            "datetime": "1998-04-11 10:15:50",
+            "click_qty": 64,
+            "reply_qty": 4,
+            "user": {
+                "role": 73,
+                "name": "劳建调才所",
+                "id": 35,
+                "password": "Lorem dolore ipsum cillum ut",
+                "sex": "男",
+                "record_date": "1996-03-12",
+                "birthday": "2009-11-03",
+                "location": "in velit",
+                "post_num": 44,
+                "reply_num": 10,
+                "head_image": "http://dummyimage.com/400x400"
+            }
+        }
+    ],
+    "resp": {
+        "msg": "voluptate eu",
+        "status": 6
     }
-]
-
 })

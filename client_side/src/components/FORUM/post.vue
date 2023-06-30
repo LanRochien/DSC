@@ -66,7 +66,7 @@ onMounted(()=>{
   API({
     url:'http://localhost:8080/posttest',
     params:{
-      id:postId.value
+      // id:postId.value
     },
     method:'GET'
   }).then((res)=>{
@@ -99,7 +99,7 @@ onBeforeUnmount(() => {
           <div class="content_block">
             <div class="content_docker">
             <div class="content_warp">
-              <p class="content">{{post_data.post.content}}</p>
+              <div class="content" v-html="post_data.post.content"></div>
             </div>
             <div class="content_info">
               <span>1楼</span>
@@ -123,7 +123,7 @@ onBeforeUnmount(() => {
           <div class="content_block">
             <div class="content_docker">
               <div class="content_warp">
-                <p class="content">{{item.content}}</p>
+                <div class="content" v-html="item.content"></div>
               </div>
               <div class="content_info">
                 <span>{{key+2}}楼</span>
