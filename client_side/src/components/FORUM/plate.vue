@@ -28,6 +28,7 @@ onMounted(()=>{
   }).then((res)=>{
     plate_data.value=res.data
     console.log(plate_data.value)
+    console.log(plate_data.value.posts[0].user)
   })
 })
 </script>
@@ -51,7 +52,7 @@ onMounted(()=>{
     <div class="plate_content">
       <div class="plate_block" v-for="item in plate_data.posts">
        <div class="plate_title" @click="toPost(plateid,item.post_id)"><h5>{{ item.title }}</h5></div>
-        <div class="flex_grow"/>
+         <div class="flex_grow"/>
         <div class="user_name" @click="toUser(item.user.id)" ><el-icon class="icon"><User /></el-icon>{{item.user.name}}</div>
         <div class="post_time"><div>{{item.datetime}}</div></div>
       </div>
