@@ -11,6 +11,7 @@ const router=useRouter()
 const plate_data=ref({})
 const plateid=ref()
 const toPost=(plateid,postid)=>{
+  //跳转帖子页面
   router.push({
     name:'post',
     params:{
@@ -23,8 +24,11 @@ onMounted(()=>{
   const  plateId=router.currentRoute.value.params.plateid
   plateid.value=plateId
   API({
-    url:"http://localhost:8080/posts",
+    url: "http://localhost:8080/posts",
     // 传参，使用指定板块号
+    //params:{
+  //   id:
+  // }
     method:'GET'
   }).then((res)=>{
     plate_data.value=res.data

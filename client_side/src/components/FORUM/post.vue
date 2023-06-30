@@ -65,10 +65,9 @@ onMounted(()=>{
   postId.value=router.currentRoute.value.params.postid
   API({
     url:'http://localhost:8080/posttest',
-    //传参使用指定postid
-    // params:{
-    //   id:postId.value
-    // },
+    params:{
+      id:postId.value
+    },
     method:'GET'
   }).then((res)=>{
     post_data.value=res.data
