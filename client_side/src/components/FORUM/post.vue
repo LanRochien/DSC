@@ -1,16 +1,63 @@
 <script setup>
-import {onMounted} from "vue";
+//帖子等待分页
+import {ref,shallowRef,onBeforeUnmount,onMounted} from "vue";
 import {useRouter} from "vue-router";
-import {ref,onBeforeMount} from 'vue'
+import {Editor,Toolbar} from '@wangeditor/editor-for-vue'
 import Menu from "@/components/COMPONENT/menu.vue";
 import API from "../../axiosinstance/axiosInstance.js"//API路径
+
+const editorRef = shallowRef()
+const toolbarConfig = {}
+
+const valueHtml = ref()
+const editorConfig =
+    { placeholder: '请输入内容...' ,
+    }
 
 const current='/forum'
 const router=useRouter()
 const postId=ref()
 const post_data=ref({})
 const isShow=ref(false)
+const user=ref(null)
+const handleCreated = (editor) => {
+  editorRef.value = editor // 记录 editor 实例，重要！
+}
+const handleChange=()=>{
+  console.log(valueHtml.value)
+}
+//menu里传user
+//post_data传post信息
+//事件处理
+const getDate=(n)=>{
+  n=new Date(n)
+  return n.toLocaleDateString().replace(/\//g,"-") + " " + n.toTimeString().substring(0,7)
+}
+const toSubmit=()=>{
+  //获取当前时间
+ const currentDate=getDate(Date.now())
 
+  API({
+    url:'',
+    method:'POST',
+    data:{
+            comment:{
+              id:0,
+              content:valueHtml,
+              datetime:currentDate,
+              up_qty:0,
+            },
+            user:user.value.user,
+            post:post_data.value.post
+    }
+  }).then((res)=>{
+    // if(res.data.resp.msg===200){
+      window.alert("success")
+    // }
+  })
+  console.log(post_data.value.post)
+  console.log(user.value.user)
+}
 onMounted(()=>{
   postId.value=router.currentRoute.value.params.postid
   API({
@@ -21,38 +68,42 @@ onMounted(()=>{
     post_data.value=res.data
     isShow.value=true
   })
-
+})
+onBeforeUnmount(() => {
+  const editor = editorRef.value
+  if (editor == null) return
+  editor.destroy()
 })
 </script>
 
 <template>
-<Menu :current=current></Menu>
-  <el-card class="post_section">
-    <div class="post_title"><h2>{{post_data.title}}</h2></div>
+<Menu :current=current ref="user"></Menu>
+  <el-card class="post_section" v-if="isShow">
+    <div class="post_title" ><h2>{{post_data.post.title}}</h2></div>
     <div class="post_list">
         <div class="post_main">
           <div class="user_block">
             <div class="user_info">
-              <ul v-if="isShow">
+              <ul >
                 <li ><el-avatar :size="70" ></el-avatar></li>
-                <li>{{post_data.user.name}}</li>
-                <li>性别：{{post_data.user.sex}}</li>
+                <li>{{post_data.post.user.name}}</li>
+                <li>性别：{{post_data.post.user.sex}}</li>
               </ul>
             </div>
           </div>
           <div class="content_block">
             <div class="content_docker">
             <div class="content_warp">
-              <p class="content">{{post_data.content}}</p>
+              <p class="content">{{post_data.post.content}}</p>
             </div>
             <div class="content_info">
               <span>1楼</span>
-              <span>{{post_data.datetime}}</span>
+              <span>{{post_data.post.datetime}}</span>
             </div>
           </div>
           </div>
         </div>
-      <div class="post_comment" v-for="(item,key) in post_data.commentlist" >
+      <div class="post_comment" v-for="(item,key) in post_data.comments" >
         <div class="post_main">
           <div class="user_block">
             <div class="user_info">
@@ -79,6 +130,27 @@ onMounted(()=>{
       </div>
     </div>
   </el-card>
+  <div class="editor" style="border: 1px solid #ccc">
+
+    <Toolbar
+        style="border-bottom: 1px solid #ccc"
+        :editor="editorRef"
+        :defaultConfig="toolbarConfig"
+        mode="default"
+    />
+    <div class="editor_block">
+    <Editor
+        style="height: 300px; overflow-y: hidden;"
+        v-model="valueHtml"
+        :defaultConfig="editorConfig"
+        mode="default"
+        @onCreated="handleCreated"
+        @onChange="handleChange"
+    />
+    </div>
+    <div class="submit"><el-button @click="toSubmit" type="primary">提交</el-button></div>
+
+  </div>
 </template>
 
 <style scoped>
@@ -130,11 +202,25 @@ text-align: center;
   height: 20px;
   font-size: 15px;
   color: #7e7e7e;
-  //flex: 1;
+
   float: right;
   position: relative;
 }
 .content_info span{
   padding-right: 10px;
 }
+.editor  {
+  box-sizing: border-box;
+  width: 50%;
+  //max-height: 300px;
+  margin: 30px auto;
+  padding-left: 30px;
+  padding-top: 15px;
+}
+.submit{
+  margin-right: 30px;
+  margin-bottom: 15px;
+  text-align: right;
+}
+
 </style>

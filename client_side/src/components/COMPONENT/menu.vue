@@ -24,7 +24,7 @@
   <el-sub-menu v-if="login">
     <template #title>  <el-avatar  :icon="UserFilled" /></template>
     <div class="user_info">
-      <div class="username">{{user.name}}</div>
+<!--      <div class="username">{{user.name}}</div>-->
     </div>
     <el-menu-item> 个人中心</el-menu-item>
   </el-sub-menu>
@@ -36,31 +36,46 @@
   </div>
 </template>
 <script lang="ts" setup>
-import {ref} from "vue";
+import {inject, onMounted, ref} from "vue";
 import { Search } from '@element-plus/icons-vue'
 import { UserFilled } from '@element-plus/icons-vue'
 import API from "../../axiosinstance/axiosInstance.js"//API路径
-
-
+import {useStore} from '../../pinia/index.js'
+const user=inject('userInfo')
 const input=ref("")
-const login=ref(false)
-const user=ref({})
+const login=ref()
+// const user=ref({})
+const store=useStore()
+const checkLogin=()=>{
+  if(typeof (store.user)!="undefined"){
+    login.value=true
+  }
+  else login.value=false
+}
 const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
-
-API({
-  url:'/test',
-  method:'GET'
-}).then((res)=>{
-
-  user.value=res.data
+onMounted(()=>{
+  console.log(store.user)
+  checkLogin()
 
 })
+// API({
+//   url:'/test',
+//   method:'GET'
+// }).then((res)=>{
+//   user.value=res.data.user
+//   console.log(user.value)
+// })
 
 defineProps({
   current:String,
 })
+defineExpose({
+  user,
+  login
+})
+
 </script>
 <style scoped>
 .el-menu{

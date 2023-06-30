@@ -3,128 +3,138 @@ const login =Mock.mock('http://localhost:8080/test/?username=qwe&password=qwe ',
 
     return body
 })
-const testData=Mock.mock('http://localhost:8080/test','get',{
-    name:"Lanxxx",
-    id:1
+const testData=Mock.mock('http://localhost:8080/test','get',
+{
+    "resp": {
+    "msg": "200",
+        "status": 59
+},
+    "user": {
+    "role": 4,
+        "name": "科头程度",
+        "id": 56,
+        "password": "consectetur",
+        "sex": "男",
+        "record_date": "2014-05-13",
+        "birthday": "2020-12-13",
+        "location": "ea",
+        "post_num": 62,
+        "reply_num": 4,
+        "head_image": "http://dummyimage.com/400x400"
+
+}
 
 })
 const post =Mock.mock('http://localhost:8080/posttest','get',{
-    post_id: 55,
-    title: "这区想不质",
-    post_image: "http://dummyimage.com/400x400",
-    content: "irure exercitation proident",
-    datetime: "1989-09-22 03:50:32",
-    click_qty: 77,
-    reply_qty: 39,
-    commentlist: [
+    "post": {
+        "id": 61,
+        "title": "完路和接织形",
+        "post_image": "http://dummyimage.com/400x400",
+        "content": "minim",
+        "datetime": "1990-12-07 18:35:58",
+        "click_qty": 20,
+        "reply_qty": 11,
+        "user": {
+            "role": 27,
+            "name": "题影每民走常",
+            "id": 76,
+            "password": "est",
+            "sex": "女",
+            "record_date": "1972-03-15",
+            "birthday": "2018-02-07",
+            "location": "qui labore do",
+            "post_num": 66,
+            "reply_num": 25,
+            "head_image": "http://dummyimage.com/400x400"
+        }
+    },
+    "comments": [
         {
-            id: 93,
-            content: "magna anim Excepteur",
-            datetime: "1978-10-09 16:44:41",
-            up_qty: 79,
-            user: {
-                role: 11,
-                name: "设称管",
-                id: 76,
-                password: "pariatur enim dolore cillum",
-                sex: "女",
-                record_date: "1974-09-28",
-                birthday: "2012-10-25",
-                location: "culpa dolor est magna tempor",
-                post_num: 38,
-                reply_num: 65,
-                head_image: "http://dummyimage.com/400x400"
+            "id": 19,
+            "content": "in fugiat adipisicing dolor irure",
+            "datetime": "1992-11-01 23:53:45",
+            "up_qty": 5,
+            "user": {
+                "role": 91,
+                "name": "议而知先从西",
+                "id": 54,
+                "password": "ut Excepteur qui incididunt in",
+                "sex": "女",
+                "record_date": "1997-01-23",
+                "birthday": "2005-02-05",
+                "location": "dolor ut magna Lorem tempor",
+                "post_num": 65,
+                "reply_num": 45,
+                "head_image": "http://dummyimage.com/400x400"
+            },
+            "post": {
+                "id": 2,
+                "title": "斯种法己小上",
+                "post_image": "http://dummyimage.com/400x400",
+                "content": "eiusmod Ut in",
+                "datetime": "1992-05-10 21:21:17",
+                "click_qty": 21,
+                "reply_qty": 21,
+                "user": {
+                    "role": 86,
+                    "name": "划易温重相发",
+                    "id": 98,
+                    "password": "consequat proident exercitation",
+                    "sex": "男",
+                    "record_date": "1994-03-29",
+                    "birthday": "1972-08-18",
+                    "location": "sint deserunt",
+                    "post_num": 50,
+                    "reply_num": 59,
+                    "head_image": "http://dummyimage.com/400x400"
+                }
             }
         },
         {
-            id: 84,
-            content: "enim commodo ullamco",
-            datetime: "1987-05-28 07:49:35",
-            up_qty: 14,
-            user: {
-                role: 92,
-                name: "话论好切书",
-                id: 88,
-                password: "Ut",
-                sex: "男",
-                record_date: "1991-04-29",
-                birthday: "2020-05-15",
-                location: "quis",
-                post_num: 17,
-                reply_num: 11,
-                head_image: "http://dummyimage.com/400x400"
-            }
-        },
-        {
-            id: 45,
-            content: "in ut",
-            datetime: "1977-01-09 13:44:50",
-            up_qty: 13,
-            user: {
-                role: 40,
-                name: "安资过越很声达",
-                id: 47,
-                password: "eu",
-                sex: "男",
-                record_date: "2006-06-12",
-                birthday: "1993-03-22",
-                location: "ipsum",
-                post_num: 49,
-                reply_num: 35,
-                head_image: "http://dummyimage.com/400x400"
-            }
-        },
-        {
-            id: 75,
-            content: "veniam magna",
-            datetime: "1991-07-16 16:57:20",
-            up_qty: 94,
-            user: {
-                role: 6,
-                name: "状系内经律",
-                id: 15,
-                password: "ipsum irure quis Excepteur",
-                sex: "男",
-                record_date: "1985-05-28",
-                birthday: "2005-08-28",
-                location: "sit veniam in ipsum",
-                post_num: 97,
-                reply_num: 2,
-                head_image: "http://dummyimage.com/400x400"
-            }
-        },
-        {
-            id: 11,
-            content: "sit occaecat",
-            datetime: "2011-02-14 23:27:10",
-            up_qty: 27,
-            user: {
-                role: 47,
-                name: "干各同则",
-                id: 25,
-                password: "in",
-                sex: "男",
-                record_date: "2008-01-09",
-                birthday: "2018-08-22",
-                location: "est aute irure sit",
-                post_num: 39,
-                reply_num: 11,
-                head_image: "http://dummyimage.com/400x400"
+            "id": 22,
+            "content": "dolor amet",
+            "datetime": "2021-12-31 13:42:53",
+            "up_qty": 38,
+            "user": {
+                "role": 22,
+                "name": "法称少原从期",
+                "id": 48,
+                "password": "incididunt et ullamco",
+                "sex": "女",
+                "record_date": "1972-12-28",
+                "birthday": "1996-10-29",
+                "location": "dolore in Lorem cillum",
+                "post_num": 66,
+                "reply_num": 8,
+                "head_image": "http://dummyimage.com/400x400"
+            },
+            "post": {
+                "id": 49,
+                "title": "马院按证知低",
+                "post_image": "http://dummyimage.com/400x400",
+                "content": "anim veniam occaecat enim labore",
+                "datetime": "1982-10-02 07:20:59",
+                "click_qty": 55,
+                "reply_qty": 37,
+                "user": {
+                    "role": 32,
+                    "name": "面总有实",
+                    "id": 98,
+                    "password": "fugiat ipsum aliquip nostrud",
+                    "sex": "男",
+                    "record_date": "2009-10-30",
+                    "birthday": "2006-01-26",
+                    "location": "laboris deserunt labore in sit",
+                    "post_num": 65,
+                    "reply_num": 30,
+                    "head_image": "http://dummyimage.com/400x400"
+                }
             }
         }
     ],
-    user: {
-        role: 36,
-        name: "断把身化",
-        id: 5,
-        password: "ut et proident magna amet",
-        sex: "女",
-        record_date: "1986-04-20",
-        birthday: "1995-09-28",
-        location: "dolor enim dolor proident",
-        post_num: 20,
-        reply_num: 30,
-        head_image: "http://dummyimage.com/400x400"
+    "resp": {
+        "msg": "aliquip pariatur",
+        "status": 41
     }
 })
 const plate=Mock.mock('http://localhost:8080/plate','get',{

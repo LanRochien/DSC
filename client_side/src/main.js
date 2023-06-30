@@ -7,11 +7,15 @@ import axios from '@/axiosinstance/axiosInstance';
 import './mock/index'
 import router from '/src/router/index.js'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import { createPinia } from 'pinia'
+import piniaPersist from 'pinia-plugin-persist'
+
 const app=createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
 app.use(ElementPlus)
+app.use(createPinia().use(piniaPersist))
 app.use(router)
 app.mount('#app')
 app.config.globalProperties.$axios=axios;

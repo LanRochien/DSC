@@ -2,6 +2,7 @@
   <div class="main">
     <div class="logo">
       <h2>登录</h2>
+<!--      <div>{{store.count}}</div>-->
     </div>
     <hr id="underline"/>
     <div class="login">
@@ -37,14 +38,16 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
+import {provide, reactive, ref} from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import {useRouter} from "vue-router"
 import API from "../../axiosinstance/axiosInstance.js"//API路径
-
+// import bus from '../../../bus.ts'
+import {useStore} from '../../pinia/index.js'
+const store=useStore()
 const router=useRouter()
 const ruleFormRef = ref<FormInstance>()
-
+const userInfo=ref({})
 const naviToreg=()=>{
   router.push('/register')
 }
@@ -88,13 +91,23 @@ const submitForm = (formEl: FormInstance |undefined) => {
       console.log(ruleForm.name);
       console.log(ruleForm.pwd);
       API({
-        url:'http://localhost:8080/test',
-        method:"post",
-        params:{
-          username:ruleForm.name,
-          password:ruleForm.pwd
-        }
+        // url:'http://localhost:8080/test',
+        // method:"post",
+        // params:{
+        //   username:ruleForm.name,
+        //   password:ruleForm.pwd
+        url:'/test',
+        method:'GET'
+
       }).then((res)=>{
+        if(res.status=="200"){
+          userInfo.value=res.data
+          store.user=res.data.user
+          console.log(store.user)
+          router.push({
+            path:'/index'
+          })
+        }
         console.log(res)
       })
 
@@ -109,7 +122,7 @@ const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
   formEl.resetFields()
 }
-
+provide('userInfo',userInfo)
 </script>
 <style scoped>
 .logo{

@@ -1,4 +1,5 @@
 <script setup>
+//板块等待分页
 import {onMounted} from "vue";
 import {useRouter} from "vue-router";
 import {ref} from 'vue'

@@ -8,8 +8,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "axios": "^1.4.0",
+    "mitt": "^3.0.0",
     "mockjs": "^1.1.0",
+    "pinia": "^2.1.4",
+    "pinia-plugin-persist": "^1.0.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.2"
   },
