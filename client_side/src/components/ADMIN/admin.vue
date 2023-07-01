@@ -38,13 +38,6 @@
         </el-sub-menu>
       </el-menu>
 
-  <div class="header">
-  <el-page-header @back="goBack">
-    <template #content>
-      <span class="text-large font-600 mr-3"> Welcome,administrator</span>
-    </template>
-  </el-page-header>
-  </div>
   <div class="adminperson">
   <el-avatar :size="'large'" :src="circleUrl" shape="circle" class="touxiang"/>
     <el-text type="primary" class="adminshuoming">Administrator</el-text>

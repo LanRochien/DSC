@@ -14,7 +14,7 @@
   <el-menu-item index="/forum">论坛</el-menu-item>
   <div class="flex-grow" />
   <el-menu-item>
-    <el-input v-model="search" class="w-50 m-2" placeholder="Type something">
+    <el-input v-model="search" class="w-50 m-2" placeholder="Search for Activity or Post">
       <template #prefix>
         <el-icon class="el-input__icon" @click="toSearch()"><Search style="width: 1em; height: 1em; margin-right: 8px" />
         </el-icon>

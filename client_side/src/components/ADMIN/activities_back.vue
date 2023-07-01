@@ -101,16 +101,14 @@ const acInsert=()=>{
         type: 'success',
       })
       reLoad()
-
     })
-
   }
   else {
-    ElMessage.error('表单项不能为空，请检查')
+    ElMessage.error('除图片外不能为空，请检查')
   }
 }
 const checkAc=(form)=>{
-  return (form.title!==''&&form.content!=''&&form.num_required!=0)?true:false
+  return (form.title!==''&&form.content!=''&&form.num_required!=0)
 }
 const acDelete=()=>{
   getIds(multipleSelection.value)
