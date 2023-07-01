@@ -17,11 +17,24 @@
   const { circleUrl, squareUrl, sizeList } = toRefs(state)
 
   const router=useRouter()
-  const userData=ref({
-  })
-  const postsData=ref({})
-  const activityData=ref({})
+  const userData=ref()
+  const postsData=ref()
+  const commentData=ref()
+
   const isShow=ref(false)
+
+  const dateSolver=(date:string)=>{
+    return date.substring(0,9)
+  }
+  const toPost=(plate,id)=>{
+    router.push({
+      name:'post',
+      params:{
+        plateid:plate,
+        postid:id,
+      }
+    })
+  }
   onMounted(()=>{
     const userName=router.currentRoute.value.params.id
     console.log(userName)
@@ -35,10 +48,18 @@
       if (res.data.resp.status==200){
         userData.value=res.data.user
         postsData.value=res.data.posts
-        activityData.value=res.data.activities
+        commentData.value=res.data.comments
 
+        for(let item of postsData.value){
+            item.date_time=dateSolver(item.date_time)
+        }
+        for(let item of commentData.value){
+          item.date_time=dateSolver(item.date_time)
+        }
         isShow.value=true
         console.log(userData.value)
+        console.log(postsData.value)
+        console.log(commentData.value)
       }
     })
   })
@@ -92,13 +113,37 @@
     <div id="container">
       <div class="ihome">
 <!--       ihome内还可添加主要内容以外的的东西（排行榜等） -->
-        <div class="content" >帖子展示处</div>
+        <div class="content" >
+        <div class="show_block">
+        <div class="post_item" v-for="item in postsData">
+          <div class="class_block">发帖</div>
+          <div class="post_title" @click="toPost(item.plate.id,item.id)"><h4>{{item.title}}</h4></div>
+          <div class="text_">{{item.content}}</div>
+          <div class="flex-grow" />
 
+          <div class="up_num">点赞：{{item.up_qty}}</div>
+          <div class="reply_num">回复：{{item.reply_qty}}</div>
+          <div class="date_post">发表日期：{{item.date_time}}</div>
+            </div>
+        </div>
+
+        <div class="show_block">
+
+          <div class="comment_item" v-for="item in commentData">
+            <div class="class_block">回复</div>
+            <div class="post_title" @click="toPost(item.post.plate.id,item.post.id)"><h4>{{ item.post.title }}</h4></div>
+            <div class="text_">{{item.content}}</div>
+            <div class="flex-grow" />
+
+            <div class="date_post">发表日期：{{item.date_time}}</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
   </div>
+</div>
 </template>
 
 <style scoped>
@@ -175,14 +220,28 @@ font-weight: bolder;
 }
 .content{
   width: 978px;
-  text-align: center;
-  line-height: 200px;
+  //text-align: center;
+  //line-height: 200px;
   border-style: solid;
   border-width: 1px;
   background-color: white;
 }
-.head{
-  height: 90px;
-  background: aquamarine;
+.post_item,
+.comment_item{
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+.post_item div,
+.comment_item div{
+  margin:5px;
+}
+.text_{
+  max-width: 200px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.post_title{
+  cursor: pointer;
 }
 </style>
