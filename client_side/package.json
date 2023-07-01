@@ -10,6 +10,7 @@
   "dependencies": {
     "@wangeditor/editor-for-vue": "^5.1.12",
     "axios": "^1.4.0",
+    "element-china-area-data": "^6.0.2",
     "mitt": "^3.0.0",
     "mockjs": "^1.1.0",
     "pinia": "^2.1.4",

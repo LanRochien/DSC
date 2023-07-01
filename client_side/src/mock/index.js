@@ -3,6 +3,123 @@ const login =Mock.mock('http://localhost:8080/test/?username=qwe&password=qwe ',
 
     return body
 })
+const activity=Mock.mock('http://localhost:8080/activity','get',[
+    {
+        "id": 98,
+        "title": "验期华需技省",
+        "content": "voluptate dolore consectetur",
+        "activity_image": "http://dummyimage.com/400x400",
+        "date_time": "1992-06-08 18:33:46",
+        "num_required": 13,
+        "num_participants": 49,
+        "state": 4,
+        "user": {
+            "role": 90,
+            "name": "算至都",
+            "id": 45,
+            "password": "nulla",
+            "sex": "女",
+            "record_date": "2003-03-22",
+            "birthday": "2018-12-28",
+            "location": "tempor enim",
+            "post_qty": 31,
+            "reply_qty": 10,
+            "head_image": "http://dummyimage.com/400x400"
+        }
+    },
+    {
+        "id": 81,
+        "title": "花式a况分",
+        "content": "nulla",
+        "activity_image": "http://dummyimage.com/400x400",
+        "date_time": "2001-04-04 18:00:54",
+        "num_required": 38,
+        "num_participants": 32,
+        "state": "officia consectetur",
+        "user": {
+            "role": 75,
+            "name": "却平fad段东",
+            "id": 67,
+            "password": "cillum dolor dolore in consectetur",
+            "sex": "女",
+            "record_date": "2015-06-24",
+            "birthday": "1988-03-16",
+            "location": "sed nostrud ad ipsum Lorem",
+            "post_qty": 30,
+            "reply_qty": 12,
+            "head_image": "http://dummyimage.com/400x400"
+        }
+    },
+    {
+        "id": 98,
+        "title": "验期123华需技省",
+        "content": "voluptate dolore consectetur",
+        "activity_image": "http://dummyimage.com/400x400",
+        "date_time": "1992-06-08 18:33:46",
+        "num_required": 13,
+        "num_participants": 49,
+        "state": 0,
+        "user": {
+            "role": 90,
+            "name": "算至56668都",
+            "id": 45,
+            "password": "nulla",
+            "sex": "女",
+            "record_date": "2003-03-22",
+            "birthday": "2018-12-28",
+            "location": "tempor enim",
+            "post_qty": 31,
+            "reply_qty": 10,
+            "head_image": "http://dummyimage.com/400x400"
+        }
+    },
+    {
+        "id": 98,
+        "title": "验期华需技tsdt省",
+        "content": "voluptate dolore consectetur",
+        "activity_image": "http://dummyimage.com/400x400",
+        "date_time": "1992-06-08 18:33:46",
+        "num_required": 13,
+        "num_participants": 49,
+        "state": 5,
+        "user": {
+            "role": 90,
+            "name": "算至dsaa都",
+            "id": 45,
+            "password": "nulla",
+            "sex": "女",
+            "record_date": "2003-03-22",
+            "birthday": "2018-12-28",
+            "location": "tempor enim",
+            "post_qty": 31,
+            "reply_qty": 10,
+            "head_image": "http://dummyimage.com/400x400"
+        }
+    },
+    {
+        "id": 98,
+        "title": "验期华21需技省",
+        "content": "voluptate dolore consectetur",
+        "activity_image": "http://dummyimage.com/400x400",
+        "date_time": "1992-06-08 18:33:46",
+        "num_required": 13,
+        "num_participants": 49,
+        "state": 3,
+        "user": {
+            "role": 90,
+            "name": "算至3e都",
+            "id": 45,
+            "password": "nulla",
+            "sex": "女",
+            "record_date": "2003-03-22",
+            "birthday": "2018-12-28",
+            "location": "tempor enim",
+            "post_qty": 31,
+            "reply_qty": 10,
+            "head_image": "http://dummyimage.com/400x400"
+        }
+    },
+])
 const testData=Mock.mock('http://localhost:8080/test','get',
 {
     "resp": {
@@ -31,7 +148,7 @@ const post =Mock.mock('http://localhost:8080/posttest','get',{
         "title": "完路和接织形",
         "post_image": "http://dummyimage.com/400x400",
         "content": "minim",
-        "datetime": "1990-12-07 18:35:58",
+        "date_time": "1990-12-07 18:35:58",
         "click_qty": 20,
         "reply_qty": 11,
         "user": {
@@ -52,7 +169,7 @@ const post =Mock.mock('http://localhost:8080/posttest','get',{
         {
             "id": 19,
             "content": "in fugiat adipisicing dolor irure",
-            "datetime": "1992-11-01 23:53:45",
+            "date_time": "1992-11-01 23:53:45",
             "up_qty": 5,
             "user": {
                 "role": 91,
@@ -72,7 +189,7 @@ const post =Mock.mock('http://localhost:8080/posttest','get',{
                 "title": "斯种法己小上",
                 "post_image": "http://dummyimage.com/400x400",
                 "content": "eiusmod Ut in",
-                "datetime": "1992-05-10 21:21:17",
+                "date_time": "1992-05-10 21:21:17",
                 "click_qty": 21,
                 "reply_qty": 21,
                 "user": {
@@ -93,7 +210,7 @@ const post =Mock.mock('http://localhost:8080/posttest','get',{
         {
             "id": 22,
             "content": "<p>hello</p>",
-            "datetime": "2021-12-31 13:42:53",
+            "date_time": "2021-12-31 13:42:53",
             "up_qty": 38,
             "user": {
                 "role": 22,
@@ -113,7 +230,7 @@ const post =Mock.mock('http://localhost:8080/posttest','get',{
                 "title": "马院按证知低",
                 "post_image": "http://dummyimage.com/400x400",
                 "content": "anim veniam occaecat enim labore",
-                "datetime": "1982-10-02 07:20:59",
+                "date_time": "1982-10-02 07:20:59",
                 "click_qty": 55,
                 "reply_qty": 37,
                 "user": {
@@ -188,7 +305,7 @@ const plates=Mock.mock("http://localhost:8080/posts",'get',{
             "title": "须转决反现",
             "post_image": "http://dummyimage.com/400x400",
             "content": "enim culpa cupidatat",
-            "datetime": "1990-04-07 00:50:27",
+            "date_time": "1990-04-07 00:50:27",
             "click_qty": 84,
             "reply_qty": 3,
             "user": {
@@ -210,7 +327,7 @@ const plates=Mock.mock("http://localhost:8080/posts",'get',{
             "title": "办快林并家",
             "post_image": "http://dummyimage.com/400x400",
             "content": "adipisicing qui labore officia",
-            "datetime": "1998-04-11 10:15:50",
+            "date_time": "1998-04-11 10:15:50",
             "click_qty": 64,
             "reply_qty": 4,
             "user": {

@@ -21,13 +21,14 @@ const router=useRouter()
 const postId=ref()
 const post_data=ref({})
 const isShow=ref(false)
-const user=ref(null)
+const isLogin=ref(null)
 const store=useStore()
 const handleCreated = (editor) => {
   editorRef.value = editor // 记录 editor 实例，重要！
 }
+
 const handleChange=()=>{
-  console.log(valueHtml.value)
+  console.log(valueHtml)
 }
 //menu里传user
 //post_data传post信息
@@ -47,7 +48,7 @@ const toSubmit=()=>{
             comment:{
               id:0,
               content:valueHtml,
-              datetime:currentDate,
+              date_time:currentDate,
               up_qty:0,
             },
             user:store.user,
@@ -62,6 +63,7 @@ const toSubmit=()=>{
   console.log(store.user)
 }
 onMounted(()=>{
+  console.log(isLogin.value.login)
   postId.value=router.currentRoute.value.params.postid
   API({
     url:'http://localhost:8080/posttest',
@@ -82,7 +84,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-<Menu :current=current></Menu>
+<Menu :current=current ref="isLogin"></Menu>
   <el-card class="post_section" v-if="isShow">
     <div class="post_title" ><h2>{{post_data.post.title}}</h2></div>
     <div class="post_list">
@@ -103,7 +105,7 @@ onBeforeUnmount(() => {
             </div>
             <div class="content_info">
               <span>1楼</span>
-              <span>{{post_data.post.datetime}}</span>
+              <span>{{post_data.post.date_time}}</span>
             </div>
           </div>
           </div>
@@ -127,7 +129,7 @@ onBeforeUnmount(() => {
               </div>
               <div class="content_info">
                 <span>{{key+2}}楼</span>
-                <span>{{item.datetime}}</span>
+                <span>{{item.date_time}}</span>
               </div>
             </div>
           </div>
@@ -135,8 +137,7 @@ onBeforeUnmount(() => {
       </div>
     </div>
   </el-card>
-  <div class="editor" style="border: 1px solid #ccc">
-
+  <div class="editor" v-if="isShow" style="border: 1px solid #ccc">
     <Toolbar
         style="border-bottom: 1px solid #ccc"
         :editor="editorRef"
@@ -145,7 +146,7 @@ onBeforeUnmount(() => {
     />
     <div class="editor_block">
     <Editor
-        style="height: 300px; overflow-y: hidden;"
+        style="height: 200px; overflow-y: hidden;"
         v-model="valueHtml"
         :defaultConfig="editorConfig"
         mode="default"
@@ -153,7 +154,7 @@ onBeforeUnmount(() => {
         @onChange="handleChange"
     />
     </div>
-    <div class="submit"><el-button @click="toSubmit" type="primary">提交</el-button></div>
+    <div class="submit"><el-button @click="toSubmit" type="primary" :disabled="!isLogin.login">提交</el-button></div>
 
   </div>
 </template>
@@ -217,8 +218,7 @@ text-align: center;
 .editor  {
   box-sizing: border-box;
   width: 50%;
-  //max-height: 300px;
-  margin: 30px auto;
+  margin: 20px auto 40px;
   padding-left: 30px;
   padding-top: 15px;
 }

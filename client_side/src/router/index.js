@@ -5,10 +5,13 @@ import { createRouter,createWebHashHistory } from "vue-router";
 import LOGIN from "/src/components/LOGIN/login.vue"
 import INDEX from "/src/components/INDEX/index.vue"
 import REGISTER from "/src/components/REGISTER/register.vue"
-import ACTIVITY from "/src/components/ACTIVITY/activities.vue"
+import ACTIVITIES from "/src/components/ACTIVITY/activities.vue"
+import ACTIVITY from "/src/components/ACTIVITY/activitydetail.vue"
 import FORUMINDEX from "/src/components/FORUM/forum_index.vue"
 import PLATE from "/src/components/FORUM/plate.vue"
 import POST from "/src/components/FORUM/post.vue"
+import SEARCH from "/src/components/SEARCH/search.vue"
+import ADMIN from "/src/components/ADMIN/admin.vue"
 
 
 const routes=[
@@ -30,7 +33,7 @@ const routes=[
     },
     {
         path:'/activities',
-        component:ACTIVITY
+        component:ACTIVITIES
     },
     {
         path:'/FORUM',
@@ -45,7 +48,22 @@ const routes=[
         path:'/FORUM/:plateid/post/:postid',
         name:'post',
         component: POST
-    }
+    },
+    {
+        path:'/activities/:activity_id',
+        name:'activity',
+        component: ACTIVITY
+    },
+    {
+        path:'/search/:key',
+        name:'search',
+        component: SEARCH
+    },
+    {
+        path:'/admin',
+
+        component: ADMIN
+    },
 ]
 export default createRouter({
     // 设置路由模式，设置每次加载新路由地址，页面位置顶部开始

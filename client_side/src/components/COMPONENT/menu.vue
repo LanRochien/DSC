@@ -36,12 +36,10 @@
   </div>
 </template>
 <script lang="ts" setup>
-import {inject, onMounted, ref} from "vue";
+import {onMounted, ref} from "vue";
 import { Search } from '@element-plus/icons-vue'
 import { UserFilled } from '@element-plus/icons-vue'
-import API from "../../axiosinstance/axiosInstance.js"//API路径
 import {useStore} from '../../pinia/index.js'
-const user=inject('userInfo')
 const input=ref("")
 const login=ref()
 const store=useStore()
@@ -59,18 +57,13 @@ onMounted(()=>{
   checkLogin()
 
 })
-// API({
-//   url:'/test',
-//   method:'GET'
-// }).then((res)=>{
-//   user.value=res.data.user
-//   console.log(user.value)
-// })
 
 defineProps({
   current:String,
 })
-
+defineExpose({
+  login
+})
 </script>
 <style scoped>
 .el-menu{

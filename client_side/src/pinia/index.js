@@ -4,7 +4,8 @@ import { defineStore } from 'pinia'
 export const useStore = defineStore('main', {
     state(){
         return {
-            user:{}
+            user:{},
+            activity:{},
         }
     },
     persist:{

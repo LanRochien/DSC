@@ -1,16 +1,28 @@
 <script setup>
 //板块等待分页
-import {onMounted} from "vue";
+import {onMounted, shallowRef} from "vue";
 import {useRouter} from "vue-router";
 import {ref} from 'vue'
 import Menu from "@/components/COMPONENT/menu.vue";
 import API from "../../axiosinstance/axiosInstance.js"//API路径
+import {useStore} from '../../pinia/index.js'
+import {Editor, Toolbar} from "@wangeditor/editor-for-vue";
 
 const current='/forum'
 const router=useRouter()
 const plate_data=ref({})
 const posts_data=ref({})
 const plateid=ref()
+const editorRef = shallowRef()
+const toolbarConfig = {}
+
+const post=ref({
+  title:'',
+  content:'',
+})
+const editorConfig =
+    { placeholder: '请输入内容...' ,
+    }
 const toPost=(plateid,postid)=>{
   //跳转帖子页面
   router.push({
@@ -61,12 +73,43 @@ onMounted(()=>{
        <div class="plate_title" @click="toPost(plateid,item.id)"><h5>{{ item.title }}</h5></div>
          <div class="flex_grow"/>
         <div class="user_name" @click="toUser(item.user.id)" ><el-icon class="icon"><User /></el-icon>{{item.user.name}}</div>
-        <div class="post_time"><div>{{item.datetime}}</div></div>
+        <div class="post_time"><div>{{item.date_time}}</div></div>
       </div>
     </div>
     </el-card>
   </div>
+<div class="post_post">
+  <el-card shadow="never" body-style="">
+      <el-form :model="post" label-width="60px">
+        <el-form-item label="题目">
+          <el-input v-model="post.title" />
+        </el-form-item>
 
+          <el-form-item>
+<!--          <div class="editor" style="border: 1px solid #ccc">-->
+            <Toolbar
+                style="border-bottom: 1px solid #ccc;height: 50px"
+                :editor="editorRef"
+                :defaultConfig="toolbarConfig"
+                mode="default"
+            /></el-form-item>
+<!--            <div class="editor_block">-->
+              <el-form-item>
+                <Editor
+                  style="height: 200px; overflow-y: hidden;"
+                  v-model="valueHtml"
+                  :defaultConfig="editorConfig"
+                  mode="default"
+                  @onCreated="handleCreated"
+                  @onChange="handleChange"
+              />
+<!--            </div>-->
+            <div class="submit"><el-button  type="primary" >提交</el-button></div>
+<!--          </div>-->
+        </el-form-item>
+      </el-form>
+  </el-card>
+</div>
   </div>
 </template>
 
@@ -134,5 +177,12 @@ onMounted(()=>{
 }
 .post_time{
   margin: 5px;
+}
+.post_post{
+  width: 80%;
+  margin: 20px auto;
+}
+.editor{
+  width: 100%;
 }
 </style>

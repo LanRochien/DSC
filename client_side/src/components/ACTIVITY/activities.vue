@@ -1,23 +1,71 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import {onMounted, ref} from 'vue'
 import MENU from '../COMPONENT/menu.vue'
-import API from "../../axiosinstance/axiosInstance.js"//API路径
-var images=ref([{content:''}])
+import API from "../../axiosinstance/axiosInstance.js"
+import {useRouter} from 'vue-router'
+import {get} from "axios";
+import {useStore} from "../../pinia";
+import { Edit,} from '@element-plus/icons-vue'
+
+//API路径
+    const store= useStore()
+    const router=useRouter()
+    const isShow=ref(false)
+    const activities=ref([
+      {
+        id:0,
+        activity_image:'',
+        title:'',
+        date_time:'',
+        num_required:0,
+        num_participants:0,
+        state:0,
+        stateString:'',
+        user:{}}
+    ])
     const   current='/activities';
     const testData = ref({});
-    //测试请求方法
-    const getData = function(){
-      API({
-        // url:'/activity/findall',//目的数据详细路基
-        method:'GET'
-      }).then((res)=>{
-        // alert('请求成功!');
-        let arr=res.data.map((item)=>{
-          return Object.assign({},{content:item.content})
-        })//将获取的数组整理为只含图片地址的数组
-       images.value=arr;
-      });
+    const acState=ref('true')
+    const dateSolver=(date:string)=>{
+      return date.substring(0,9)
     }
+    const stateMap=['待审核','进行中','已结束']
+    const toActivity=(ac:object)=>{
+        store.activity={
+          activity_title:ac.title,
+          activity_content:ac.content,
+          activity_date:ac.date_time,
+          activity_image:ac.activity_image,
+          activity_state:ac.stateString,
+          activity_sponsor:ac.user.name,
+        }
+        router.push({
+          name:'activity',
+          params:{
+            activity_id:ac.id,
+          }
+        })
+    }
+
+    onMounted(()=>{
+      API({
+        url:'/activity',
+        method:'get'
+      }).then((res)=>{
+        // iftrue
+        console.log(res.data)
+        activities.value=res.data
+        isShow.value=true
+
+        for (let cur of activities.value){//for of 遍历对象
+
+            cur.date_time=dateSolver(cur.date_time)
+            cur.stateString=stateMap[cur.state%3]
+        }
+        console.log(activities.value)
+      })
+    })
+
 
 
 
@@ -25,139 +73,107 @@ var images=ref([{content:''}])
 
 <template >
   <MENU :current=current></MENU>
-  <div class="common-layout" @mouseover="getData">
-
-    <el-container>
-      <el-main class="main">
-        <div class="jieshao">
-          <div class="huodongxuechuan">
-            <div class="block text-center" style="height: 300px">
-              <el-carousel height="auto" autoplay>
-                <el-carousel-item style="height: 300px">
-                  <a href="#">
-                  <h3 class="small justify-center" text="2xl">test txt0</h3>
-                  </a>
-                </el-carousel-item>
-                <el-carousel-item style="height: 300px">
-                  <a href="#">
-                  <h3 class="small justify-center" text="2xl">test txt1</h3>
-                  </a>
-                </el-carousel-item>
-                <el-carousel-item style="height: 300px">
-                  <a href="#">
-                  <h3 class="small justify-center" text="2xl">test txt2</h3>
-                  </a>
-                </el-carousel-item>
-                <el-carousel-item style="height: 300px">
-                  <a href="#">
-                  <h3 class="small justify-center" text="2xl">test txt3</h3>
-                  </a>
-                </el-carousel-item>
-              </el-carousel>
-            </div>
-          </div>
-      </div>
-      <div class="huodongview">
-        <div class="testfirst">
-        <el-row >
-          <el-col
-              v-for="image in images"
-              :span="4"
-              :offset="1"
-          >
-            <a href="#" class="cardin">
-            <el-card :body-style="{ padding: '0px' }">
-
+  <div class="button_group">
+    <el-button-group>
+      <el-button style="padding-left: 10px" type="primary">申请活动  <el-icon><Edit /></el-icon> </el-button >
+      <el-button type="primary">加入我们  <el-icon><Check /></el-icon> </el-button   >
+    </el-button-group>
+  </div>
+  <div class="activities_wrapper" v-if="isShow" >
+      <div class="activity_view">
+        <div class="activity_card" v-for="activity in activities">
+            <el-card :body-style="{ height:'500px',padding:'0px' }">
               <img
-                  :src=image.content
-                  @loadstart="getData"
-                  class="image"
+                  :src="activity.activity_image"
+                  class="activity_image"
               />
-
               <div style="padding: 14px;">
-
-                <span>Yummy hamburger</span>
-                <div class="bottom">
-                  <p>activities txt</p>
-                  <el-button text class="button">Operating</el-button>
+                <div class="activity_title">
+                  <h4>{{activity.title}}</h4>
+                  <div class="enter_button"><el-button  class="button" @click="toActivity(activity)">查看详情</el-button></div>
                 </div>
+                <div class="activity_detail">
+                  <!--                需要人数 参与人数-->
+                  <div class="need_info">
+                    <div class="parti_num">已参与人数：{{activity.num_participants}}</div>
+                    <div class="required_num">需要人数：{{activity.num_required}}</div>
+                  </div>
+<!--                  发布时间 发起人-->
+                  <div class="author_info">
+                    <div class="">发起人</div>
+                    <div class="sponsor">{{activity.user.name}}</div>
+                  </div>
+                  <div class="time_info">
+                    <div class="">发起时间</div>
+                    <div class="post_time">{{activity.date_time}}</div>
+                  </div>
+<!--                  活动状态-->
+                  <div class="state_info">
+                    <div class="">当前状态：</div>
+                    <div class="">{{activity.stateString}}</div>
+                  </div>
 
+                </div>
               </div>
-
             </el-card>
-            </a>
-          </el-col>
-        </el-row>
         </div>
-
       </div>
-      </el-main>
-    </el-container>
   </div>
 </template>
 
 <style scoped>
-.header{
-  text-align: center;
-  background-color: aquamarine;
-}
-.jieshao{
+.activities_wrapper{
   width: 100%;
-  min-height: 300px;
-  background: aquamarine;
-  margin-bottom: 2vw;
-  text-align: center;
-}
-.huodongview{
-  width:100%;
-  min-height: 50vw;
-  background-color: coral;
+  height: fit-content;
+
 }
 
-
-.el-carousel__item h3 {
-  color: #475669;
-  opacity: 0.75;
-  display: block;
-  align-items: center;
-  margin: 0;
-  text-align: center;
-  height: 100%;
-  line-height: 550px;
-  margin-right: 90%;
+.activity_view{
+  width: 1440px;
+  overflow: hidden;
+  margin: 0 auto;
 }
-
-
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
+.activity_card{
+  max-width: 320px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  float: left;
 }
-
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
+.activity_image{
+  width: 100%;
 }
-
-
-
-.bottom {
-  margin-top: 13px;
-  line-height: 12px;
-  display: block;
+.activity_title{
+  padding-bottom: 10px;
+}
+.need_info{
+  font-size: 15px;
+  padding-bottom: 5px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.activity_title,
+.author_info,
+.time_info,
+.state_info{
+  font-size: 14px;
+  padding-bottom: 5px;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 }
-
-.button {
-  padding: 0;
-  min-height: auto;
+.activity_title{
+  margin-bottom: 10px;
+}
+.button_group {
+  margin-top: 20px;
+  text-align: right;
 }
 
-.image {
-  width: 100%;
-  display: block;
-}
-.testfirst{
-  margin-left: 10vw;
-}
+
 
 
 
