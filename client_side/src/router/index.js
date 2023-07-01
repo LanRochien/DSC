@@ -12,6 +12,7 @@ import PLATE from "/src/components/FORUM/plate.vue"
 import POST from "/src/components/FORUM/post.vue"
 import SEARCH from "/src/components/SEARCH/search.vue"
 import ADMIN from "/src/components/ADMIN/admin.vue"
+import INDIVIDUAL from  "/src/components/INDIVIDUAL/personpage.vue"
 
 
 const routes=[
@@ -61,8 +62,12 @@ const routes=[
     },
     {
         path:'/admin',
-
         component: ADMIN
+    },
+    {
+        path:'/individual/:id',
+        name:'personal',
+        component: INDIVIDUAL
     },
 ]
 export default createRouter({

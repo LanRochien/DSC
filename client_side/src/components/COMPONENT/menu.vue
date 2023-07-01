@@ -21,12 +21,12 @@
       :suffix-icon="Search"
   />
   </el-menu-item>
-  <el-sub-menu v-if="login">
+  <el-sub-menu v-if="login" index="/person">
     <template #title>  <el-avatar  :icon="UserFilled" /></template>
     <div class="user_info">
       <div class="username">{{store.user.name}}</div>
     </div>
-    <el-menu-item> 个人中心</el-menu-item>
+    <el-menu-item @click="toPersonal"> 个人中心</el-menu-item>
   </el-sub-menu>
   <el-menu-item v-else index="/login" >
     <div >登录</div>
@@ -40,9 +40,12 @@ import {onMounted, ref} from "vue";
 import { Search } from '@element-plus/icons-vue'
 import { UserFilled } from '@element-plus/icons-vue'
 import {useStore} from '../../pinia/index.js'
+import {useRouter} from "vue-router";
+
 const input=ref("")
 const login=ref()
 const store=useStore()
+const router=useRouter()
 const checkLogin=()=>{
   if(typeof (store.user.name)!="undefined"){
     login.value=true
@@ -51,6 +54,15 @@ const checkLogin=()=>{
 }
 const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
+}
+const toPersonal=()=>{
+  const name=store.user.name
+  router.push({
+    name:'personal',
+    params:{
+      id:name
+    }
+  })
 }
 onMounted(()=>{
   console.log(store.user)

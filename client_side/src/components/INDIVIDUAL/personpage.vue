@@ -1,6 +1,11 @@
 
 <script lang="ts" setup>
   import { reactive, toRefs } from 'vue'
+  import {onMounted, ref} from "vue";
+  import {useStore} from '../../pinia/index.js'
+  import {useRouter} from "vue-router";
+  import MENU from '../COMPONENT/menu.vue'
+  import API from "../../axiosinstance/axiosInstance.js"
 
   const state = reactive({
   circleUrl:
@@ -11,24 +16,48 @@
 
   const { circleUrl, squareUrl, sizeList } = toRefs(state)
 
+  const router=useRouter()
+  const userData=ref({
+  })
+  const postsData=ref({})
+  const activityData=ref({})
+  const isShow=ref(false)
+  onMounted(()=>{
+    const userName=router.currentRoute.value.params.id
+    console.log(userName)
+    API({
+      url:'/user/findDetail',
+      method:'GET',
+      // params:{
+      //   name:userName
+      // }
+    }).then((res)=>{
+      if (res.data.resp.status==200){
+        userData.value=res.data.user
+        postsData.value=res.data.posts
+        activityData.value=res.data.activities
 
+        isShow.value=true
+        console.log(userData.value)
+      }
+    })
+  })
 </script>
 
 <template>
-<div class="wrap1" >
+  <MENU ></MENU>
+<div class="wrap1" v-if="isShow">
   <div class="wrap2">
-    <div class="head">
-<!--      导航栏/搜索框-->
-    </div>
     <div class="main">
     <div id="headinfo">
 <!--      头部背景-->头部背景
+<!--      <img>-->
     </div>
         <div id="userinfo">
           <div class="userinfo_left">
 <!--            此处添加用户信息左侧内容-->
             <div class="userinfo_left_head">
-              <el-avatar size="large" :src="squareUrl" shape="square">
+              <el-avatar size="large" :src="userData.head_url" shape="circle">
 <!--               用户头像-->
 <!--                :src="circleUrl/squareUrl表示圆形实例或方形实例“-->
               </el-avatar>
@@ -37,26 +66,39 @@
           <div class="userinfo_middle">
 <!--            此处添加用户信息中部内容，还可加性别、id等-->
               <div class="userinfo_middle_name">
-                用户名
+                {{userData.name}}
               </div>
             <div class="userinfo_middle_details">
-              说明信息
+              <div class="user_info">
+             <div class="user_role"> 用户组：{{ userData.role }}</div>
+              <div class="user_sex">性别：{{userData.sex}}</div>
+            </div>
+              <div class="record_time">
+                <div>注册日期：{{userData.record_date}}</div>
+              </div>
+              <div class="forum_info">
+                <div >发帖数：{{userData.post_qty}}</div>
+                <div>回复数：{{userData.reply_qty}}</div>
+              </div>
             </div>
           </div>
           <div class="userinfo_right">
-            <el-button type="info" >功能/跳转</el-button>
-<!--            此处添加用户信息右侧内容，可是功能按钮（修改密码等）-->
+            <el-button type="primary" >修改头像</el-button>
+            <el-button type="primary" >修改密码</el-button>
+
+<!--            此处添加用户信息右侧内容，可是功能按钮（修改密码等）修改头像-->
           </div>
         </div>
     <div id="container">
       <div class="ihome">
 <!--       ihome内还可添加主要内容以外的的东西（排行榜等） -->
         <div class="content" >帖子展示处</div>
+
       </div>
-    </div>
     </div>
   </div>
 </div>
+  </div>
 </template>
 
 <style scoped>
@@ -76,9 +118,9 @@
   color: white;
 }
 #userinfo{
-  min-height: 110px;
+  min-height: 120px;
   width: 978px;
-  margin: 0 auto;
+  margin: 10px auto;
   border-style: solid;
   border-color: #8FC0D3;
   border-width: 0 1px;
@@ -100,12 +142,27 @@
   width: 500px;
   float: left;
   margin-left: -80px;
-  margin-top: 30px;
+  //margin-top: 30px;
 }
 .userinfo_right{
   line-height: 100px;
   text-align: right;
   padding-right: 30px;
+}
+.user_info,
+.forum_info,
+.record_time{
+  display: flex;
+  margin: 5px 0;
+
+}
+.user_info div,
+.forum_info div,
+.record_time div{
+  margin-right: 15px;
+}
+.userinfo_middle_name{
+font-weight: bolder;
 }
 #container{
   width: 980px;

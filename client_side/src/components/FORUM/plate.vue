@@ -70,10 +70,16 @@ onMounted(()=>{
     <el-card>
     <div class="plate_content">
       <div class="plate_block" v-for="item in posts_data">
-       <div class="plate_title" @click="toPost(plateid,item.id)"><h5>{{ item.title }}</h5></div>
+        <div class="like"><el-icon><Star /></el-icon>{{item.up_qty}}</div>
+       <div class="plate_title" @click="toPost(plateid,item.id)">
+         <h5>{{ item.title }}</h5>
+       </div>
+
          <div class="flex_grow"/>
         <div class="user_name" @click="toUser(item.user.id)" ><el-icon class="icon"><User /></el-icon>{{item.user.name}}</div>
         <div class="post_time"><div>{{item.date_time}}</div></div>
+
+
       </div>
     </div>
     </el-card>
@@ -184,5 +190,8 @@ onMounted(()=>{
 }
 .editor{
   width: 100%;
+}
+.like{
+  margin-right: 10px;
 }
 </style>

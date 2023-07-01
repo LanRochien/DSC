@@ -3,7 +3,6 @@ import {onMounted, ref} from 'vue'
 import MENU from '../COMPONENT/menu.vue'
 import API from "../../axiosinstance/axiosInstance.js"
 import {useRouter} from 'vue-router'
-import {get} from "axios";
 import {useStore} from "../../pinia";
 import { Edit,} from '@element-plus/icons-vue'
 
