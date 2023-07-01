@@ -15,6 +15,7 @@ const posts_data=ref({})
 const plateid=ref()
 const editorRef = shallowRef()
 const toolbarConfig = {}
+const isShow=ref(false)
 
 const post=ref({
   title:'',
@@ -46,6 +47,7 @@ onMounted(()=>{
   }).then((res)=>{
     plate_data.value=res.data.plate
     posts_data.value=res.data.posts
+    isShow.value=true
     console.log(plate_data.value)
     console.log(posts_data.value)
   })
@@ -54,7 +56,7 @@ onMounted(()=>{
 
 <template>
   <Menu :current=current></Menu>
-  <div class="wrapper">
+  <div class="wrapper"v-if="isShow">
   <div class="plate_header">
     <el-card class="header-card">
       <el-avatar shape="square" :size="100" :fit="fill" :src="plate_data.plate_image" />
@@ -90,28 +92,27 @@ onMounted(()=>{
         <el-form-item label="题目">
           <el-input v-model="post.title" />
         </el-form-item>
-
           <el-form-item>
-<!--          <div class="editor" style="border: 1px solid #ccc">-->
-            <Toolbar
-                style="border-bottom: 1px solid #ccc;height: 50px"
-                :editor="editorRef"
-                :defaultConfig="toolbarConfig"
-                mode="default"
-            /></el-form-item>
-<!--            <div class="editor_block">-->
-              <el-form-item>
-                <Editor
-                  style="height: 200px; overflow-y: hidden;"
-                  v-model="valueHtml"
-                  :defaultConfig="editorConfig"
+            <div class="editor" v-if="isShow" style="border: 1px solid #ccc">
+              <Toolbar
+                  style="border-bottom: 1px solid #ccc"
+                  :editor="editorRef"
+                  :defaultConfig="toolbarConfig"
                   mode="default"
-                  @onCreated="handleCreated"
-                  @onChange="handleChange"
               />
-<!--            </div>-->
-            <div class="submit"><el-button  type="primary" >提交</el-button></div>
-<!--          </div>-->
+              <div class="editor_block">
+                <Editor
+                    style="height: 200px; overflow-y: hidden;"
+                    v-model="valueHtml"
+                    :defaultConfig="editorConfig"
+                    mode="default"
+                    @onCreated="handleCreated"
+                    @onChange="handleChange"
+                />
+              </div>
+              <div class="submit"><el-button @click="toSubmit" type="primary" :disabled="!isLogin.login">提交</el-button></div>
+
+            </div>
         </el-form-item>
       </el-form>
   </el-card>

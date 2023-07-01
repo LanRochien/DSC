@@ -221,8 +221,6 @@ font-weight: bolder;
 }
 .content{
   width: 978px;
-  //text-align: center;
-  //line-height: 200px;
   border-style: solid;
   border-width: 1px;
   background-color: white;

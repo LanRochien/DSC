@@ -14,12 +14,12 @@
   <el-menu-item index="/forum">论坛</el-menu-item>
   <div class="flex-grow" />
   <el-menu-item>
-  <el-input
-      v-model="input"
-      class="w-50 m-2"
-      placeholder="全站搜索"
-      :suffix-icon="Search"
-  />
+    <el-input v-model="search" class="w-50 m-2" placeholder="Type something">
+      <template #prefix>
+        <el-icon class="el-input__icon" @click="toSearch()"><Search style="width: 1em; height: 1em; margin-right: 8px" />
+        </el-icon>
+      </template>
+    </el-input>
   </el-menu-item>
   <el-sub-menu v-if="login" index="/person">
     <template #title>  <el-avatar  :icon="UserFilled" /></template>
@@ -36,16 +36,30 @@
   </div>
 </template>
 <script lang="ts" setup>
-import {onMounted, ref} from "vue";
-import { Search } from '@element-plus/icons-vue'
+import {onMounted, ref,inject} from "vue";
+import {Search}  from '@element-plus/icons-vue'
 import { UserFilled } from '@element-plus/icons-vue'
 import {useStore} from '../../pinia/index.js'
 import {useRouter} from "vue-router";
 
-const input=ref("")
+const reLoad=inject('reLoad')
+const search=ref("")
 const login=ref()
 const store=useStore()
 const router=useRouter()
+const toSearch=()=>{
+  if(typeof (search.value)!==undefined&&search.value!==""){
+  store.searchKey=search.value
+    console.log(store.searchKey)
+    router.push({
+      name:"search",
+      params:{
+        key:store.searchKey
+      }
+    })
+    reLoad()
+  }
+}
 const checkLogin=()=>{
   if(typeof (store.user.name)!="undefined"){
     login.value=true
@@ -65,7 +79,7 @@ const toPersonal=()=>{
   })
 }
 onMounted(()=>{
-  console.log(store.user)
+  // console.log(store.user)
   checkLogin()
 
 })
