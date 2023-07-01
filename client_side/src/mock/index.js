@@ -1,5 +1,84 @@
 import Mock from 'mockjs'
 
+
+
+
+const changeState=Mock.mock('http://localhost:8080/admin/banUserById','get',{
+
+})
+const userList=Mock.mock('http://localhost:8080/admin/findall','get',{
+    "users": [
+        {
+            "role": 11,
+            "name": "期步清色多白",
+            "id": 49,
+            "password": "quis",
+            "sex": "女",
+            "record_date": "2007-02-25",
+            "birthday": "2001-09-06",
+            "location": "esse",
+            "post_qty": 86,
+            "reply_qty": 97,
+            "head_url": "http://eeliwe.uk/ktrs"
+        },
+        {
+            "role": 82,
+            "name": "理又金改",
+            "id": 94,
+            "password": "dolore aute",
+            "sex": "女",
+            "record_date": "2006-01-09",
+            "birthday": "2007-09-04",
+            "location": "ad esse nisi labore",
+            "post_qty": 69,
+            "reply_qty": 58,
+            "head_url": "http://bqkiqm.aw/ebw"
+        },
+        {
+            "role": 98,
+            "name": "求老张权例",
+            "id": 53,
+            "password": "dolore ad est do consectetur",
+            "sex": "男",
+            "record_date": "2020-06-29",
+            "birthday": "2006-03-06",
+            "location": "qui commodo reprehenderit",
+            "post_qty": 88,
+            "reply_qty": 86,
+            "head_url": "http://tkerauit.cu/bpdhb"
+        },
+        {
+            "role": 60,
+            "name": "边万铁查它",
+            "id": 41,
+            "password": "cupidatat Excepteur ad enim",
+            "sex": "女",
+            "record_date": "1989-01-14",
+            "birthday": "1983-09-20",
+            "location": "mollit dolor do",
+            "post_qty": 33,
+            "reply_qty": 72,
+            "head_url": "http://smnrlwl.pr/xemlpinf"
+        },
+        {
+            "role": 9,
+            "name": "号家口",
+            "id": 42,
+            "password": "ullamco reprehenderit nulla eiusmod dolor",
+            "sex": "女",
+            "record_date": "1991-08-06",
+            "birthday": "1984-12-12",
+            "location": "ipsum ea",
+            "post_qty": 87,
+            "reply_qty": 27,
+            "head_url": "http://dpgh.cc/bvippyt"
+        }
+    ],
+    "resp": {
+        "msg": "id pariatur dolore culpa",
+        "status": 200
+    }
+})
 const up=Mock.mock('http://localhost:8080/post/up','get',{
     "msg": "Excepteur sed minim veniam non",
     "status": 200

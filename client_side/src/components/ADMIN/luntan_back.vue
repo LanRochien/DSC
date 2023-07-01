@@ -20,6 +20,11 @@
 </template>
 
 <script setup lang="ts">
+import API from "../../axiosinstance/axiosInstance.js"
+import  {onMounted} from "vue";
+onMounted(()=>{
+
+})
 </script>
 
 <style scoped>
