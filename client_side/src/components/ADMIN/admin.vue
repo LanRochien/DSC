@@ -22,14 +22,18 @@
           <el-icon><icon-menu /></el-icon>
           <span>用户信息</span>
         </el-menu-item>
-        <el-menu-item index="/admin/forum" >
-          <el-icon><document /></el-icon>
-          <span>论坛信息</span>
-        </el-menu-item>
         <el-menu-item index="/admin/activity">
           <el-icon><setting /></el-icon>
-          <span>活动信息</span>
+          <span>活动管理</span>
         </el-menu-item>
+          <el-menu-item index="/admin/plate">
+            <el-icon><setting /></el-icon>
+            <span>板块管理</span>
+          </el-menu-item>
+          <el-menu-item index="/admin/post">
+            <el-icon><setting /></el-icon>
+            <span>帖子管理</span>
+          </el-menu-item>
         </el-menu-item-group>
         </el-sub-menu>
       </el-menu>

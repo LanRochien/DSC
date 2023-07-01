@@ -7,14 +7,10 @@
     <el-table-column prop="state" label="用户权限" width="180" />
     <el-table-column prop="record_date" label="注册时间" width="230" />
     <el-table-column prop="password" label="密码" width="230" />
-
     <el-table-column prop="" label="设置封禁" >
-
       <template v-slot="scope">
         <el-button @click="userBan(scope.row.id,scope.row.role)" >编辑</el-button>
       </template>
-
-
     </el-table-column>
   </el-table>
 </template>
@@ -27,7 +23,6 @@ import { ElMessage } from 'element-plus'
 
 const reLoad=inject('reLoad')
 const userList=ref([])
-const isBan=ref()
 const isShow=ref(false)
 // const scope=ref()
 
@@ -79,15 +74,6 @@ onMounted(()=>{
 </script>
 
 <style scoped>
-.el-descriptions {
-  margin-top: 20px;
-}
-.userform{
-  width:100%;
-  margin:0 auto;
-}
-.btn{
 
-}
 
 </style>

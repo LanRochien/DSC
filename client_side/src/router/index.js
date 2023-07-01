@@ -13,7 +13,8 @@ import POST from "/src/components/FORUM/post.vue"
 import SEARCH from "/src/components/SEARCH/search.vue"
 import ADMIN from "/src/components/ADMIN/admin.vue"
 import BACKACT from "/src/components/ADMIN/activities_back.vue"
-import BACKFORUM from "/src/components/ADMIN/luntan_back.vue"
+import BACKPLATE from "/src/components/ADMIN/plate_back.vue"
+import BACKPOST from "/src/components/ADMIN/post_back.vue"
 import BACKUSER from "/src/components/ADMIN/users_back.vue"
 
 import INDIVIDUAL from  "/src/components/INDIVIDUAL/personpage.vue"
@@ -80,8 +81,12 @@ const routes=[
                 component: BACKACT
             },
             {
-                path:'forum',
-                component: BACKFORUM
+                path:'plate',
+                component: BACKPLATE
+            },
+            {
+                path:'post',
+                component: BACKPOST
             },
             {
                 path:'users',

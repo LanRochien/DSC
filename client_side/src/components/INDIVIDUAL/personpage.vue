@@ -2,7 +2,6 @@
 <script lang="ts" setup>
   import { reactive, toRefs } from 'vue'
   import {onMounted, ref} from "vue";
-  import {useStore} from '../../pinia/index.js'
   import {useRouter} from "vue-router";
   import MENU from '../COMPONENT/menu.vue'
   import API from "../../axiosinstance/axiosInstance.js"
