@@ -16,10 +16,11 @@ const toPlate=(id)=>{
   })
 }
 API({
-  url:'/plate',
+  url:'/plate/findall',
   method:'GET'
 }).then((res)=>{
-  plate.value=res.data.forum
+  plate.value=res.data
+    console.log(plate.value)
 })
 </script>
 

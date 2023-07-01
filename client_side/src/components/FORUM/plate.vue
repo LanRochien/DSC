@@ -37,11 +37,11 @@ onMounted(()=>{
   const  plateId=router.currentRoute.value.params.plateid
   plateid.value=plateId
   API({
-    url: "http://localhost:8080/posts",
+    url: "plate/plateDetails",
     // 传参，使用指定板块号
-    //params:{
-  //   id:
-  // }
+    params:{
+    id:plateId
+  },
     method:'GET'
   }).then((res)=>{
     plate_data.value=res.data.plate

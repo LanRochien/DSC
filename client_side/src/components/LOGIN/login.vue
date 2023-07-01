@@ -48,7 +48,6 @@ const store=useStore()
 const router=useRouter()
 const ruleFormRef = ref<FormInstance>()
 const userInfo=ref({})
-import { ElMessage } from 'element-plus'
 const naviToreg=()=>{
   router.push('/register')
 }
@@ -92,25 +91,23 @@ const submitForm = (formEl: FormInstance |undefined) => {
       console.log(ruleForm.name);
       console.log(ruleForm.pwd);
       API({
-        // url:'http://localhost:8080/test',
-        // method:"post",
-        // params:{
-        //   username:ruleForm.name,
-        //   password:ruleForm.pwd
-        url:'/test',
-        method:'GET'
+        url:'http://localhost:8129/user/login',
+        method:"post",
+        params: {
+            username: ruleForm.name,
+            password: ruleForm.pwd
+        }
+        // url:'/test',
+        // method:'GET'
 
       }).then((res)=>{
-        if(res.data.resp.status=="200"){
+        if(res.status=="200"){
           userInfo.value=res.data
           store.user=res.data.user
           console.log(store.user)
           router.push({
             path:'/index'
           })
-        }
-        else{
-          ElMessage.error('用户名或密码出错')
         }
         console.log(res)
       })

@@ -28,7 +28,7 @@ const handleCreated = (editor) => {
 }
 
 const handleChange=()=>{
-  console.log(valueHtml)
+  console.log(valueHtml.value)
 }
 //menu里传user
 //post_data传post信息
@@ -40,19 +40,18 @@ const getDate=(n)=>{
 const toSubmit=()=>{
   //获取当前时间
  const currentDate=getDate(Date.now())
-
   API({
-    url:'',
+    url:'/comment/insertcomment',
     method:'POST',
     data:{
             comment:{
               id:0,
-              content:valueHtml,
+              content:valueHtml.value,
               date_time:currentDate,
               up_qty:0,
-            },
-            user:store.user,
-            post:post_data.value.post
+              user:store.user,
+              post:post_data.value.post
+            }
     }
   }).then((res)=>{
     // if(res.data.resp.msg===200){
@@ -65,14 +64,17 @@ const toSubmit=()=>{
 onMounted(()=>{
   console.log(isLogin.value.login)
   postId.value=router.currentRoute.value.params.postid
+    console.log(postId.value)
   API({
-    url:'http://localhost:8080/posttest',
+    url:'http://localhost:8129/post/postDetail',
+
     params:{
-      // id:postId.value
+      id:postId.value //
     },
-    method:'GET'
+    method:'GET',
   }).then((res)=>{
     post_data.value=res.data
+      console.log(post_data.value)
     isShow.value=true
   })
 })

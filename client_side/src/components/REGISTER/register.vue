@@ -12,7 +12,7 @@
       <el-input v-model="form.password" type="password" />
     </el-form-item>
     <el-form-item label="所在地区">
-      <el-cascader v-model="form.location" :options="pcTextArr" @change="handleChange" />
+        <el-input v-model="form.location" />
     </el-form-item>
     <el-form-item label="出生日期">
       <el-col :span="11">
@@ -37,8 +37,8 @@
     </el-form-item>
     <el-form-item>
       <div class="btn">
-      <el-button type="primary" @click="onSubmit">注册</el-button>
-      <el-button @click="onCancel">取消</el-button>
+      <el-button type="primary" @click="onSubmit()">注册</el-button>
+      <el-button @click="onCancel()">取消</el-button>
       </div>
     </el-form-item>
   </el-form>
@@ -55,8 +55,8 @@ import { ElMessage } from 'element-plus'
 const router=useRouter()
 // do not use same name with ref
 const form = ref({
-  role:0,
-  id:0,
+  role:1,
+  id:123,
   name: '',
   password:'',
   sex:'',
@@ -76,7 +76,7 @@ const onSubmit = () => {
   const currentDate=getDate(Date.now())
   console.log(currentDate)
   API({
-    url:'/user/register',
+    url:'http://localhost:8129/user/register',
     method:'POST',
     data:{
       role:form.value.role,
@@ -92,7 +92,7 @@ const onSubmit = () => {
       head_url:'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
     }
   }).then((res)=>{
-    if(res.data.resp.status==200){
+    if(res.data.status==200){
       //成功
       setTimeout(()=>{
         router.push('/login')

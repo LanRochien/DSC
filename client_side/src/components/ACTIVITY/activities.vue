@@ -48,12 +48,12 @@ import { Edit,} from '@element-plus/icons-vue'
 
     onMounted(()=>{
       API({
-        url:'/activity',
+        url:'/activity/findall',
         method:'get'
       }).then((res)=>{
         // iftrue
         console.log(res.data)
-        activities.value=res.data
+        activities.value=res.data.activities
         isShow.value=true
 
         for (let cur of activities.value){//for of 遍历对象

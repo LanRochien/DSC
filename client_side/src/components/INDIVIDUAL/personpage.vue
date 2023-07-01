@@ -41,9 +41,9 @@
     API({
       url:'/user/findDetail',
       method:'GET',
-      // params:{
-      //   name:userName
-      // }
+      params:{
+        name:userName
+      }
     }).then((res)=>{
       if (res.data.resp.status==200){
         userData.value=res.data.user
@@ -51,10 +51,11 @@
         commentData.value=res.data.comments
 
         for(let item of postsData.value){
-            item.date_time=dateSolver(item.date_time)
+
+            // item.date_time=dateSolver(item.date_time)
         }
         for(let item of commentData.value){
-          item.date_time=dateSolver(item.date_time)
+          // item.date_time=dateSolver(item.date_time)
         }
         isShow.value=true
         console.log(userData.value)

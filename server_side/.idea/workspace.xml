@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b1b3a9a-3825-4ded-a92e-daf4e6f06803" name="变更" comment="">
+      <change beforePath="$PROJECT_DIR$/../client_side/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../client_side/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client_side/src/components/FORUM/plate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../client_side/src/components/FORUM/plate.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client_side/src/components/FORUM/post.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../client_side/src/components/FORUM/post.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client_side/src/components/LOGIN/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../client_side/src/components/LOGIN/login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/controller/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/mapper/CommentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/mapper/CommentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/service/CommentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cupk/service/impl/CommentServiceimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cupk/service/impl/CommentServiceimpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/CommentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/CommentMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,23 +56,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="RequestMappingsPanelOrder0" value="0" />
-    <property name="RequestMappingsPanelOrder1" value="1" />
-    <property name="RequestMappingsPanelWidth0" value="75" />
-    <property name="RequestMappingsPanelWidth1" value="75" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../booklibrary" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
-    <property name="show.run.dashboard.notification" value="false" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Java/WorkSpace/patienthome&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;b39024efbc6de61976f585c8421c6bba&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\mytest\web\web-comprehensive-practice\server_side\src\main\resources\templates" />
@@ -119,6 +113,11 @@
       <workItem from="1688005120284" duration="211000" />
       <workItem from="1688005386414" duration="12000" />
       <workItem from="1688005463118" duration="2031000" />
+      <workItem from="1688123696204" duration="1144000" />
+      <workItem from="1688129511221" duration="1231000" />
+      <workItem from="1688176127622" duration="1353000" />
+      <workItem from="1688187332604" duration="6000" />
+      <workItem from="1688187348621" duration="13000" />
     </task>
     <servers />
   </component>

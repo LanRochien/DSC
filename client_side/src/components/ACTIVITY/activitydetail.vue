@@ -65,8 +65,6 @@ const handleExceed: UploadProps['onExceed'] = (files, uploadFiles) => {
               <div class="container">
                 <p class="article">
                   {{activityInfo.activity_content}}
-                  <br>
-                  希利眼科研究所医生和研究员们在治疗视网膜变异、青光眼、糖尿病性视网膜病变和其他原发性眼疾方面取得了可喜的发展。希望这里的发现对全球产生影响。未间断地对眼库标本研究中的一方面包括按生物地理血统来识别眼疾的生物标志物，了解标记如何适用于不同祖先的个体。
                 </p>
               </div>
             </div>
