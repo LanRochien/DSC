@@ -21,12 +21,24 @@
       </template>
     </el-input>
   </el-menu-item>
-  <el-sub-menu v-if="login" index="/person">
+  <el-sub-menu v-if="isLogin" index="/person">
     <template #title>  <el-avatar  :icon="UserFilled" /></template>
     <div class="user_info">
       <div class="username">{{store.user.name}}</div>
+      <div class="user_role"> 用户组：{{ store.user.state }}</div>
+      <div class="user_sex">性别：{{store.user.sex}}</div>
+      <div class="record_time">
+        <div>注册日期：{{store.user.record_date}}</div>
+      </div>
+      <div class="forum_info">
+        <div >发帖数：{{store.user.post_qty}}</div>
+        <div>回复数：{{store.user.reply_qty}}</div>
+      </div>
     </div>
+
     <el-menu-item @click="toPersonal"> 个人中心</el-menu-item>
+    <el-menu-item @click="logOut"> 退出登录</el-menu-item>
+
   </el-sub-menu>
   <el-menu-item v-else index="/login" >
     <div >登录</div>
@@ -37,16 +49,22 @@
 </template>
 <script lang="ts" setup>
 import {onMounted, ref,inject} from "vue";
-import {Search}  from '@element-plus/icons-vue'
 import { UserFilled } from '@element-plus/icons-vue'
 import {useStore} from '../../pinia/index.js'
 import {useRouter} from "vue-router";
 
 const reLoad=inject('reLoad')
 const search=ref("")
-const login=ref()
+const isBan=ref(false)
+const isLogin=ref(false)
 const store=useStore()
 const router=useRouter()
+
+
+const logOut=()=>{
+  store.user={}
+  reLoad()
+}
 const toSearch=()=>{
   if(typeof (search.value)!==undefined&&search.value!==""){
   store.searchKey=search.value
@@ -62,9 +80,12 @@ const toSearch=()=>{
 }
 const checkLogin=()=>{
   if(typeof (store.user.name)!="undefined"){
-    login.value=true
+    isLogin.value=true
+    if (store.user.role!==-1)
+      isBan.value=true
+    else isBan.value=false
   }
-  else login.value=false
+  else isLogin.value=false
 }
 const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
@@ -80,6 +101,9 @@ const toPersonal=()=>{
 }
 onMounted(()=>{
   // console.log(store.user)
+    const rules=['已封禁','管理员','普通用户','志愿者']
+    store.user.state= rules[(store.user.role+1)%4]
+
   checkLogin()
 
 })
@@ -88,7 +112,7 @@ defineProps({
   current:String,
 })
 defineExpose({
-  login
+  login: isBan
 })
 </script>
 <style scoped>
@@ -106,8 +130,7 @@ defineExpose({
 }
 .user_info{
   width: 100%;
-  height: 150px;
+  height: 130px;
   text-align: center;
-  border: 1px solid black;
 }
 </style>

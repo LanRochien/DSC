@@ -91,21 +91,26 @@ const submitForm = (formEl: FormInstance |undefined) => {
       console.log(ruleForm.name);
       console.log(ruleForm.pwd);
       API({
-        url:'http://localhost:8129/user/login',
-        method:"post",
-        params: {
-            username: ruleForm.name,
-            password: ruleForm.pwd
-        }
-        // url:'/test',
-        // method:'GET'
+        url:'/user/login',
+        // method:"post",
+        // params: {
+        //     username: ruleForm.name,
+        //     password: ruleForm.pwd
+        // },
+        method:'GET'
 
       }).then((res)=>{
         if(res.status=="200"){
           userInfo.value=res.data
           store.user=res.data.user
           console.log(store.user)
-          router.push({
+          if (store.user.role==0){
+            router.push({
+              path:'/admin'
+            })
+          }
+          else
+            router.push({
             path:'/index'
           })
         }
