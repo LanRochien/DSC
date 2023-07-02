@@ -3,22 +3,30 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cupk.mapper.CommentMapper">
-    <select id="findCommentsByPostID" resultMap="CommentWithOthers">
-        select * from t_comment where mainpost_id=#{post_id}
- </select>
-    <resultMap id="CommentWithOthers" type="com.cupk.pojo.Comment">
-        <id column="id" property="id"></id>
-        <result column="content" property="content"></result>
-        <result column="datetime" property="datetime"></result>
-        <result column="click_qty" property="click_qty"></result>
-        <result column="up_qty" property="up_qty"></result>
-        <association property="user" column="user_id" javaType="com.cupk.pojo.User"
-                     select="com.cupk.mapper.UserMapper.findByID"></association>
-        <association property="mainPost" column="mainpost_id" javaType="com.cupk.pojo.Post"
-                     select="com.cupk.mapper.PostMapper.getMainPostsByPlateID"></association>
-    </resultMap>
-    <insert id="insertComment" parameterType="com.cupk.pojo.Comment">
-        insert into t_comment(id,content,datetime,click_qty,up_qty,main_post_id,user_id)
-        values(#{id},#{content},#{datetime},#{click_qty},#{up_qty},#{user.id},#{mainPost.id})
-    </insert>
+
+  <resultMap id="CommentWithOthers" type="com.cupk.pojo.Comment">
+    <id column="id" property="id"></id>
+    <result column="content" property="content"></result>
+    <result column="date_time" property="date_time"></result>
+    <result column="click_qty" property="click_qty"></result>
+    <result column="uo_qty" property="up_qty"></result>
+    <association property="user" column="user_id" javaType="com.cupk.pojo.User"
+                 select="com.cupk.mapper.UserMapper.findByID"></association>
+    <association property="Post" column="mainpost_id" javaType="com.cupk.pojo.Post"
+                 select="com.cupk.mapper.PostMapper.getMainPostsByPlateID"></association>
+  </resultMap>
+  <update id="upComment">
+    update t_comment
+    set up_qty=up_qty+1
+    where id = #{id}
+  </update>
+  <delete id="delCommentByIds">
+    delete from t_comment where id in
+    <foreach collection="array" open="(" close=")" item="id" separator=",">
+      #{id}
+    </foreach>
+  </delete>
+  <insert id="insertComment" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO t_comment(content,date_time,mainpost_id,user_id)VALUES(#{content},#{date_time},#{post.id},#{user.id})
+  </insert>
 </mapper>

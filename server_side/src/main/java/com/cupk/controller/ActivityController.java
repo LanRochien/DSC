@@ -1,14 +1,14 @@
 package com.cupk.controller;
+import com.cupk.model.Activity_List;
 import com.cupk.pojo.Activity;
+import com.cupk.pojo.Resp;
 import com.cupk.service.ActivityService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("/activity")
 public class ActivityController {
@@ -16,58 +16,41 @@ public class ActivityController {
     private ActivityService activityService;
 
     @GetMapping ("/findall")
-    public String findAllActivities(Model model){
+    public String findAllActivities(){
         List<Activity> activities = activityService.findAllActivities();
-        model.addAttribute("activityList",activities);
+        Activity_List activityList = new Activity_List();
+        Gson gson = new Gson();
+        Resp resp = new Resp();
         if(activities!=null) {
-            Gson gson = new Gson();
-            return gson.toJson(activities);
+            resp.setMsg("查找成功");
+            resp.setStatus(200);
+            activityList.setActivities(activities);
+            activityList.setResp(resp);
         }else {
-            return "false";
+            resp.setMsg("查找失败");
+            resp.setStatus(400);
+            activityList.setResp(resp);
         }
+        return gson.toJson(activityList);
     }
 
-    @RequestMapping("/toinsert")
-    public String toinsert(){
-        return "activity/insert";
-    }
-    @RequestMapping("/insertactivity")
-    public String insertActivities(Activity activity,Model model){
-        int i = activityService.insertActivity(activity);
-        List<Activity> activities = activityService.findAllActivities();
-        for(Activity activity1 :activities){
-            System.out.println(activity);
-        }
-        model.addAttribute("activityList",activities);
-        return "activity/findall";
-    }
-
-    @RequestMapping("/findactivitiesbystr")
-    public String findActivitiesByStr(String Str,Model model,Integer line){
-        List<Activity> activityList=activityService.findActivitiesByStr(Str);
-        if(activityList!=null){
-            if(line==null||line==1) {
-                activityList.sort((a, b) -> {
-                    Integer a1 = Math.toIntExact(a.getDatetime().getTime());
-                    Integer b1 = Math.toIntExact(b.getDatetime().getTime());
-                    return b1.compareTo(a1);
-                });
-            }else{
-                activityList.sort((a, b) -> {
-                    Integer a1 = Math.toIntExact(a.getDatetime().getTime());
-                    Integer b1 = Math.toIntExact(b.getDatetime().getTime());
-                    return a1.compareTo(b1);
-                });
-            }
-            for (Activity activity:activityList ) {
-                System.out.println(activity);
-            }
-            model.addAttribute("activities",activityList);
-            model.addAttribute("msg","成功");
+    @GetMapping("/findActivityByStr")//活动模糊搜索
+    public String  findActivityByStr(@RequestParam String Str){
+        List<Activity> activities=activityService.findActivityByStr(Str);
+        Resp resp = new Resp();
+        Gson gson = new Gson();
+        Activity_List activityList= new Activity_List();
+        if (activities.size()>0){
+            resp.setMsg("找到以下内容");
+            resp.setStatus(200);
+            activityList.setActivities(activities);
+            activityList.setResp(resp);
         }else{
-            model.addAttribute("msg","失败");
+            resp.setStatus(400);
+            resp.setMsg("未找到相关内容");
+            activityList.setActivities(activities);
+            activityList.setResp(resp);
         }
-        return "test/test";
+        return gson.toJson(activityList);
     }
-
 }

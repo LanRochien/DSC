@@ -18,35 +18,17 @@
      set reply_qty=reply_qty+1
      where id = #{id}
    </update>
-    <select id="getMainPostsByPlateID" resultMap="PostWithUser">
-        select * from t_post where plate_id=#{plate_id}
-    </select>
-    <resultMap id="PostWithUser" type="com.cupk.pojo.Post">
-        <id column="id" property="id"></id>
-        <result column="reply_qty" property="reply_qty"></result>
-        <result column="click_qty" property="click_qty"></result>
-        <result column="up_qty" property="up_qty"></result>
-        <result column="head" property="head"></result>
-        <result column="content" property="content"></result>
-        <result column="datetime" property="datetime"></result>
-        <association property="plate_id" column="plate_id" javaType="com.cupk.pojo.PlateMessage"
-                     select="com.cupk.mapper.PlateMapper.findPlateById"></association>
-        <association property="user" column="user_id" javaType="com.cupk.pojo.User"
-                     select="com.cupk.mapper.UserMapper.findByID"></association>
-    </resultMap>
-    <insert id="insertMainPost" parameterType="com.cupk.pojo.Post">
-        insert into t_post(reply_qty,click_qty,up_qty,head,content,datetime,plate_id,user_id)
-            value (#{reply_qty},#{click_qty},#{up_qty},#{head},#{content},#{datetime},#{plate.id},#{user.id})
-    </insert>
-    <select id="findMainPostsByStr" parameterType="java.lang.String" resultMap="PostWithUser">
-        select * from t_post
-        where 1=1
-        <if test="Str!=null and Str!=''">
-            and head like CONCAT('%',#{Str},'%')
-            or content like CONCAT('%',#{Str},'%')
-            or plate_id = (select id from t_plate where name like CONCAT('%',#{Str},'%'))
-            or user_id =(select id from t_plate where name like CONCAT('%',#{Str},'%'))
-        </if>
-    </select>
-</mapper>
 
+    <insert id="insertMainPost" parameterType="com.cupk.pojo.Post" useGeneratedKeys="true" keyProperty="id">
+        insert into t_post(reply_qty,click_qty,up_qty,title,content,date_time,plate_id,user_id)
+            values (#{reply_qty},#{click_qty},#{up_qty},#{title},#{content},#{date_time},#{plate.id},#{user.id})
+    </insert>
+
+    <delete id="delPostByIds">
+        delete from t_post where id in
+        <foreach collection="array" open="(" close=")" item="id" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

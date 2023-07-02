@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -35,6 +36,15 @@ public class UserServiceimpl implements UserService {
         return userMapper.addUser(user);
     }
 
+    @Override
+    public User getUserByName(String name) {
+        return userMapper.getUserByName(name);
+    }
+
+    @Override
+    public Boolean banUserById(int id,int role) {
+        return userMapper.banUserById(id,role);
+    }
 
     @Override
     public int register(User user) {
@@ -47,7 +57,28 @@ public class UserServiceimpl implements UserService {
     }
 
     @Override
-    public int login(String name, String password) {
+    public Integer selectRoleByName(String name) {
+        return userMapper.selectRoleByName(name);
+    }
+
+    @Override
+    public User login(String name, String password) {
+        String strDateFormat = "yyyy-MM-dd";
+        SimpleDateFormat sdf = new SimpleDateFormat(strDateFormat);
+        sdf.format(userMapper.login(name,password).getBirthday());
+        userMapper.login(name,password).setBirthday(userMapper.login(name,password).getBirthday());
+        sdf.format(userMapper.login(name,password).getRecord_date());
+        userMapper.login(name,password).setRecord_date(userMapper.login(name,password).getRecord_date());
         return userMapper.login(name,password);
+    }
+
+    @Override
+    public Integer updatePostCount(String name, int post_qty) {
+        return userMapper.updatePostCount(name,post_qty);
+    }
+
+    @Override
+    public Integer updateReplyCount(String name, int reply_qty) {
+        return userMapper.updatePostCount(name,reply_qty);
     }
 }

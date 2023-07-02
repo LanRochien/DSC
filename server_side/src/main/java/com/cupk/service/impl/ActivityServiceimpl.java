@@ -29,13 +29,26 @@ public class ActivityServiceimpl implements ActivityService {
         return activityMapper.findAllActivities();
     }
 
+
     @Override
     public int insertActivity(Activity activity) {
         return activityMapper.insertActivity(activity);
     }
 
     @Override
-    public List<Activity> findActivitiesByStr(String Str) {
-        return activityMapper.findActivitiesByStr(Str);
+    public int delActivityByIds(long... ids){
+        return activityMapper.delActivityByIds(ids);
     }
+
+    @Override
+    public List<Activity> findActivitiesByUserName(String name) {
+        return activityMapper.findActivitiesByUserName(name);
+    }
+
+    @Override
+    public List<Activity> findActivityByStr(String Str) {
+        return activityMapper.findActivityByStr(Str);
+    }
+
+
 }

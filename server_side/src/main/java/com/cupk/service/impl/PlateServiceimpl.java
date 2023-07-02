@@ -1,7 +1,8 @@
 package com.cupk.service.impl;
 
 import com.cupk.mapper.PlateMapper;
-import com.cupk.pojo.PlateMessage;
+import com.cupk.pojo.Plate;
+import com.cupk.pojo.Post;
 import com.cupk.service.PlateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -24,12 +25,37 @@ public class PlateServiceimpl implements PlateService {
     private PlateMapper plateMapper;
 
     @Override
-    public List<PlateMessage> findAllPlate() {
+    public List<Plate> findAllPlate() {
         return plateMapper.findAllPlate();
     }
 
     @Override
-    public PlateMessage findPlateById(Integer id) {
+    public Plate findPlateById(Integer id) {
         return plateMapper.findPlateById(id);
+    }
+
+    @Override
+    public Integer insertPlate(Plate plate) {
+        return plateMapper.insertPlate(plate);
+    }
+
+    @Override
+    public List<Post> findPostsByStr(String Str) {
+        return plateMapper.findPostsByStr(Str);
+    }
+
+    @Override
+    public int delPlateById(Integer id) {
+        return plateMapper.delPlateById(id);
+    }
+
+    @Override
+    public Integer postsUpdate(Integer id, Integer post_qty) {
+        return plateMapper.postsUpdate(id,post_qty);
+    }
+
+    @Override
+    public Integer clickUpdate(Integer id, Integer click_qty) {
+        return plateMapper.clickUpdate(id,click_qty);
     }
 }
