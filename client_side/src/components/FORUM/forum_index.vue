@@ -29,7 +29,7 @@ API({
   <div class="dock">
   <div class="wrapper">
   <div class="forum_block" v-for="item in plate">
-    <el-card class="box-card">
+    <el-card class="box-card" :body-style="{ height:'300px' }">
     <template #header>
       <div class="forum_header">
         <span>{{ item.name }}</span>
@@ -40,7 +40,7 @@ API({
         <span>帖子数:{{item.post_qty}}</span>
       </div>
     </template>
-    <div class="forum_img"><img :src="item.plate_img"></div>
+    <div class="forum_img"><img :src="item.plate_image"></div>
   </el-card>
   </div>
   </div></div>
@@ -55,7 +55,6 @@ API({
 }
 .wrapper{
   width: 1320px;
-
   overflow: hidden;
 }
 .forum_block{
@@ -65,8 +64,13 @@ API({
   height:fit-content;
 
 }
-.forum_block img{
+.forum_img{
   width: 100%;
+  height: 100%;
+}
+.forum_img img{
+  width: 100%;
+  height: 100%;
 }
 .forum_header {
   display: flex;

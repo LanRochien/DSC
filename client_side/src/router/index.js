@@ -12,6 +12,11 @@ import PLATE from "/src/components/FORUM/plate.vue"
 import POST from "/src/components/FORUM/post.vue"
 import SEARCH from "/src/components/SEARCH/search.vue"
 import ADMIN from "/src/components/ADMIN/admin.vue"
+import BACKACT from "/src/components/ADMIN/activities_back.vue"
+import BACKPLATE from "/src/components/ADMIN/plate_back.vue"
+import BACKPOST from "/src/components/ADMIN/post_back.vue"
+import BACKUSER from "/src/components/ADMIN/users_back.vue"
+
 import INDIVIDUAL from  "/src/components/INDIVIDUAL/personpage.vue"
 
 
@@ -60,15 +65,37 @@ const routes=[
         name:'search',
         component: SEARCH
     },
-    {
-        path:'/admin',
-        component: ADMIN
-    },
+
     {
         path:'/individual/:id',
         name:'personal',
         component: INDIVIDUAL
     },
+    {
+        path:'/admin',
+
+        component: ADMIN,
+        children:[
+            {
+                path:'activity',
+                component: BACKACT
+            },
+            {
+                path:'plate',
+                component: BACKPLATE
+            },
+            {
+                path:'post',
+                component: BACKPOST
+            },
+            {
+                path:'users',
+                component: BACKUSER
+            },
+        ]
+
+    },
+
 ]
 export default createRouter({
     // 设置路由模式，设置每次加载新路由地址，页面位置顶部开始

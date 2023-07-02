@@ -1,13 +1,16 @@
 <script setup>
 //板块等待分页
-import {onMounted, shallowRef} from "vue";
+import {onMounted, shallowRef,inject} from "vue";
 import {useRouter} from "vue-router";
 import {ref} from 'vue'
 import Menu from "@/components/COMPONENT/menu.vue";
 import API from "../../axiosinstance/axiosInstance.js"//API路径
 import {useStore} from '../../pinia/index.js'
 import {Editor, Toolbar} from "@wangeditor/editor-for-vue";
+import { ElMessage } from 'element-plus'
 
+const reLoad=inject('reLoad')
+const store=useStore()
 const current='/forum'
 const router=useRouter()
 const plate_data=ref({})
@@ -15,11 +18,20 @@ const posts_data=ref({})
 const plateid=ref()
 const editorRef = shallowRef()
 const toolbarConfig = {}
+const isShow=ref(false)
+const isLogin=ref()
 
 const post=ref({
   title:'',
   content:'',
 })
+const handleCreated = (editor) => {
+  editorRef.value = editor // 记录 editor 实例，重要！
+}
+
+const handleChange=()=>{
+  console.log(post.value.content)
+}
 const editorConfig =
     { placeholder: '请输入内容...' ,
     }
@@ -33,19 +45,75 @@ const toPost=(plateid,postid)=>{
     }
   })
 }
+const toUser=(name)=>{
+  router.push({
+    name:'personal',
+    params:{
+      id:name,
+    }
+  })
+}
+const getDate=(n)=>{
+  n=new Date(n)
+  return n.toLocaleDateString().replace(/\//g,"-") + " " + n.toTimeString().substring(0,7)
+}
+const toSubmit=()=>{
+
+  const currentDate=getDate(Date.now())
+  if((typeof post.value.title)!==undefined&&post.value.title!==""){
+    if(typeof(post.value.content)!==undefined&&post.value.content!=="" ){
+      API({
+        url:'/post/insertPost',
+        method:'POST',
+        data:{
+          id:'3',
+          title:post.value.title,
+          content:post.value.content,
+          date_time:currentDate,
+          reply_qty:0,
+          click_qty:0,
+          up_qty:0,
+          user:store.user,
+          plate:plate_data.value
+        }
+      }).then((res)=>{
+        if(res.data.resp.status==200){
+          ElMessage({
+            message: '发布成功！',
+            type: 'success',
+          })
+          reLoad()
+        }
+      })
+    }
+    else{
+        ElMessage({
+          message: '请输入帖子内容！！',
+          type: 'warning',
+        })
+    }
+  }
+  else {
+      ElMessage({
+        message: '请输入题目！',
+        type: 'warning',
+      })
+    }
+}
 onMounted(()=>{
   const  plateId=router.currentRoute.value.params.plateid
   plateid.value=plateId
   API({
     url: "plate/plateDetails",
     // 传参，使用指定板块号
-    params:{
-    id:plateId
-  },
+  //   params:{
+  //   id:plateId
+  // },
     method:'GET'
   }).then((res)=>{
     plate_data.value=res.data.plate
     posts_data.value=res.data.posts
+    isShow.value=true
     console.log(plate_data.value)
     console.log(posts_data.value)
   })
@@ -53,8 +121,8 @@ onMounted(()=>{
 </script>
 
 <template>
-  <Menu :current=current></Menu>
-  <div class="wrapper">
+  <Menu :current=current ref="isLogin"></Menu>
+  <div class="wrapper" v-if="isShow">
   <div class="plate_header">
     <el-card class="header-card">
       <el-avatar shape="square" :size="100" :fit="fill" :src="plate_data.plate_image" />
@@ -76,10 +144,8 @@ onMounted(()=>{
        </div>
 
          <div class="flex_grow"/>
-        <div class="user_name" @click="toUser(item.user.id)" ><el-icon class="icon"><User /></el-icon>{{item.user.name}}</div>
+        <div class="user_name" @click="toUser(item.user.name)" ><el-icon class="icon"><User /></el-icon>{{item.user.name}}</div>
         <div class="post_time"><div>{{item.date_time}}</div></div>
-
-
       </div>
     </div>
     </el-card>
@@ -90,28 +156,27 @@ onMounted(()=>{
         <el-form-item label="题目">
           <el-input v-model="post.title" />
         </el-form-item>
-
-          <el-form-item>
-<!--          <div class="editor" style="border: 1px solid #ccc">-->
-            <Toolbar
-                style="border-bottom: 1px solid #ccc;height: 50px"
-                :editor="editorRef"
-                :defaultConfig="toolbarConfig"
-                mode="default"
-            /></el-form-item>
-<!--            <div class="editor_block">-->
-              <el-form-item>
-                <Editor
-                  style="height: 200px; overflow-y: hidden;"
-                  v-model="valueHtml"
-                  :defaultConfig="editorConfig"
+          <el-form-item label="内容">
+            <div class="editor" v-if="isShow" style="border: 1px solid #ccc">
+              <Toolbar
+                  style="border-bottom: 1px solid #ccc"
+                  :editor="editorRef"
+                  :defaultConfig="toolbarConfig"
                   mode="default"
-                  @onCreated="handleCreated"
-                  @onChange="handleChange"
               />
-<!--            </div>-->
-            <div class="submit"><el-button  type="primary" >提交</el-button></div>
-<!--          </div>-->
+              <div class="editor_block">
+                <Editor
+                    style="height: 200px; overflow-y: hidden;"
+                    v-model="post.content"
+                    :defaultConfig="editorConfig"
+                    mode="default"
+                    @onCreated="handleCreated"
+                    @onChange="handleChange"
+                />
+              </div>
+              <div class="submit"><el-button @click="toSubmit" type="primary" :disabled="!isLogin.login">提交</el-button></div>
+
+            </div>
         </el-form-item>
       </el-form>
   </el-card>
@@ -177,6 +242,14 @@ onMounted(()=>{
   display: flex;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
+}
+.editor  {
+  box-sizing: border-box;
+  width: 50%;
+  margin: 20px auto 40px;
+  padding-left: 30px;
+  padding-top: 15px;
 }
 .icon{
   margin:5px;

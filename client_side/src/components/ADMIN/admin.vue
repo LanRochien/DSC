@@ -1,14 +1,16 @@
 <template>
-  <el-row class="tac">
-    <el-col :span="12">
+
       <el-menu
+          style="width: 300px;"
           active-text-color="#ffd04b"
           background-color="#545c64"
-          class="cebianlan"
+          class="side_menu"
           default-active="2"
           text-color="#fff"
           @open="handleOpen"
           @close="handleClose"
+          :router="true"
+
       >
         <el-sub-menu index="1" >
           <template #title>
@@ -16,35 +18,33 @@
             <span id="title">管理员界面</span>
           </template>
         <el-menu-item-group>
-        <el-menu-item index="1-1">
+        <el-menu-item index="/admin/users">
           <el-icon><icon-menu /></el-icon>
           <span>用户信息</span>
         </el-menu-item>
-        <el-menu-item index="1-2" >
-          <el-icon><document /></el-icon>
-          <span>论坛信息</span>
-        </el-menu-item>
-        <el-menu-item index="1-3">
+        <el-menu-item index="/admin/activity">
           <el-icon><setting /></el-icon>
-          <span>活动信息</span>
+          <span>活动管理</span>
         </el-menu-item>
+          <el-menu-item index="/admin/plate">
+            <el-icon><setting /></el-icon>
+            <span>板块管理</span>
+          </el-menu-item>
+          <el-menu-item index="/admin/post">
+            <el-icon><setting /></el-icon>
+            <span>帖子管理</span>
+          </el-menu-item>
         </el-menu-item-group>
         </el-sub-menu>
       </el-menu>
-    </el-col>
-  </el-row>
-  <div class="header">
-  <el-page-header @back="goBack">
-    <template #content>
-      <span class="text-large font-600 mr-3"> Welcome,administrator</span>
-    </template>
-  </el-page-header>
-  </div>
+
   <div class="adminperson">
   <el-avatar :size="'large'" :src="circleUrl" shape="circle" class="touxiang"/>
     <el-text type="primary" class="adminshuoming">Administrator</el-text>
   </div>
-  <div class="details">contents</div>
+  <div class="details">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -74,9 +74,10 @@ const state = reactive({
 const { circleUrl, squareUrl } = toRefs(state)
 </script>
 <style scoped>
-.cebianlan{
+.side_menu{
+  position: fixed;
   width: 300px;
-  height: 792px;
+  height: 100%;
 }
 .header{
   width: 79vw;
@@ -110,9 +111,10 @@ const { circleUrl, squareUrl } = toRefs(state)
   width: 150px;
 }
 .details{
-  font-size: 40px;
   position: absolute;
-  left:800px;
-  top:300px;
+  left: 300px;
+  top: 150px;
+  width: 1382px;
+  overflow: hidden;
 }
 </style>

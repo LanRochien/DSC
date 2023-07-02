@@ -6,6 +6,8 @@ import {Editor,Toolbar} from '@wangeditor/editor-for-vue'
 import Menu from "@/components/COMPONENT/menu.vue";
 import API from "../../axiosinstance/axiosInstance.js"
 import {useStore} from "@/pinia";
+import { ElMessage } from 'element-plus'
+
 //API路径
 
 const editorRef = shallowRef()
@@ -23,6 +25,31 @@ const post_data=ref({})
 const isShow=ref(false)
 const isLogin=ref(null)
 const store=useStore()
+const isUp=ref(false)
+
+const toUp=()=>{
+  if(isUp.value){
+    ElMessage('取消点赞')
+  }
+  else{
+    API({
+      url:'/post/up',
+      method:'GET',
+      // params:{
+      //   id:post_data.value.post.id
+      // }
+    }).then((res)=>{
+      if(res.data.status==200){
+        ElMessage({
+          message: '点赞成功！',
+          type: 'success',
+        })
+
+      }
+    })
+  }
+  isUp.value=!isUp.value
+}
 const handleCreated = (editor) => {
   editorRef.value = editor // 记录 editor 实例，重要！
 }
@@ -30,9 +57,7 @@ const handleCreated = (editor) => {
 const handleChange=()=>{
   console.log(valueHtml.value)
 }
-//menu里传user
-//post_data传post信息
-//事件处理
+
 const getDate=(n)=>{
   n=new Date(n)
   return n.toLocaleDateString().replace(/\//g,"-") + " " + n.toTimeString().substring(0,7)
@@ -66,11 +91,10 @@ onMounted(()=>{
   postId.value=router.currentRoute.value.params.postid
     console.log(postId.value)
   API({
-    url:'http://localhost:8129/post/postDetail',
-
-    params:{
-      id:postId.value //
-    },
+    url:'/post/postDetail',
+    // params:{
+    //   id:postId.value //
+    // },
     method:'GET',
   }).then((res)=>{
     post_data.value=res.data
@@ -96,6 +120,8 @@ onBeforeUnmount(() => {
               <ul >
                 <li ><el-avatar :size="70" ></el-avatar></li>
                 <li>{{post_data.post.user.name}}</li>
+                <li>注册日期：{{post_data.post.user.record_time}}</li>
+                <li>生日：{{post_data.post.user.birthday}}</li>
                 <li>性别：{{post_data.post.user.sex}}</li>
               </ul>
             </div>
@@ -106,6 +132,10 @@ onBeforeUnmount(() => {
               <div class="content" v-html="post_data.post.content"></div>
             </div>
             <div class="content_info">
+              <span class="up" >
+                <el-icon v-if="isUp" @click="toUp()"><StarFilled /></el-icon>
+                <el-icon v-else @click="toUp"><Star /></el-icon>
+                {{post_data.post.up_qty}}</span>
               <span>1楼</span>
               <span>{{post_data.post.date_time}}</span>
             </div>
@@ -119,7 +149,8 @@ onBeforeUnmount(() => {
               <ul v-if="isShow">
                 <li ><el-avatar :size="70" :src="item.head_image" ></el-avatar></li>
                 <li>{{item.user.name}}</li>
-                <li></li>
+                <li>注册日期：{{item.user.record_time}}</li>
+                <li>生日：{{item.user.birthday}}</li>
                 <li>性别：{{item.user.sex}}</li>
               </ul>
             </div>
@@ -229,5 +260,7 @@ text-align: center;
   margin-bottom: 15px;
   text-align: right;
 }
-
+.up{
+  cursor: pointer;
+}
 </style>

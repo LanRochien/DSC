@@ -6,6 +6,8 @@ export const useStore = defineStore('main', {
         return {
             user:{},
             activity:{},
+            searchKey:'',
+            searchStatus:true,
         }
     },
     persist:{

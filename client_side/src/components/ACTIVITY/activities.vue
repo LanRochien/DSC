@@ -5,8 +5,11 @@ import API from "../../axiosinstance/axiosInstance.js"
 import {useRouter} from 'vue-router'
 import {useStore} from "../../pinia";
 import { Edit,} from '@element-plus/icons-vue'
+import {ElMessage, ElMessageBox, UploadProps, UploadUserFile} from 'element-plus'
 
 //API路径
+    const activityVisible=ref(false)
+    const volVisible=ref(false)
     const store= useStore()
     const router=useRouter()
     const isShow=ref(false)
@@ -23,8 +26,26 @@ import { Edit,} from '@element-plus/icons-vue'
         user:{}}
     ])
     const   current='/activities';
-    const testData = ref({});
     const acState=ref('true')
+const activeFileList = ref<UploadUserFile[]>([
+])
+const volFileList = ref<UploadUserFile[]>([
+])
+const handleExceed: UploadProps['onExceed'] = (files, uploadFiles) => {
+  ElMessage.warning(
+      `The limit is 1, you selected ${files.length} files this time, add up to ${
+          files.length + uploadFiles.length
+      } totally`
+  )
+}
+const downLoad=()=>{
+  const href=''
+  const title=''
+  const a=document.createElement('a')
+  a.setAttribute('href',href)
+  a.setAttribute('download',title)
+  a.click()
+}
     const dateSolver=(date:string)=>{
       return date.substring(0,9)
     }
@@ -46,6 +67,16 @@ import { Edit,} from '@element-plus/icons-vue'
         })
     }
 
+
+const handleClose = (done: () => void) => {
+  ElMessageBox.confirm('Are you sure to close this dialog?')
+      .then(() => {
+        done()
+      })
+      .catch(() => {
+        // catch error
+      })
+}
     onMounted(()=>{
       API({
         url:'/activity/findall',
@@ -53,7 +84,7 @@ import { Edit,} from '@element-plus/icons-vue'
       }).then((res)=>{
         // iftrue
         console.log(res.data)
-        activities.value=res.data.activities
+        activities.value=res.data
         isShow.value=true
 
         for (let cur of activities.value){//for of 遍历对象
@@ -74,18 +105,20 @@ import { Edit,} from '@element-plus/icons-vue'
   <MENU :current=current></MENU>
   <div class="button_group">
     <el-button-group>
-      <el-button style="padding-left: 10px" type="primary">申请活动  <el-icon><Edit /></el-icon> </el-button >
-      <el-button type="primary">加入我们  <el-icon><Check /></el-icon> </el-button   >
+      <el-button style="padding-left: 10px" type="primary" @click="activityVisible=true">申请活动  <el-icon><Edit /></el-icon> </el-button >
+      <el-button type="primary" @click="volVisible=true">加入我们  <el-icon><Check /></el-icon> </el-button   >
     </el-button-group>
   </div>
   <div class="activities_wrapper" v-if="isShow" >
       <div class="activity_view">
         <div class="activity_card" v-for="activity in activities">
-            <el-card :body-style="{ height:'500px',padding:'0px' }">
+            <el-card :body-style="{ height:'420px',padding:'0px',width:'320px'}">
+              <div class="image_block">
               <img
                   :src="activity.activity_image"
                   class="activity_image"
               />
+              </div>
               <div style="padding: 14px;">
                 <div class="activity_title">
                   <h4>{{activity.title}}</h4>
@@ -118,6 +151,72 @@ import { Edit,} from '@element-plus/icons-vue'
         </div>
       </div>
   </div>
+<!--  下载-->
+  <el-dialog
+      class="dialog_block"
+      v-model="activityVisible"
+      title="活动申请表"
+      width="30%"
+      :before-close="handleClose"
+      center
+  >
+    <el-button class="download_button" type="success" size="large" @click="downLoad()">下载表单</el-button>
+    <el-upload
+        v-model:file-list="activeFileList"
+        class="upload-demo"
+        action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+        multiple
+        :show-file-list="false"
+        :limit="1"
+        :on-exceed="handleExceed"
+    >
+      <el-button size="large" type="primary">上传表单</el-button>
+      <template #tip>
+        <div class="el-upload__tip">
+        </div>
+      </template>
+    </el-upload>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="activityVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="activityVisible = false">
+          Confirm
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
+<!--  加入我们-->
+  <el-dialog
+      v-model="volVisible"
+      title="志愿者申请表"
+      width="30%"
+      :before-close="handleClose"
+  >
+    <el-button class="download_button" type="success" size="large" @click="downLoad()">下载表单</el-button>
+    <el-upload
+        v-model:file-list="volFileList"
+        class="upload-demo"
+        action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+        multiple
+        :show-file-list="false"
+        :limit="1"
+        :on-exceed="handleExceed"
+    >
+      <el-button size="large" type="primary">上传表单</el-button>
+      <template #tip>
+        <div class="el-upload__tip">
+        </div>
+      </template>
+    </el-upload>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="volVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="volVisible = false">
+          Confirm
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <style scoped>
@@ -139,8 +238,12 @@ import { Edit,} from '@element-plus/icons-vue'
   margin-top: 20px;
   float: left;
 }
+.image_block{
+  height: 240px;
+}
 .activity_image{
   width: 100%;
+  height: 100%;
 }
 .activity_title{
   padding-bottom: 10px;
@@ -171,9 +274,9 @@ import { Edit,} from '@element-plus/icons-vue'
   margin-top: 20px;
   text-align: right;
 }
-
-
-
+.download_button{
+  margin-bottom: 20px;
+}
 
 
 </style>

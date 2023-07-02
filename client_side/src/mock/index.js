@@ -1,7 +1,322 @@
 import Mock from 'mockjs'
-const login =Mock.mock('http://localhost:8080/test/?username=qwe&password=qwe ','post',function (req){
 
-    return body
+
+
+
+const changeState=Mock.mock('http://localhost:8080/admin/banUserById','get',{
+
+})
+const userList=Mock.mock('http://localhost:8080/admin/findall','get',{
+    "users": [
+        {
+            "role": 11,
+            "name": "期步清色多白",
+            "id": 49,
+            "password": "quis",
+            "sex": "女",
+            "record_date": "2007-02-25",
+            "birthday": "2001-09-06",
+            "location": "esse",
+            "post_qty": 86,
+            "reply_qty": 97,
+            "head_url": "http://eeliwe.uk/ktrs"
+        },
+        {
+            "role": 82,
+            "name": "理又金改",
+            "id": 94,
+            "password": "dolore aute",
+            "sex": "女",
+            "record_date": "2006-01-09",
+            "birthday": "2007-09-04",
+            "location": "ad esse nisi labore",
+            "post_qty": 69,
+            "reply_qty": 58,
+            "head_url": "http://bqkiqm.aw/ebw"
+        },
+        {
+            "role": 98,
+            "name": "求老张权例",
+            "id": 53,
+            "password": "dolore ad est do consectetur",
+            "sex": "男",
+            "record_date": "2020-06-29",
+            "birthday": "2006-03-06",
+            "location": "qui commodo reprehenderit",
+            "post_qty": 88,
+            "reply_qty": 86,
+            "head_url": "http://tkerauit.cu/bpdhb"
+        },
+        {
+            "role": 60,
+            "name": "边万铁查它",
+            "id": 41,
+            "password": "cupidatat Excepteur ad enim",
+            "sex": "女",
+            "record_date": "1989-01-14",
+            "birthday": "1983-09-20",
+            "location": "mollit dolor do",
+            "post_qty": 33,
+            "reply_qty": 72,
+            "head_url": "http://smnrlwl.pr/xemlpinf"
+        },
+        {
+            "role": 9,
+            "name": "号家口",
+            "id": 42,
+            "password": "ullamco reprehenderit nulla eiusmod dolor",
+            "sex": "女",
+            "record_date": "1991-08-06",
+            "birthday": "1984-12-12",
+            "location": "ipsum ea",
+            "post_qty": 87,
+            "reply_qty": 27,
+            "head_url": "http://dpgh.cc/bvippyt"
+        }
+    ],
+    "resp": {
+        "msg": "id pariatur dolore culpa",
+        "status": 200
+    }
+})
+const up=Mock.mock('http://localhost:8080/post/up','get',{
+    "msg": "Excepteur sed minim veniam non",
+    "status": 200
+})
+const searchPost=Mock.mock('http://localhost:8080/post/findPostByStr','get',{
+    "posts": [
+        {
+            "id": 64,
+            "title": "利历开平",
+            "content": "et",
+            "date_time": "2011-01-31 13:28:21",
+            "click_qty": 95,
+            "reply_qty": 93,
+            "user": {
+                "role": 12,
+                "name": "处听角月",
+                "id": 92,
+                "password": "irure magna in nulla",
+                "sex": "女",
+                "record_date": "2006-12-09",
+                "birthday": "2013-11-24",
+                "location": "labore do dolore ex",
+                "post_qty": 61,
+                "reply_qty": 42,
+                "head_url": "http://koahgador.nz/moyr"
+            },
+            "plate": {
+                "id": 70,
+                "name": "确权适路府",
+                "detail": "aliqua nisi ad laboris",
+                "post_qty": 47,
+                "click_qty": 56,
+                "plate_image": "http://dummyimage.com/400x400"
+            },
+            "up_qty": 98
+        },
+        {
+            "id": 83,
+            "title": "身强些和发",
+            "content": "ea aliqua exercitation",
+            "date_time": "1998-09-11 10:28:34",
+            "click_qty": 71,
+            "reply_qty": 91,
+            "user": {
+                "role": 57,
+                "name": "经住开市的",
+                "id": 36,
+                "password": "tempor ad pariatur ut",
+                "sex": "女",
+                "record_date": "1994-07-09",
+                "birthday": "1979-05-11",
+                "location": "dolore deserunt",
+                "post_qty": 70,
+                "reply_qty": 5,
+                "head_url": "http://tny.mr/gqbderm"
+            },
+            "plate": {
+                "id": 6,
+                "name": "命况部四他",
+                "detail": "ipsum",
+                "post_qty": 23,
+                "click_qty": 34,
+                "plate_image": "http://dummyimage.com/400x400"
+            },
+            "up_qty": 60
+        },
+        {
+            "id": 17,
+            "title": "证名种定接她",
+            "content": "cillum officia dolore ut exercitation",
+            "date_time": "2002-10-16 04:02:40",
+            "click_qty": 41,
+            "reply_qty": 50,
+            "user": {
+                "role": 83,
+                "name": "部争走领她是由",
+                "id": 84,
+                "password": "et in elit culpa commodo",
+                "sex": "男",
+                "record_date": "2013-10-08",
+                "birthday": "1995-06-22",
+                "location": "non",
+                "post_qty": 90,
+                "reply_qty": 44,
+                "head_url": "http://svfyzcmcw.be/jlqredtuc"
+            },
+            "plate": {
+                "id": 79,
+                "name": "满展入片",
+                "detail": "fugiat ullamco",
+                "post_qty": 39,
+                "click_qty": 98,
+                "plate_image": "http://dummyimage.com/400x400"
+            },
+            "up_qty": 15
+        },
+        {
+            "id": 33,
+            "title": "易研认受音最",
+            "content": "tempor aliquip occaecat ut anim",
+            "date_time": "2007-09-28 07:08:33",
+            "click_qty": 3,
+            "reply_qty": 78,
+            "user": {
+                "role": 11,
+                "name": "龙定选界长",
+                "id": 41,
+                "password": "nisi laboris ullamco",
+                "sex": "男",
+                "record_date": "1993-09-05",
+                "birthday": "2009-05-21",
+                "location": "Duis Excepteur nulla qui velit",
+                "post_qty": 74,
+                "reply_qty": 71,
+                "head_url": "http://uiceygl.su/snaoyngfg"
+            },
+            "plate": {
+                "id": 25,
+                "name": "王克状步",
+                "detail": "tempor id esse ipsum",
+                "post_qty": 39,
+                "click_qty": 50,
+                "plate_image": "http://dummyimage.com/400x400"
+            },
+            "up_qty": 42
+        },
+        {
+            "id": 20,
+            "title": "二性论积体",
+            "content": "mollit minim quis deserunt",
+            "date_time": "2020-07-26 14:05:27",
+            "click_qty": 25,
+            "reply_qty": 100,
+            "user": {
+                "role": 88,
+                "name": "片叫进议展从",
+                "id": 85,
+                "password": "nostrud ut aute qui do",
+                "sex": "男",
+                "record_date": "2009-01-16",
+                "birthday": "1972-06-28",
+                "location": "occaecat velit dolore esse",
+                "post_qty": 32,
+                "reply_qty": 3,
+                "head_url": "http://gfsqxjsxg.net/rojlg"
+            },
+            "plate": {
+                "id": 89,
+                "name": "风它易存强气",
+                "detail": "nostrud voluptate exercitation in",
+                "post_qty": 69,
+                "click_qty": 46,
+                "plate_image": "http://dummyimage.com/400x400"
+            },
+            "up_qty": 91
+        }
+    ],
+    "resp": {
+        "msg": "Excepteur labore amet Duis sunt",
+        "status": 200
+    }
+})
+const search=Mock.mock('http://localhost:8080/activity/findActivityByStr','get',{
+    "activities": [
+        {
+            "id": 34,
+            "title": "写口任新里技位",
+            "content": "commodo pariatur officia Lorem qui",
+            "activity_image": "http://dummyimage.com/400x400",
+            "date_time": "2004-12-16 12:46:25",
+            "num_required": 65,
+            "num_participants": 52,
+            "state": 23,
+            "user": {
+                "role": 92,
+                "name": "本院九品选速目",
+                "id": 91,
+                "password": "incididunt irure in dolore cupidatat",
+                "sex": "男",
+                "record_date": "2013-04-09",
+                "birthday": "1991-03-24",
+                "location": "et pariatur nostrud consequat",
+                "post_qty": 41,
+                "reply_qty": 56,
+                "head_url": "http://chapys.fi/wewxevf"
+            }
+        },
+        {
+            "id": 60,
+            "title": "号明此受",
+            "content": "adipisicing fugiat culpa Ut",
+            "activity_image": "http://dummyimage.com/400x400",
+            "date_time": "2000-05-01 15:00:54",
+            "num_required": 63,
+            "num_participants": 17,
+            "state": 49,
+            "user": {
+                "role": 34,
+                "name": "知长该小",
+                "id": 88,
+                "password": "dolor consectetur",
+                "sex": "男",
+                "record_date": "1989-10-20",
+                "birthday": "1988-08-20",
+                "location": "ex nulla minim",
+                "post_qty": 74,
+                "reply_qty": 42,
+                "head_url": "http://pln.gm/sshqnl"
+            }
+        },
+        {
+            "id": 50,
+            "title": "圆却积分合酸重",
+            "content": "enim",
+            "activity_image": "http://dummyimage.com/400x400",
+            "date_time": "2006-05-12 05:00:39",
+            "num_required": 15,
+            "num_participants": 35,
+            "state": 86,
+            "user": {
+                "role": 96,
+                "name": "时斗安增走",
+                "id": 86,
+                "password": "aliquip Excepteur",
+                "sex": "男",
+                "record_date": "2011-09-29",
+                "birthday": "1972-11-03",
+                "location": "nulla mollit sit eiusmod",
+                "post_qty": 43,
+                "reply_qty": 87,
+                "head_url": "http://yyfeshg.hk/zrkibjy"
+            }
+        }
+    ],
+    "resp": {
+        "msg": "qui",
+        "status": 200
+    }
 })
 const personal=Mock.mock('http://localhost:8080/user/findDetail','get',{
     "user": {
@@ -421,124 +736,124 @@ const personal=Mock.mock('http://localhost:8080/user/findDetail','get',{
         "status": 200
     }
 })
-const activity=Mock.mock('http://localhost:8080/activity','get',[
+const activity=Mock.mock('http://localhost:8080/activity/findall','get',[
     {
-        "id": 98,
-        "title": "验期华需技省",
-        "content": "voluptate dolore consectetur",
+        "id": 26,
+        "title": "步八且在机",
+        "content": "tempor qui Excepteur",
         "activity_image": "http://dummyimage.com/400x400",
-        "date_time": "1992-06-08 18:33:46",
-        "num_required": 13,
-        "num_participants": 49,
-        "state": 4,
+        "date_time": "1970-10-02 20:12:52",
+        "num_required": 94,
+        "num_participants": 85,
+        "state": 73,
         "user": {
-            "role": 90,
-            "name": "算至都",
-            "id": 45,
-            "password": "nulla",
-            "sex": "女",
-            "record_date": "2003-03-22",
-            "birthday": "2018-12-28",
-            "location": "tempor enim",
-            "post_qty": 31,
-            "reply_qty": 10,
-            "head_image": "http://dummyimage.com/400x400"
+            "role": 6,
+            "name": "今易示六",
+            "id": 92,
+            "password": "sed labore dolore",
+            "sex": "男",
+            "record_date": "2012-11-12",
+            "birthday": "1978-08-19",
+            "location": "ad",
+            "post_qty": 72,
+            "reply_qty": 59,
+            "head_url": "http://cquqoyr.sg/cyhffwcn"
         }
     },
     {
-        "id": 81,
-        "title": "花式a况分",
-        "content": "nulla",
+        "id": 41,
+        "title": "给间都阶斗",
+        "content": "labore",
         "activity_image": "http://dummyimage.com/400x400",
-        "date_time": "2001-04-04 18:00:54",
+        "date_time": "1991-05-07 10:40:56",
+        "num_required": 86,
+        "num_participants": 90,
+        "state": 52,
+        "user": {
+            "role": 4,
+            "name": "资气导光研",
+            "id": 66,
+            "password": "anim Ut deserunt Duis",
+            "sex": "女",
+            "record_date": "1991-09-12",
+            "birthday": "1999-05-23",
+            "location": "eu in laborum",
+            "post_qty": 55,
+            "reply_qty": 93,
+            "head_url": "http://euhsdzy.as/mafkxxv"
+        }
+    },
+    {
+        "id": 92,
+        "title": "务书太至月育目",
+        "content": "ea",
+        "activity_image": "http://dummyimage.com/400x400",
+        "date_time": "1973-12-09 07:31:37",
         "num_required": 38,
-        "num_participants": 32,
-        "state": "officia consectetur",
+        "num_participants": 91,
+        "state": 14,
         "user": {
-            "role": 75,
-            "name": "却平fad段东",
-            "id": 67,
-            "password": "cillum dolor dolore in consectetur",
+            "role": 87,
+            "name": "论做她管提",
+            "id": 77,
+            "password": "ut",
             "sex": "女",
-            "record_date": "2015-06-24",
-            "birthday": "1988-03-16",
-            "location": "sed nostrud ad ipsum Lorem",
-            "post_qty": 30,
-            "reply_qty": 12,
-            "head_image": "http://dummyimage.com/400x400"
+            "record_date": "2014-04-19",
+            "birthday": "1972-06-02",
+            "location": "elit nulla in consequat dolor",
+            "post_qty": 45,
+            "reply_qty": 1,
+            "head_url": "http://chpjm.ae/roocwzkg"
         }
     },
     {
-        "id": 98,
-        "title": "验期123华需技省",
-        "content": "voluptate dolore consectetur",
+        "id": 92,
+        "title": "务书太至月育目",
+        "content": "ea",
         "activity_image": "http://dummyimage.com/400x400",
-        "date_time": "1992-06-08 18:33:46",
-        "num_required": 13,
-        "num_participants": 49,
-        "state": 0,
+        "date_time": "1973-12-09 07:31:37",
+        "num_required": 38,
+        "num_participants": 91,
+        "state": 14,
         "user": {
-            "role": 90,
-            "name": "算至56668都",
-            "id": 45,
-            "password": "nulla",
+            "role": 87,
+            "name": "论做她管提",
+            "id": 77,
+            "password": "ut",
             "sex": "女",
-            "record_date": "2003-03-22",
-            "birthday": "2018-12-28",
-            "location": "tempor enim",
-            "post_qty": 31,
-            "reply_qty": 10,
-            "head_image": "http://dummyimage.com/400x400"
+            "record_date": "2014-04-19",
+            "birthday": "1972-06-02",
+            "location": "elit nulla in consequat dolor",
+            "post_qty": 45,
+            "reply_qty": 1,
+            "head_url": "http://chpjm.ae/roocwzkg"
         }
     },
     {
-        "id": 98,
-        "title": "验期华需技tsdt省",
-        "content": "voluptate dolore consectetur",
+        "id": 92,
+        "title": "务书太至月育目",
+        "content": "ea",
         "activity_image": "http://dummyimage.com/400x400",
-        "date_time": "1992-06-08 18:33:46",
-        "num_required": 13,
-        "num_participants": 49,
-        "state": 5,
+        "date_time": "1973-12-09 07:31:37",
+        "num_required": 38,
+        "num_participants": 91,
+        "state": 14,
         "user": {
-            "role": 90,
-            "name": "算至dsaa都",
-            "id": 45,
-            "password": "nulla",
+            "role": 87,
+            "name": "论做她管提",
+            "id": 77,
+            "password": "ut",
             "sex": "女",
-            "record_date": "2003-03-22",
-            "birthday": "2018-12-28",
-            "location": "tempor enim",
-            "post_qty": 31,
-            "reply_qty": 10,
-            "head_image": "http://dummyimage.com/400x400"
+            "record_date": "2014-04-19",
+            "birthday": "1972-06-02",
+            "location": "elit nulla in consequat dolor",
+            "post_qty": 45,
+            "reply_qty": 1,
+            "head_url": "http://chpjm.ae/roocwzkg"
         }
-    },
-    {
-        "id": 98,
-        "title": "验期华21需技省",
-        "content": "voluptate dolore consectetur",
-        "activity_image": "http://dummyimage.com/400x400",
-        "date_time": "1992-06-08 18:33:46",
-        "num_required": 13,
-        "num_participants": 49,
-        "state": 3,
-        "user": {
-            "role": 90,
-            "name": "算至3e都",
-            "id": 45,
-            "password": "nulla",
-            "sex": "女",
-            "record_date": "2003-03-22",
-            "birthday": "2018-12-28",
-            "location": "tempor enim",
-            "post_qty": 31,
-            "reply_qty": 10,
-            "head_image": "http://dummyimage.com/400x400"
-        }
-    },
+    }
 ])
-const testData=Mock.mock('http://localhost:8080/test','get',
+const testData=Mock.mock('http://localhost:8080/user/login','get',
 {
     "resp": {
     "msg": "200",
@@ -553,14 +868,14 @@ const testData=Mock.mock('http://localhost:8080/test','get',
         "record_date": "2014-05-13",
         "birthday": "2020-12-13",
         "location": "ea",
-        "post_num": 62,
-        "reply_num": 4,
+        "post_qty": 69,
+        "reply_qty": 79,
         "head_image": "http://dummyimage.com/400x400"
 
 }
 
 })
-const post =Mock.mock('http://localhost:8080/posttest','get',{
+const post =Mock.mock('http://localhost:8080/post/postDetail','get',{
     "post": {
         "id": 61,
         "title": "完路和接织形",
@@ -672,43 +987,34 @@ const post =Mock.mock('http://localhost:8080/posttest','get',{
         "status": 41
     }
 })
-const plate=Mock.mock('http://localhost:8080/plate','get',{
-    forum:[{
-    id: 123,
-    name: 'abc',
-    explain: 'dfjskldfj',
-    click_qty: 5885,
-    post_qty: 655,
-    plate_img: '/src/assets/test2.png',
-},{
-        id: 123434,
-        name: 'a24bsdfsc',
-        explain: '242435',
-        click_qty: 6685885,
-        post_qty: 6755,
-        plate_img: '/src/assets/test2.png',
-    },
+const plate=Mock.mock('http://localhost:8080/plate/findall','get',[
         {
-            id: 1263334,
-            name: 'a2zsdf 4bc',
-            explain: '242435',
-            click_qty: 6685885,
-            post_qty: 6755,
-            plate_img: '/src/assets/test2.png',
+            "id": 78,
+            "name": "集议么门转切重",
+            "detail": "ad elit dolore",
+            "post_qty": 25,
+            "click_qty": 79,
+            "plate_image": "http://dummyimage.com/400x400"
         },
         {
-            id: 14,
-            name: 'a24zxcfwebc',
-            explain: '242435',
-            click_qty: 6685885,
-            post_qty: 6755,
-            plate_img: '/src/assets/test2.png',
+            "id": 40,
+            "name": "增干导龙满",
+            "detail": "dolor",
+            "post_qty": 39,
+            "click_qty": 13,
+            "plate_image": "http://dummyimage.com/400x400"
         },
-
-]
-    }
+        {
+            "id": 23,
+            "name": "知近历制",
+            "detail": "esse",
+            "post_qty": 87,
+            "click_qty": 39,
+            "plate_image": "http://dummyimage.com/400x400"
+        }
+    ]
 )
-const plates=Mock.mock("http://localhost:8080/posts",'get',{
+const plates=Mock.mock("http://localhost:8080/plate/plateDetails",'get',{
     "plate": {
         "id": 56,
         "name": "第分格车铁",

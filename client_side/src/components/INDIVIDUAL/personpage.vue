@@ -2,7 +2,6 @@
 <script lang="ts" setup>
   import { reactive, toRefs } from 'vue'
   import {onMounted, ref} from "vue";
-  import {useStore} from '../../pinia/index.js'
   import {useRouter} from "vue-router";
   import MENU from '../COMPONENT/menu.vue'
   import API from "../../axiosinstance/axiosInstance.js"
@@ -26,6 +25,10 @@
   const dateSolver=(date:string)=>{
     return date.substring(0,9)
   }
+  const userRole=(role)=>{
+    const rules=['已封禁','管理员','普通用户','志愿者']
+    return rules[(role+1)%4]
+  }
   const toPost=(plate,id)=>{
     router.push({
       name:'post',
@@ -41,21 +44,22 @@
     API({
       url:'/user/findDetail',
       method:'GET',
-      params:{
-        name:userName
-      }
+      // params:{
+      //   name:userName
+      // }
     }).then((res)=>{
       if (res.data.resp.status==200){
         userData.value=res.data.user
         postsData.value=res.data.posts
         commentData.value=res.data.comments
 
+        userData.value.state=userRole(userData.value.role)
         for(let item of postsData.value){
 
-            // item.date_time=dateSolver(item.date_time)
+            item.date_time=dateSolver(item.date_time)
         }
         for(let item of commentData.value){
-          // item.date_time=dateSolver(item.date_time)
+          item.date_time=dateSolver(item.date_time)
         }
         isShow.value=true
         console.log(userData.value)
@@ -92,7 +96,7 @@
               </div>
             <div class="userinfo_middle_details">
               <div class="user_info">
-             <div class="user_role"> 用户组：{{ userData.role }}</div>
+             <div class="user_role"> 用户组：{{ userData.state }}</div>
               <div class="user_sex">性别：{{userData.sex}}</div>
             </div>
               <div class="record_time">
@@ -221,8 +225,6 @@ font-weight: bolder;
 }
 .content{
   width: 978px;
-  //text-align: center;
-  //line-height: 200px;
   border-style: solid;
   border-width: 1px;
   background-color: white;
