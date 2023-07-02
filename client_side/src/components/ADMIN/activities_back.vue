@@ -31,14 +31,14 @@
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="acInsert">
+        <el-button type="primary" @click="acInsert()">
           确认
         </el-button>
       </span>
     </template>
   </el-dialog>
   <el-button type="primary" @click="dialogVisible=true">活动插入</el-button>
-  <el-button type="danger" @click="acDelete">批量删除</el-button>
+  <el-button type="danger" @click="acDelete()">批量删除</el-button>
 
   <el-table :data="acList"
             height="650"
@@ -60,6 +60,7 @@ import API from "../../axiosinstance/axiosInstance.js"
 import  {onMounted,ref,inject} from "vue";
 import { ElMessage } from 'element-plus'
 import {useStore} from '../../pinia/index.js'
+import axios from "axios";
 
 
 const dialogVisible = ref(false)
@@ -119,10 +120,11 @@ const acDelete=()=>{
     ElMessage('未选中活动')
   }
   else{
+
     API({
       url:'/admin/delActivityByIds',
       method:"DELETE",
-      data:{
+      params:{
         ids:acIds.value
       }
     }).then((res)=>{
@@ -139,8 +141,9 @@ const acDelete=()=>{
 const getIds=(classes)=>{
   acIds.value=[]
   for (let [key,item] of classes.entries() ){
-      acIds.value[key]=item.id
+      acIds.value[key]=item.id.toString()
     }
+  console.log(acIds.value)
 }
 const handleSelectionChange = (val) => {
   multipleSelection.value = val
@@ -152,7 +155,8 @@ onMounted(()=>{
     method:"GET",
   }).then((res)=>{
       // iftrue
-    acList.value=res.data
+    acList.value=res.data.activities
+      console.log(acList.value)
   isShow.value=true
   })
 })

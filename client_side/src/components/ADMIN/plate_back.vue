@@ -3,6 +3,7 @@ import API from "../../axiosinstance/axiosInstance.js"
 import  {onMounted,ref,inject} from "vue";
 import { ElMessage } from 'element-plus'
 import { ElTable } from 'element-plus'
+import axios from "axios";
 
 
 
@@ -55,6 +56,7 @@ const pInsert=()=>{
 }
 const pDelete=()=>{
   const id=getId(currentRow.value)
+
   API({
     url:'/admin/delPlateById',
     method:'DELETE',

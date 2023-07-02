@@ -92,12 +92,11 @@ const submitForm = (formEl: FormInstance |undefined) => {
       console.log(ruleForm.pwd);
       API({
         url:'/user/login',
-        // method:"post",
-        // params: {
-        //     username: ruleForm.name,
-        //     password: ruleForm.pwd
-        // },
-        method:'GET'
+        method:"post",
+        params: {
+            username: ruleForm.name,
+            password: ruleForm.pwd
+        },
 
       }).then((res)=>{
         if(res.status=="200"){
