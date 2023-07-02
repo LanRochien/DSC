@@ -2,7 +2,104 @@ import Mock from 'mockjs'
 
 
 
-
+const postCo=Mock.mock('http://localhost:8080/post/findall','get',{
+    "posts": [
+        {
+            "id": 21,
+            "title": "统题参导",
+            "content": "ut aute",
+            "date_time": "2000-10-13 23:53:36",
+            "click_qty": 52,
+            "reply_qty": 39,
+            "user": {
+                "role": 35,
+                "name": "革总十",
+                "id": 76,
+                "password": "non ut aliquip occaecat pariatur",
+                "sex": "男",
+                "record_date": "1986-07-02",
+                "birthday": "1979-06-28",
+                "location": "mollit",
+                "post_qty": 82,
+                "reply_qty": 78,
+                "head_url": "http://wiliap.gt/faksyteygm"
+            },
+            "plate": {
+                "id": 52,
+                "name": "或式话清象就",
+                "detail": "ad",
+                "post_qty": 97,
+                "click_qty": 18,
+                "plate_image": "http://dummyimage.com/400x400"
+            },
+            "up_qty": 12
+        },
+        {
+            "id": 18,
+            "title": "百目上极",
+            "content": "officia sed",
+            "date_time": "2020-06-13 16:21:02",
+            "click_qty": 40,
+            "reply_qty": 27,
+            "user": {
+                "role": 29,
+                "name": "选据力三",
+                "id": 5,
+                "password": "amet proident laboris deserunt",
+                "sex": "男",
+                "record_date": "2006-05-30",
+                "birthday": "1975-08-28",
+                "location": "ut est in minim sit",
+                "post_qty": 75,
+                "reply_qty": 8,
+                "head_url": "http://uojnysyjh.中国互联.网络/jwnxojd"
+            },
+            "plate": {
+                "id": 92,
+                "name": "决叫前必习",
+                "detail": "Duis nulla velit",
+                "post_qty": 45,
+                "click_qty": 51,
+                "plate_image": "http://dummyimage.com/400x400"
+            },
+            "up_qty": 81
+        },
+        {
+            "id": 9,
+            "title": "集别部县同",
+            "content": "deserunt",
+            "date_time": "2005-03-03 01:42:50",
+            "click_qty": 96,
+            "reply_qty": 95,
+            "user": {
+                "role": 39,
+                "name": "应每效铁",
+                "id": 38,
+                "password": "velit dolor qui",
+                "sex": "女",
+                "record_date": "2018-05-30",
+                "birthday": "1977-11-17",
+                "location": "Excepteur mollit velit",
+                "post_qty": 83,
+                "reply_qty": 85,
+                "head_url": "http://bbvxxdb.cm/vlmil"
+            },
+            "plate": {
+                "id": 15,
+                "name": "响实无道",
+                "detail": "et enim sit",
+                "post_qty": 72,
+                "click_qty": 94,
+                "plate_image": "http://dummyimage.com/400x400"
+            },
+            "up_qty": 94
+        }
+    ],
+    "resp": {
+        "msg": "sit quis commodo qui non",
+        "status": 11
+    }
+})
 const changeState=Mock.mock('http://localhost:8080/admin/banUserById','get',{
 
 })
@@ -860,7 +957,7 @@ const testData=Mock.mock('http://localhost:8080/user/login','get',
         "status": 200
 },
     "user": {
-    "role": 4,
+    "role": 0,
         "name": "科头程度",
         "id": 56,
         "password": "consectetur",

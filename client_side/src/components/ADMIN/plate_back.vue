@@ -8,7 +8,6 @@ import { ElTable } from 'element-plus'
 
 const reLoad=inject('reLoad')
 const isShow=ref(false)
-const multipleSelection = ref([])
 const dialogVisible = ref(false)
 const pList=ref()
 const currentRow = ref()

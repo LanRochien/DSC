@@ -44,7 +44,8 @@
             height="650"
             style="width: 100%"
             v-if="isShow"
-            @selection-change="handleSelectionChange">
+            @selection-change="handleSelectionChange"
+  >
     <el-table-column type="selection" width="55" />
     <el-table-column prop="title" label="活动主题" width="230" />
     <el-table-column prop="content" label="活动内容" width="180" />
@@ -59,6 +60,7 @@ import API from "../../axiosinstance/axiosInstance.js"
 import  {onMounted,ref,inject} from "vue";
 import { ElMessage } from 'element-plus'
 import {useStore} from '../../pinia/index.js'
+
 
 const dialogVisible = ref(false)
 const store=useStore()
