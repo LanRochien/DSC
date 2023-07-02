@@ -3,10 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cupk.mapper.PlateMapper">
-  <select id="findAllPlate" resultType="com.cupk.pojo.PlateMessage">
+  <select id="findAllPlate">
     select * from t_plate
   </select>
-  <select id="findPlateById" resultType="com.cupk.pojo.PlateMessage">
-    select * from t_plate where id=#{id}
+  <select id="findPlateById">
+    select * from t_plate
+        where id = #{id}
   </select>
+  <insert id="insertPlate" parameterType="com.cupk.pojo.Plate">
+    insert into t_plate(name,detail,plate_image)
+    value (#{name},#{detail},#{plate_image})
+  </insert>
+  <delete id="delPlateById">
+    delete from t_plate where id =#{id}
+  </delete>
 </mapper>

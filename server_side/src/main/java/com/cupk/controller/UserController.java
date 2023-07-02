@@ -1,15 +1,16 @@
 package com.cupk.controller;
 
-import com.cupk.pojo.Activity;
-import com.cupk.pojo.Post;
-import com.cupk.pojo.User;
+import com.cupk.model.Profile;
+import com.cupk.model.user_model;
+import com.cupk.pojo.*;
 import com.cupk.service.ActivityService;
+import com.cupk.service.CommentService;
 import com.cupk.service.PostService;
 import com.cupk.service.UserService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -24,116 +25,101 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    @Autowired(required = false)
+    @Autowired
     private UserService userService;
+    @Autowired
+    private PostService postService;
+    @Autowired
+    private ActivityService activityService;
+    @Autowired
+    private CommentService commentService;
 
-    @RequestMapping("/finduserbyid/{id}")
-    public String findUserByID(Integer id,Model model){
-        System.out.println("001");
-        User user=userService.findByID(id);
-        if(user!=null){
-            System.out.println(user);
-            model.addAttribute("msg","成功");
-            model.addAttribute("user",user);
-        }else{
-            model.addAttribute("msg","失败");
+    @GetMapping("/findDetail")
+    public String findDetailByName(@RequestParam String name){
+        User user = userService.getUserByName(name);
+        Profile profile = new Profile();
+        Gson gson = new Gson();
+        Resp resp = new Resp();
+        if (user!=null){
+            resp.setStatus(200);
+            resp.setMsg("查询成功");
+            List<Post> posts = postService.getMainPostsByUserName(name);
+            int post_qty = posts.size();
+            List<Comment> comments = commentService.findCommentsByUserName(name);
+            int reply_qty = comments.size();
+            userService.updatePostCount(name,post_qty);
+            userService.updateReplyCount(name,reply_qty);
+            profile.setComments(comments);
+            profile.setUser(user);
+            profile.setPosts(posts);
+            profile.setResp(resp);
+        }else {
+            resp.setMsg("未请求到数据（用户不存在或账号已注销）");
+            resp.setStatus(400);
+            profile.setResp(resp);
         }
-        return "test/test";
+        return gson.toJson(profile);
     }
-    @RequestMapping("/findall")
-    public String findAllUser(Model model){
-        List<User> users = userService.findAllUsers();
-        for(User u:users){
-            System.out.println(u);
-        }
-        model.addAttribute("userlist",users);
-        return "user/list";
-    }
+
     //注册账号方法
     @PostMapping("/register")
-    public String register (User user){
+    public String register (@RequestBody User user){
         Gson gson = new Gson();
+        Resp resp = new Resp();
         int i = userService.register(user);
         if(i>0){
-            return gson.toJson(user);
+            resp.setMsg("注册成功");
+            resp.setStatus(200);
         }
         else{
-            return "false";
+            resp.setMsg("注册失败，请联系管理员");
+            resp.setStatus(400);
         }
+        return gson.toJson(resp);
     }
     //登录账号方法
     @PostMapping("/login")
-    public String loginUser(@RequestParam() String name, String password) {
-        System.out.println("name=" + name + "pwd" + password);
-        if (name.equals("") || password.equals("")) {
-            return "用户名或密码不能为空";
+    public String loginUser(@RequestParam("username") String username,
+                            @RequestParam("password") String password) {
+        System.out.println("name=" + username + "pwd" + password);
+        Gson gson = new Gson();
+        Resp resp = new Resp();
+        if (username.equals("") || password.equals("")) {
+            resp.setMsg("用户名或密码不能为空");
+            resp.setStatus(401);
+            return gson.toJson(resp);
         } else {
-            if (userService.login(name,password)>0)
-                return "登录成功";
+            if (userService.login(username,password)!=null){
+                user_model model = new user_model();
+                resp.setMsg("登录成功");
+                resp.setStatus(200);
+                model.setResp(resp);
+                model.setUser(userService.login(username,password));
+                System.out.println(model);
+                return gson.toJson(model);
+            }
             else {
-                return "用户名或密码错误";
+                resp.setMsg("用户名或密码错误");
+                resp.setStatus(402);
+                return gson.toJson(resp);
             }
         }
     }
-
     //注销账号方法
-    @DeleteMapping(value = "/user/{id}")
-    public String deleteUserById(@PathVariable int id) {
+    @DeleteMapping(value = "/deluser")
+    public String deleteUserById(@RequestParam int id) {
+        Gson gson = new Gson();
         if (userService.deleteUserById(id) == 1) {
-            return "删除成功!";
+            Resp resp = new Resp();
+            resp.setMsg("账号注销成功");
+            resp.setStatus(200);
+            return gson.toJson(resp);
         } else {
-            return "删除失败!";
+            Resp resp = new Resp();
+            resp.setMsg("账号注销失败");
+            resp.setStatus(400);
+            return gson.toJson(resp);
         }
     }
 
-    //全站模糊搜索
-    @Autowired(required = false)
-    PostService postService;
-    @Autowired(required = false)
-    ActivityService activityService;
-    @RequestMapping("findpostactivites")
-    public String findPotsAndActivities(String Str,Model model,Integer line1,Integer line2){
-        List<Activity> activityList=activityService.findActivitiesByStr(Str);
-        List<Post> postList=postService.findMainPostsByStr(Str);
-        if(activityList!=null||postList!=null){
-            if(activityList!=null){
-                if(line1==null||line1==1) {
-                    activityList.sort((a, b) -> {
-                        Integer a1 = Math.toIntExact(a.getDatetime().getTime());
-                        Integer b1 = Math.toIntExact(b.getDatetime().getTime());
-                        return b1.compareTo(a1);
-                    });
-                }else{
-                    activityList.sort((a, b) -> {
-                        Integer a1 = Math.toIntExact(a.getDatetime().getTime());
-                        Integer b1 = Math.toIntExact(b.getDatetime().getTime());
-                        return a1.compareTo(b1);
-                    });
-                }
-                for (Activity activity:activityList) {
-                    System.out.println(activity);
-                }
-                model.addAttribute("activities",activityList);
-            }
-            if(postList!=null){
-                if(line2==null||line2==1){
-                    postList.sort((a,b)->{
-                        Integer a1=a.getClick_qty()*2+a.getUp_qty()*3+a.getReply_qty()*5;
-                        Integer b1=b.getClick_qty()*2+a.getReply_qty()*5+a.getUp_qty()*3;
-                        return b1.compareTo(a1);
-                    });
-                }else{
-                    postList.sort((a,b)->{
-                        Integer a1=a.getClick_qty()*2+a.getUp_qty()*3+a.getReply_qty()*5;
-                        Integer b1=b.getClick_qty()*2+a.getReply_qty()*5+a.getUp_qty()*3;
-                        return a1.compareTo(b1);
-                    });
-                }
-            }
-            model.addAttribute("msg","成功");
-        }else{
-            model.addAttribute("msg","失败");
-        }
-        return "test/test";
-    }
 }

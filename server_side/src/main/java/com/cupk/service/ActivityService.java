@@ -8,5 +8,7 @@ import java.util.List;
 public interface ActivityService {
     List<Activity> findAllActivities();
     int insertActivity(Activity activity);
-    List<Activity> findActivitiesByStr(String Str);//活动的模糊搜索
+    int delActivityByIds(long... ids);
+    List<Activity> findActivitiesByUserName(String name);
+    List<Activity> findActivityByStr(String Str);//活动的模糊搜索
 }

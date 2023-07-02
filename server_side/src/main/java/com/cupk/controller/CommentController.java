@@ -1,13 +1,12 @@
 package com.cupk.controller;
 
+import com.cupk.pojo.Resp;
 import com.cupk.service.CommentService;
 import com.cupk.pojo.Comment;
 import com.cupk.pojo.Post;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,41 +18,26 @@ import java.util.List;
  * @author:Liu JiaQi
  * @datatime:2023-06-27 22:43
  */
-    @Controller
+@CrossOrigin(origins = "http://localhost:8129")
+    @RestController
     @RequestMapping("/comment")
     public class CommentController {
         @Autowired(required = false)
         CommentService commentService;
 
-        @RequestMapping("/findcomments")
-        public String findCommentsByPost(Post post, Model model) {
-            List<Comment> commentList=commentService.findCommentsByPostID(1);
-            if(commentList!=null){
-                commentList.sort((a,b)->{
-                    Integer a1=a.getClick_qty()*3+a.getUp_qty()*7;
-                    Integer b1=b.getClick_qty()*3+b.getUp_qty()*7;
-                    return b1.compareTo(a1);
-                });
-                for (Comment com:commentList) {
-                    System.out.println(com);
-                }
-                model.addAttribute("msg","成功");
-                model.addAttribute("comments",commentList);
-            }else{
-                model.addAttribute("msg","失败");
+        @PostMapping("/insertcomment")
+        public String insertComment(@RequestBody Comment comment)
+        {
+            Gson gson = new Gson();
+            Resp resp = new Resp();
+            if(commentService.insertComment(comment)!=null){
+                resp.setStatus(200);
+                resp.setMsg("插入成功");
+            }else {
+                resp.setStatus(400);
+                resp.setMsg("插入失败");
             }
-            return "test/test";
-        }
-
-        @RequestMapping("/insertcomment")
-        public String insertComment(Comment comment){
-            int i=commentService.insertComment(comment);
-            if(i>0){
-                Gson gson=new Gson();
-                return gson.toJson(comment);
-            }else{
-                return "false";
-            }
+            return gson.toJson(resp);
         }
     }
 

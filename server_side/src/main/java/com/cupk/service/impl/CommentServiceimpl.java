@@ -18,19 +18,35 @@ import java.util.List;
  * @author:LANKEREN
  * @datatime:2023-06-27 19:11
  */
-@Primary
 @Service
+@Primary
 public class CommentServiceimpl implements CommentService {
     @Autowired(required = false)
     CommentMapper commentMapper;
     @Override
-    public List<Comment> findCommentsByPostID(Integer post_id) {
-        return commentMapper.findCommentsByPostID(post_id);
+    public List<Comment> findCommentsByPostID(Integer id) {
+        return commentMapper.findCommentsByPostID(id);
     }
 
     @Override
-    public int insertComment(Comment comment) {
+    public int upComment(int id) {
+        return commentMapper.upComment(id);
+    }
+
+    @Override
+    public List<Comment> findCommentsByUserName(String name) {
+        return commentMapper.findCommentsByUserName(name);
+    }
+
+    @Override
+    public Integer insertComment(Comment comment) {
         return commentMapper.insertComment(comment);
     }
+
+    @Override
+    public int delCommentByIds(long... ids) {
+        return commentMapper.delCommentByIds(ids);
+    }
+
 }
 

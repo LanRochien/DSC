@@ -23,22 +23,27 @@ public class PostServiceimpl implements PostService {
     @Autowired(required = false)
     private PostMapper postMapper;
     @Override
-    public int clickPost(Post post) {
-        return postMapper.clickPost(post);
+    public int clickPost(int id) {
+        return postMapper.clickPost(id);
     }
 
     @Override
-    public int upPost(Post post) {
-        return postMapper.upPost(post);
+    public int upPost(int id) {
+        return postMapper.upPost(id);
     }
 
     @Override
-    public int countReply(Post post) {
-        return postMapper.countReply(post);
+    public int countReply(int id) {
+        return postMapper.countReply(id);
     }
     @Override
     public List<Post> getMainPostsByPlateID(Integer plate_id) {
         return postMapper.getMainPostsByPlateID(plate_id);
+    }
+
+    @Override
+    public List<Post> getMainPostsByUserName(String name) {
+        return postMapper.getMainPostsByUserName(name);
     }
 
     @Override
@@ -47,7 +52,28 @@ public class PostServiceimpl implements PostService {
     }
 
     @Override
-    public List<Post> findMainPostsByStr(String Str) {
-        return postMapper.findMainPostsByStr(Str);
+    public List<Post> findPostsByStr(String Str) {
+        return postMapper.findPostsByStr(Str);
     }
+
+    @Override
+    public int delPostByIds(long... ids) {
+        return postMapper.delPostByIds(ids);
+    }
+
+    @Override
+    public Post findPostById(int id) {
+        return postMapper.findPostById(id);
+    }
+
+    @Override
+    public Integer CommentUpdate(Integer id, Integer count) {
+        return postMapper.CommentUpdate(id,count);
+    }
+
+    @Override
+    public List<Post> getAllPosts() {
+        return postMapper.getAllPosts();
+    }
+
 }
