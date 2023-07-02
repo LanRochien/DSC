@@ -61,7 +61,7 @@ import  {onMounted,ref,inject} from "vue";
 import { ElMessage } from 'element-plus'
 import {useStore} from '../../pinia/index.js'
 import axios from "axios";
-
+import  qs from 'qs'
 
 const dialogVisible = ref(false)
 const store=useStore()
@@ -120,13 +120,13 @@ const acDelete=()=>{
     ElMessage('未选中活动')
   }
   else{
+    let p={ids:acIds.value}
+    qs.stringify(p,{indices:false})
 
     API({
       url:'/admin/delActivityByIds',
       method:"DELETE",
-      params:{
-        ids:acIds.value
-      }
+      p
     }).then((res)=>{
       if(res.data.status==200){
         ElMessage({
@@ -139,9 +139,10 @@ const acDelete=()=>{
   }
 }
 const getIds=(classes)=>{
+  let ids=[]
   acIds.value=[]
   for (let [key,item] of classes.entries() ){
-      acIds.value[key]=item.id.toString()
+      acIds.value[key]=item.id
     }
   console.log(acIds.value)
 }
